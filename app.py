@@ -9,3 +9,6 @@ with mtab:
   
   with col1:
     st.header("A cat")
+    
+  with col2:
+    st.header("A dog")
