@@ -4,8 +4,8 @@ import streamlit as st
 
 mtab, etab = st.tabs(["Home", "About"])
 
-With mtab:
+with mtab:
   col1, col2 = st.columns(2)
   
-  With col1:
+  with col1:
     st.header("A cat")
