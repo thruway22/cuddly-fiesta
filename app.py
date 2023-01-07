@@ -85,11 +85,13 @@ sector_pffo = get_sector_pffo(df_ffos, 'Ticker', 'Fiscal Year')
 mtab, etab = st.tabs(["Home", "About"])
 
 with mtab:
-    option = st.selectbox(
-    'How would you like to be contacted?',
-    ('Email', 'Home phone', 'Mobile phone'))
-
-    st.write('You selected:', option)
+    
+    tickers = ['4330', '4331', '4332', '4333', '4334', '4335', '4336', '4337', '4338', '4339',
+               '4340', '4342', '4344', '4345', '4346', '4347', '4348']
+    
+    ticker = st.selectbox('Which ticker?', tickers)
+    
+    st.write(ticker)
     
     col1, col2 = st.columns([3, 1])
     with col1:
