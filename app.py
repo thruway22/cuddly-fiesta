@@ -3,6 +3,7 @@ import pandas as pd
 import streamlit as st
 import yfinance as yf
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 
 df_ffos = pd.read_csv('data.csv')
 
@@ -101,6 +102,10 @@ with mtab:
         col1.subheader("Chart")
         fig, ax = plt.subplots()
         ax.plot(test_df)
+        formatter = mdates.DateFormatter("%Y") ### formatter of the date
+        locator = mdates.YearLocator()
+        ax.xaxis.set_major_formatter(formatter) ## calling the formatter for the x-axis
+        ax.xaxis.set_major_locator(locator) ## calling the locator for the x-axis
         st.pyplot(fig)
     
     with col2:
