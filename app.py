@@ -76,7 +76,7 @@ def get_pffo(ticker, df_ffos):
     
     return df_output, current_pffo, mean_pffo
 
-sector_pffo = get_sector_pffo(df_ffos)
+sector_pffo = get_sector_pffo(df_ffos, 'Ticker', 'Fiscal Year')
   
 ##########
 ##########
