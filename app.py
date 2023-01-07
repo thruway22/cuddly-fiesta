@@ -75,7 +75,11 @@ def get_pffo(ticker, df_ffos):
     mean_pffo = round(test_df.mean()[0], 2)
     
     return df_output, current_pffo, mean_pffo
+
+sector_pffo = get_sector_pffo(df_ffos)
   
+##########
+##########
 ##########
 
 mtab, etab = st.tabs(["Home", "About"])
@@ -84,7 +88,7 @@ with mtab:
   col1, col2 = st.columns(2)
   
   with col1:
-    st.header("A cat")
+    #st.
     
   with col2:
-    st.header("A dog")
+    st.metric(label="Sector P/FFO", value=sector_pffo)
