@@ -114,3 +114,4 @@ with mtab:
         st.metric(label="Current P/FFO", value=current_pffo)
         st.metric(label="Mean P/FFO", value=mean_pffo)
         
+    st.line_chart(test_df)
