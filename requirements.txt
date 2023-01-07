@@ -1,3 +1,5 @@
-streamlit==1.16.0
 numpy==1.24.1
-gsheetsdb
+pandas==1.5.2
+matplotlib==3.6.2
+streamlit==1.16.0
+yfinance==0.2.3
