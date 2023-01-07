@@ -72,7 +72,7 @@ def get_pffo(ticker, df_ffos):
     current_pffo = round(df_output.tail(1)['PFFO'][0], 2)
     
     # get mean pffo
-    mean_pffo = round(test_df.mean()[0], 2)
+    mean_pffo = round(df_output.mean()[0], 2)
     
     return df_output, current_pffo, mean_pffo
 
@@ -86,8 +86,8 @@ mtab, etab = st.tabs(["Home", "About"])
 
 with mtab:
     
-    tickers = ['4330', '4331', '4332', '4333', '4334', '4335', '4336', '4337', '4338', '4339',
-               '4340', '4342', '4344', '4345', '4346', '4347', '4348']
+    tickers = [4330, 4331, 4332, 4333, 4334, 4335, 4336, 4337, 4338, 4339,
+               4340, 4342, 4344, 4345, 4346, 4347, 4348]
     
     ticker = st.selectbox('Which ticker?', tickers)
     
