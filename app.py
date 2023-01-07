@@ -112,75 +112,64 @@ ticker = st.selectbox('Which ticker?', tickers)
 
 test_df, current_pffo, mean_pffo = get_pffo(ticker, df_ffos)
 
-col1, col2 = st.columns([1, 7])
-
-#col1, col2, col3 = st.columns(3)
-with col1:
-    st.metric(label="Sectro P/FFO", value=sector_pffo)
-    st.metric(label="Current P/FFO", value=current_pffo)
-    st.metric(label="Mean P/FFO", value=mean_pffo)
-    
-with col2:
-    fig, ax = plt.subplots()
-    ax.plot(test_df, linewidth=1)
-
-    
-    #date_form = DateFormatter("%Y")
-    #ax.xaxis.set_major_formatter(date_form)
-    #ax.xaxis.set_major_formatter(
-    #    mdates.ConciseDateFormatter(ax.xaxis.get_major_locator()))
-    #ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
-
-    formatter = mdates.DateFormatter("%Y") ### formatter of the date
-    locator = mdates.YearLocator()
-    ax.xaxis.set_major_formatter(formatter) ## calling the formatter for the x-axis
-    ax.xaxis.set_major_locator(locator) ## calling the locator for the x-axis
+fig, ax = plt.subplots()
+ax.plot(test_df, linewidth=1)
 
 
-    # draw avg line
-    ## ax.axhline(test_df.PFFO.mean(), label="Mean "+str(round(test_df.PFFO.mean(),2)), linewidth=1) #, xmin=0.05, xmax=0.95)
-    ## plt.legend()
-    #plt.style.use('fivethirtyeight')
-    plt.style.use('default')
-    #ax.set_facecolor('#FFFFFF')
+#date_form = DateFormatter("%Y")
+#ax.xaxis.set_major_formatter(date_form)
+#ax.xaxis.set_major_formatter(
+#    mdates.ConciseDateFormatter(ax.xaxis.get_major_locator()))
+#ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
 
-    # plt.text([-1])
-
-    #plt.margins(x=0.3)
-
-    #plt.subplots_adjust(left=0, bottom=0, right=1, top=1, wspace=0, hspace=0)
-
-    plt.annotate('%0.2f' % test_df['PFFO'][-1], xy=(test_df.tail(1).index[0], test_df['PFFO'][-1]), xytext=(8, 0), 
-             xycoords=('data', 'data'), textcoords='offset points')
-
-    #plt.text('%0.2f' % test_df['PFFO'][-1], 'est')
+formatter = mdates.DateFormatter("%Y") ### formatter of the date
+locator = mdates.YearLocator()
+ax.xaxis.set_major_formatter(formatter) ## calling the formatter for the x-axis
+ax.xaxis.set_major_locator(locator) ## calling the locator for the x-axis
 
 
-    from datetime import datetime  
-    from datetime import timedelta 
-    ax.set_xlim(right=test_df.tail(1).index[0]+timedelta(days=300))
+# draw avg line
+## ax.axhline(test_df.PFFO.mean(), label="Mean "+str(round(test_df.PFFO.mean(),2)), linewidth=1) #, xmin=0.05, xmax=0.95)
+## plt.legend()
+#plt.style.use('fivethirtyeight')
+plt.style.use('default')
+#ax.set_facecolor('#FFFFFF')
 
-    ax.plot(test_df.tail(1).index[0], test_df['PFFO'][-1], **{'marker': '.'})
+# plt.text([-1])
+
+#plt.margins(x=0.3)
+
+#plt.subplots_adjust(left=0, bottom=0, right=1, top=1, wspace=0, hspace=0)
+
+plt.annotate('%0.2f' % test_df['PFFO'][-1], xy=(test_df.tail(1).index[0], test_df['PFFO'][-1]), xytext=(8, 0), 
+         xycoords=('data', 'data'), textcoords='offset points')
+
+#plt.text('%0.2f' % test_df['PFFO'][-1], 'est')
+
+
+from datetime import datetime  
+from datetime import timedelta 
+ax.set_xlim(right=test_df.tail(1).index[0]+timedelta(days=300))
+
+ax.plot(test_df.tail(1).index[0], test_df['PFFO'][-1], **{'marker': '.'})
 
 
 
-    ax.axhline(test_df.PFFO.mean(),linestyle=':', linewidth=1, xmin=0.03, xmax=0.97)
+ax.axhline(test_df.PFFO.mean(),linestyle=':', linewidth=1, xmin=0.03, xmax=0.97)
 
-    plt.annotate('Mean %0.2f' % test_df.PFFO.mean(), xy=(0, test_df.PFFO.mean()), xytext=(10, 4), 
-             xycoords=('axes fraction', 'data'), textcoords='offset points')
+plt.annotate('Mean %0.2f' % test_df.PFFO.mean(), xy=(0, test_df.PFFO.mean()), xytext=(10, 4), 
+         xycoords=('axes fraction', 'data'), textcoords='offset points')
 
-    ax.axhline(sector_pffo,linestyle=':', linewidth=1, xmin=0.03, xmax=0.97)
+ax.axhline(sector_pffo,linestyle=':', linewidth=1, xmin=0.03, xmax=0.97)
 
-    plt.annotate('Sector %0.2f' % sector_pffo, xy=(0, sector_pffo), xytext=(10, 4), 
-             xycoords=('axes fraction', 'data'), textcoords='offset points')
+plt.annotate('Sector %0.2f' % sector_pffo, xy=(0, sector_pffo), xytext=(10, 4), 
+         xycoords=('axes fraction', 'data'), textcoords='offset points')
 
-    ax.set_ylim(top=ax.get_ylim()[1]+2)
+ax.set_ylim(top=ax.get_ylim()[1]+2)
 
 
-    plt.show()
-    st.pyplot(fig)
-
-#with col3:
+plt.show()
+st.pyplot(fig)
     
 
 st.line_chart(test_df)
