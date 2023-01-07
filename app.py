@@ -85,10 +85,17 @@ sector_pffo = get_sector_pffo(df_ffos, 'Ticker', 'Fiscal Year')
 mtab, etab = st.tabs(["Home", "About"])
 
 with mtab:
-    col1, col2 = st.columns([4, 1])
+    option = st.selectbox(
+    'How would you like to be contacted?',
+    ('Email', 'Home phone', 'Mobile phone'))
+
+    st.write('You selected:', option)
+    
+    col1, col2 = st.columns([3, 1])
     with col1:
-        st.write('test')
+        col1.subheader("Chart")
+        
     
     with col2:
-        st.write('test2')
+        col2.subheader("Data")
         st.metric(label="Sectro P/FFO", value=sector_pffo)
