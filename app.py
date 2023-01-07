@@ -84,42 +84,50 @@ sector_pffo = get_sector_pffo(df_ffos, 'Ticker', 'Fiscal Year')
 ##########
 ##########
 
-hide_full_screen = '''
-<style>
-.element-container:nth-child(12) .overlayBtn {visibility: hidden;}
-</style>
-'''
+style_fullscreen_button_css = """
+    button[title="View fullscreen"] {
+        background-color: #004170cc;
+        right: 0;
+        color: white;
+    }
 
-st.markdown(hide_full_screen, unsafe_allow_html=True) 
+    button[title="View fullscreen"]:hover {
+        background-color:  #004170;
+        color: white;
+        }
+    """
+st.markdown(
+    "<style>"
+    + style_fullscreen_button_css
+    + "</styles>",
+    unsafe_allow_html=True,
+) 
 
-mtab, etab = st.tabs(["Home", "About"])
 
-with mtab:
-    
-    tickers = [4330, 4331, 4332, 4333, 4334, 4335, 4336, 4337, 4338, 4339,
-               4340, 4342, 4344, 4345, 4346, 4347, 4348]
-    
-    ticker = st.selectbox('Which ticker?', tickers)
-    
-    st.write(ticker)
-    
-    test_df, current_pffo, mean_pffo = get_pffo(ticker, df_ffos)
-    
-    col1, col2 = st.columns([3, 1])
-    with col1:
-        col1.subheader("Chart")
-        fig, ax = plt.subplots()
-        ax.plot(test_df)
-        formatter = mdates.DateFormatter("%Y") ### formatter of the date
-        locator = mdates.YearLocator()
-        ax.xaxis.set_major_formatter(formatter) ## calling the formatter for the x-axis
-        ax.xaxis.set_major_locator(locator) ## calling the locator for the x-axis
-        st.pyplot(fig)
-    
-    with col2:
-        col2.subheader("Data")
-        st.metric(label="Sectro P/FFO", value=sector_pffo)
-        st.metric(label="Current P/FFO", value=current_pffo)
-        st.metric(label="Mean P/FFO", value=mean_pffo)
-        
-    st.line_chart(test_df)
+tickers = [4330, 4331, 4332, 4333, 4334, 4335, 4336, 4337, 4338, 4339,
+           4340, 4342, 4344, 4345, 4346, 4347, 4348]
+
+ticker = st.selectbox('Which ticker?', tickers)
+
+test_df, current_pffo, mean_pffo = get_pffo(ticker, df_ffos)
+
+col1, col2 = st.columns([3, 1])
+
+fig, ax = plt.subplots()
+ax.plot(test_df)
+formatter = mdates.DateFormatter("%Y") ### formatter of the date
+locator = mdates.YearLocator()
+ax.xaxis.set_major_formatter(formatter) ## calling the formatter for the x-axis
+ax.xaxis.set_major_locator(locator) ## calling the locator for the x-axis
+st.pyplot(fig)
+
+col1, col2, col3 = st.columns(3)
+with col1:
+    st.metric(label="Sectro P/FFO", value=sector_pffo)
+with col2:
+    st.metric(label="Current P/FFO", value=current_pffo)
+
+with col3:
+    st.metric(label="Mean P/FFO", value=mean_pffo)
+
+st.line_chart(test_df)
