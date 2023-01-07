@@ -84,6 +84,14 @@ sector_pffo = get_sector_pffo(df_ffos, 'Ticker', 'Fiscal Year')
 ##########
 ##########
 
+hide_full_screen = '''
+<style>
+.element-container:nth-child(12) .overlayBtn {visibility: hidden;}
+</style>
+'''
+
+st.markdown(hide_full_screen, unsafe_allow_html=True) 
+
 mtab, etab = st.tabs(["Home", "About"])
 
 with mtab:
