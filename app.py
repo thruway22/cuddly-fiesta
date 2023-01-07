@@ -85,7 +85,7 @@ sector_pffo = get_sector_pffo(df_ffos, 'Ticker', 'Fiscal Year')
 mtab, etab = st.tabs(["Home", "About"])
 
 with mtab:
-    col1, col2 = st.columns(2)
+    col1, col2 = st.columns([3, 1])
     with col1:
         st.write('test')
     
