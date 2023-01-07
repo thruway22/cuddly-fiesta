@@ -77,6 +77,7 @@ def get_pffo(ticker, df_ffos):
     return df_output, current_pffo, mean_pffo
 
 sector_pffo = get_sector_pffo(df_ffos, 'Ticker', 'Fiscal Year')
+
   
 ##########
 ##########
@@ -93,11 +94,18 @@ with mtab:
     
     st.write(ticker)
     
+    test_df, current_pffo, mean_pffo = get_pffo(ticker, df_ffos)
+    
     col1, col2 = st.columns([3, 1])
     with col1:
         col1.subheader("Chart")
-        
+        fig, ax = plt.subplots()
+        ax.plot(test_df)
+        st.pyplot(fig)
     
     with col2:
         col2.subheader("Data")
         st.metric(label="Sectro P/FFO", value=sector_pffo)
+        st.metric(label="Current P/FFO", value=current_pffo)
+        st.metric(label="Mean P/FFO", value=mean_pffo)
+        
