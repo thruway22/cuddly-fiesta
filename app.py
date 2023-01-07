@@ -112,7 +112,7 @@ ticker = st.selectbox('Which ticker?', tickers)
 
 test_df, current_pffo, mean_pffo = get_pffo(ticker, df_ffos)
 
-col1, col2 = st.columns([1, 5])
+col1, col2 = st.columns([1, 7])
 
 #col1, col2, col3 = st.columns(3)
 with col1:
