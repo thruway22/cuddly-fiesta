@@ -91,3 +91,4 @@ with mtab:
     
     with col2:
         st.write('test2')
+        st.metric(label="Sectro P/FFO", value=sector_pffo)
