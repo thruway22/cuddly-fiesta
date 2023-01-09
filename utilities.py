@@ -206,8 +206,8 @@ def chart_pffo(ticker, file_path='data.csv'):
     # hide framebox
     plt.box(False)
     
-    plt.show()
-    
+    #plt.show()
+    return fig
     
 def chart_metric(df, ticker, metric_col, ticker_col='ticker', year_col='year'):
 
