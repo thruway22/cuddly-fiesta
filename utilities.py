@@ -209,37 +209,37 @@ def chart_pffo(ticker, file_path='data.csv'):
     plt.show()
     
     
-  def chart_metric(df, ticker, metric_col, ticker_col='ticker', year_col='year'):
-    
+def chart_metric(df, ticker, metric_col, ticker_col='ticker', year_col='year'):
+
     # prepare data
     df = df[df[ticker_col]==ticker][[year_col, metric_col]].sort_values(by=[year_col])
-    
+
     # set x and y axis data
     x = df[year_col].apply(str)
     y = df[metric_col]
-    
+
     # set defult font and colors
     plt.rcParams['font.family'] = "sans-serif"
     plt.rcParams['text.color'] = "262730"
     #plt.rcParams['axes.labelcolor'] = 'ffffff'
     plt.rcParams['xtick.color'] = '262730'
-    
+
     # create object
     fig, ax = plt.subplots()
     bars = ax.bar(x, y, color='#0068c9')
-    
+
     # hide y-axis
     ax.get_yaxis().set_visible(False)
-    
+
     # show bar values on top
     ax.bar_label(bars)
-        
+
     # remove side margins
     plt.margins(x=0)
-    
+
     # hide framebox
     plt.box(False)
-    
+
     plt.show
-    
-    return df
+
+return df
