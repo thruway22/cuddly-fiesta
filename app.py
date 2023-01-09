@@ -32,4 +32,6 @@ tickers = [4330, 4331, 4332, 4333, 4334, 4335, 4336, 4337, 4338, 4339,
 
 ticker = st.selectbox('Which ticker?', tickers)
 
-chart_pffo(ticker, file_path='data.csv')
+st.pyplot(chart_pffo(ticker, file_path='data.csv'))
+
+
