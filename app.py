@@ -26,11 +26,14 @@ st.markdown(
     unsafe_allow_html=True,
 ) 
 
+st.title('SaudiREITsInfo')
 
 tickers = [4330, 4331, 4332, 4333, 4334, 4335, 4336, 4337, 4338, 4339,
            4340, 4342, 4344, 4345, 4346, 4347, 4348]
 
 ticker = st.selectbox('Which ticker?', tickers)
+
+st.subheader('P/FFO Ratio')
 
 st.pyplot(chart_pffo(ticker, file_path='data.csv'))
 
@@ -39,7 +42,9 @@ df = prepare_data(file_path='data.csv')
 col1, col2 = st.columns(2)
 
 with col1:
-    st.pyplot(chart_metric(df, ticker, 'pffo'))
+    st.subheader('FFO Per Share')
+    st.pyplot(chart_metric(df, ticker, 'ffos'))
 
 with col2:
-    st.pyplot(chart_metric(df, ticker, 'ffos'))
+    st.subheader('FFO Payout Ratio')
+    st.pyplot(chart_metric(df, ticker, 'ffo_payout'))
