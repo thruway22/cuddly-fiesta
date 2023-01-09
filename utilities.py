@@ -241,5 +241,3 @@ def chart_metric(df, ticker, metric_col, ticker_col='ticker', year_col='year'):
     plt.box(False)
 
     plt.show
-
-return df
