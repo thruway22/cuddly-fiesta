@@ -34,4 +34,12 @@ ticker = st.selectbox('Which ticker?', tickers)
 
 st.pyplot(chart_pffo(ticker, file_path='data.csv'))
 
+df = prepare_data(file_path='data.csv')
 
+col1, col2 = st.columns(2)
+
+with col1:
+    st.pyplot(chart_metric(df, ticker, 'pffo'))
+
+with col2:
+    st.pyplot(chart_metric(df, ticker, 'ffos'))
