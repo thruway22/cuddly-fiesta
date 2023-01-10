@@ -69,7 +69,7 @@ with col1:
 
 with col2:
     st.subheader('FFO Payout Ratio')
-    text = "لكن الشرطة استعادت السيطرة على المباني الحكومية في العاصمة برازيليا مساء الأحد بعد ساعات من الاشتباكات.".decode('utf8')
+    text = u"لكن الشرطة استعادت السيطرة على المباني الحكومية في العاصمة برازيليا مساء الأحد بعد ساعات من الاشتباكات."
     reshaped_text = arabic_reshaper.reshape(text)
     bidi_text = get_display(reshaped_text)
     st.write(bidi_text)
