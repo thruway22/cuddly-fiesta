@@ -49,7 +49,7 @@ tickers = {
     '4347: Bonyan REIT': 4347,
     '4348: Alkhabeer REIT': 4348}
 
-ticker = st.selectbox('Choose a REIT fund', tickers.values())
+ticker = st.selectbox('Choose a REIT fund', tickers.keys(), format_func=lambda x:tickers[x])
 
 st.subheader('P/FFO Ratio')
 
