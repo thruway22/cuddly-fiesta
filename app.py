@@ -62,11 +62,8 @@ col1, col2 = st.columns(2)
 
 with col1:
     st.subheader('FFO Per Share')
-    with st.expander("See explanation"):
-        st.write('The chart above shows some numbers I picked for I rolled actual dice for these, so theyre guaranteed to be random.')
     st.pyplot(chart_metric(df, ticker, 'ffos'))
 
 with col2:
     st.subheader('FFO Payout Ratio')
-    st.write('Percentage of adjusted funds from operations (similar to free cash flow for REITs) paid out as a dividend. For REITs, we prefer to see a payout ratio below 90%. A rising payout ratio means the dividend is growing faster than cash flow or that cash flow is declining. A volatile payout ratio can indicate a less stable firm.')
     st.pyplot(chart_metric(df, ticker, 'ffo_payout'))
