@@ -39,7 +39,7 @@ tickers = {
 #[4330, 4331, 4332, 4333, 4334, 4335, 4336, 4337, 4338, 4339,
 #           4340, 4342, 4344, 4345, 4346, 4347, 4348]
 
-ticker = st.selectbox('Which ticker?', tickers)
+ticker = st.selectbox('Which ticker?', tickers.values())
 
 st.subheader('P/FFO Ratio')
 
