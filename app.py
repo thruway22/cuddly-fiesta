@@ -64,7 +64,22 @@ col1, col2 = st.columns(2)
 with col1:
     st.subheader('FFO Per Share')
     st.pyplot(chart_metric(df, ticker, 'ffos'))
-
-with col2:
+    
     st.subheader('FFO Payout Ratio')
     st.pyplot(chart_metric(df, ticker, 'ffo_payout'))
+    
+    st.subheader('roic')
+    st.pyplot(chart_metric(df, ticker, 'roic'))
+with col2:
+    st.subheader('op_margin')
+    st.pyplot(chart_metric(df, ticker, 'op_margin'))
+    
+    st.subheader('net_debt_ebitda')
+    st.pyplot(chart_metric(df, ticker, 'net_debt_ebitda'))
+    
+    st.subheader('net_debt_capital')
+    st.pyplot(chart_metric(df, ticker, 'net_debt_capital'))
+    
+    st.subheader('coverage')
+    st.pyplot(chart_metric(df, ticker, 'coverage'))
+    
