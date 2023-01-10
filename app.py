@@ -50,7 +50,8 @@ tickers = {
     4348: '4348: Alkhabeer REIT'
 }
 
-ticker = st.selectbox('Choose a REIT fund', tickers.keys(), format_func=lambda x:tickers[x])
+ticker = st.selectbox('Choose a REIT fund', tickers.keys(),
+                      format_func=lambda x:tickers[x])
 
 st.subheader('P/FFO Ratio')
 
@@ -66,4 +67,6 @@ with col1:
 
 with col2:
     st.subheader('FFO Payout Ratio')
+    st.write('"ذهب الطالب الى المدرسة".encode('utf-8','ignore')')
+    st.write(u'هذه تجربة')
     st.pyplot(chart_metric(df, ticker, 'ffo_payout'))
