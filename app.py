@@ -67,5 +67,5 @@ with col1:
 
 with col2:
     st.subheader('FFO Payout Ratio')
-    st.write(u'هذه تجربة')
+    st.write(u'هذه تجربة test.فإذا كان. ')
     st.pyplot(chart_metric(df, ticker, 'ffo_payout'))
