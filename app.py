@@ -31,13 +31,23 @@ st.title('SaudiREITsInfo')
 
 
 tickers = {
-    "4330: Riyad REIT": 4330,
-    "4331: Aljazira REIT": 4331,
-    "4332: Jadwa REIT Alharamain": 4332
-}
-
-#[4330, 4331, 4332, 4333, 4334, 4335, 4336, 4337, 4338, 4339,
-#           4340, 4342, 4344, 4345, 4346, 4347, 4348]
+    '4330: Riyad REIT': 4330,
+    '4331: Aljazira REIT': 4331,
+    '4332: Jadwa REIT Alharamain': 4332,
+    '4333: Taleem REIT': 4333,
+    '4334: Almaather REIT': 4334,
+    '4335: Musharaka REIT': 4335,
+    '4336: Mulkia Gulf REIT': 4336,
+    '4337: SICO Saudi REIT': 4337,
+    '4338: Alahli REIT': 4338,
+    '4339: Derayah REIT': 4339,
+    '4340: Alrajhi REIT': 4340,
+    '4342: Jadwa REIT': 4342,
+    '4344: SEDCO Capital REIT': 4344,
+    '4345: Alinma Retail REIT': 4345,
+    '4346: MEFIC REIT': 4346,
+    '4347: Bonyan REIT': 4347,
+    '4348: Alkhabeer REIT' 4348}
 
 ticker = st.selectbox('Which ticker?', tickers.values())
 
