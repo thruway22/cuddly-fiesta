@@ -47,9 +47,9 @@ tickers = {
     '4345: Alinma Retail REIT': 4345,
     '4346: MEFIC REIT': 4346,
     '4347: Bonyan REIT': 4347,
-    '4348: Alkhabeer REIT' 4348}
+    '4348: Alkhabeer REIT': 4348}
 
-ticker = st.selectbox('Which ticker?', tickers.values())
+ticker = st.selectbox('Choose a REIT fund', tickers.values())
 
 st.subheader('P/FFO Ratio')
 
