@@ -61,6 +61,12 @@ col1, col2 = st.columns(2)
 
 with col1:
     st.subheader('FFO Per Share')
+    with st.expander("See explanation"):
+    st.write(\"\"\"
+        The chart above shows some numbers I picked for you.
+        I rolled actual dice for these, so they're *guaranteed* to
+        be random.
+    \"\"\")
     st.pyplot(chart_metric(df, ticker, 'ffos'))
 
 with col2:
