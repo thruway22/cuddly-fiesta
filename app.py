@@ -4,8 +4,6 @@ import streamlit as st
 import yfinance as yf
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
-import arabic_reshaper
-from bidi.algorithm import get_display
 from utilities import *
 
 style_fullscreen_button_css = """
@@ -69,8 +67,4 @@ with col1:
 
 with col2:
     st.subheader('FFO Payout Ratio')
-    text = u"لكن الشرطة استعادت السيطرة على المباني الحكومية في العاصمة برازيليا مساء الأحد بعد ساعات من الاشتباكات."
-    reshaped_text = arabic_reshaper.reshape(text)
-    bidi_text = get_display(reshaped_text)
-    st.write(bidi_text)
     st.pyplot(chart_metric(df, ticker, 'ffo_payout'))
