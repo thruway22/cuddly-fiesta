@@ -351,6 +351,6 @@ def chart_categorical_data(ticker, metric_col):
     return fig
     
 import streamlit.components.v1 as components
-def display_arabic(text):
-    output = '<div dir="rtl">'+text+'</div>'
-    return components.html(output)
+def display_arabic(text, align, height): #, color??
+    output = f'<div dir="rtl"; align={align}>{text}</div>'
+    return components.html(output, height=height)
