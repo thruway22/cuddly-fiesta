@@ -148,7 +148,7 @@ def chart_timeseries_data(ticker, metric_col,
     ticker_data = get_ticker_data(ticker)[[metric_col]]
     
     # create objects
-    fig, ax = plt.subplots(figsize=(6, 4))
+    fig, ax = plt.subplots(figsize=(4, 2))
     ax.plot(ticker_data, linewidth=1, color='lightgrey')
     
     # format datetime on xaxis
