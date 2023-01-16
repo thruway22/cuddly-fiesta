@@ -77,7 +77,7 @@ st.subheader('Price'+' '+u'السعر')
 st.pyplot(chart_timeseries_data(ticker, 'price'))
 
 st.header('P/FFO')
-st.subheader(u'مكرر النقد من العمليات')
+st.subheader(components.html("""<div dir="rtl">مكرر النقد من العمليات</div>"""))
 
 
 st.pyplot(chart_timeseries_data(ticker, 'pffo'))
