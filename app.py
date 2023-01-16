@@ -8,6 +8,7 @@ from datetime import timedelta
 from pandas.tseries.offsets import DateOffset
 from pandas.tseries.offsets import MonthEnd
 import streamlit as st
+from bidi.algorithm import get_display
 from utilities import *
 
 style_fullscreen_button_css = """
