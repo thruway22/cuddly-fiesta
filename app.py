@@ -11,6 +11,8 @@ import streamlit as st
 import streamlit.components.v1 as components
 from utilities import *
 
+st.set_page_config(layout="wide")
+
 style_fullscreen_button_css = """
     button[title="View fullscreen"] {
         background-color: #004170cc;
