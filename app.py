@@ -72,10 +72,10 @@ st.subheader('Yield')
 st.pyplot(chart_timeseries_data(ticker, 'yield'))
 
 st.subheader('FFO Per Share')
-chart_categorical_data(ticker, 'ffos')
+st.pyplot(chart_categorical_data(ticker, 'ffos'))
 
 st.subheader('FFO Payout Ratio')
-chart_categorical_data(ticker, 'ffo_payout')
+st.pyplot(chart_categorical_data(ticker, 'ffo_payout'))
 
 col1, col2 = st.columns(2)
 
