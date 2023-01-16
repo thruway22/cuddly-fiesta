@@ -81,7 +81,7 @@ st.pyplot(chart_timeseries_data(ticker, 'yield'))
 
 st.markdown('<hr />', unsafe_allow_html=True)
 
-st.markdown("""<h3 style='direction: rtl; text-align: center;'>النقد من العمليات للوحدة</h3>""", unsafe_allow_html=True)
+st.markdown("""<h4 style='direction: rtl; text-align: center;'>النقد من العمليات للوحدة</h4>""", unsafe_allow_html=True)
 #st.subheader('FFO Per Share')
 st.pyplot(chart_categorical_data(ticker, 'ffos'))
 
