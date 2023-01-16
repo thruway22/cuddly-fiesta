@@ -1,10 +1,23 @@
+import yfinance as yf
 import numpy as np
 import pandas as pd
-import streamlit as st
-import yfinance as yf
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
+from datetime import datetime  
+from datetime import timedelta
+from pandas.tseries.offsets import DateOffset
+from pandas.tseries.offsets import MonthEnd
 from utilities import *
+
+
+
+data = pd.read_csv('data/data_hy.csv')
+
+tickers_dict = {data.ticker.unique()[i]: \
+                str(data.ticker.unique()[i]) + ': ' + data.name.unique()[i] \
+                for i in range(len(data.ticker.unique()))}
+
+sector_data = get_sector_data()
 
 style_fullscreen_button_css = """
     button[title="View fullscreen"] {
@@ -53,33 +66,39 @@ tickers = {
 ticker = st.selectbox('Choose a REIT fund', tickers.keys(),
                       format_func=lambda x:tickers[x])
 
-st.subheader('P/FFO Ratio')
+st.subheader('Price')
 
-st.pyplot(chart_pffo(ticker, file_path='data.csv'))
+st.pyplot(chart_timeseries_data(ticker, 'price'))
 
-df = prepare_data(file_path='data.csv')
+st.subheader('P/FFO')
+
+st.pyplot(chart_timeseries_data(ticker, 'pffo'))
+
+st.subheader('Yield')
+
+st.pyplot(chart_timeseries_data(ticker, 'yield'))
 
 col1, col2 = st.columns(2)
 
 with col1:
     st.subheader('FFO Per Share')
-    st.pyplot(chart_metric(df, ticker, 'ffos'))
+    st.pyplot(chart_categorical_data(ticker, 'ffos'))
     
     st.subheader('FFO Payout Ratio')
-    st.pyplot(chart_metric(df, ticker, 'ffo_payout'))
+    st.pyplot(chart_categorical_data(ticker, 'ffo_payout'))
     
     st.subheader('roic')
-    st.pyplot(chart_metric(df, ticker, 'roic'))
+    st.pyplot(chart_categorical_data(ticker, 'roic'))
 with col2:
     st.subheader('op_margin')
-    st.pyplot(chart_metric(df, ticker, 'op_margin'))
+    st.pyplot(chart_categorical_data(ticker, 'op_margin')))
     
     st.subheader('net_debt_ebitda')
-    st.pyplot(chart_metric(df, ticker, 'net_debt_ebitda'))
+    st.pyplot(chart_categorical_data(ticker, 'net_debt_ebitda'))
     
     st.subheader('net_debt_capital')
-    st.pyplot(chart_metric(df, ticker, 'net_debt_capital'))
+    st.pyplot(chart_categorical_data(ticker, 'net_debt_capital'))
     
     st.subheader('coverage')
-    st.pyplot(chart_metric(df, ticker, 'coverage'))
+    st.pyplot(chart_categorical_data(ticker, 'coverage'))
     
