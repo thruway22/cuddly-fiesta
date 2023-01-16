@@ -60,11 +60,13 @@ tickers = {
 ticker = st.selectbox('Choose a REIT fund', tickers.keys(),
                       format_func=lambda x:tickers[x])
 
-st.subheader('Price')
+st.subheader('Price'+' '+u'السعر')
 
 st.pyplot(chart_timeseries_data(ticker, 'price'))
 
-st.subheader('P/FFO')
+st.header('P/FFO')
+st.subheader(u'مكرر النقد من العمليات')
+
 
 st.pyplot(chart_timeseries_data(ticker, 'pffo'))
 
