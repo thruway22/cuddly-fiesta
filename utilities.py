@@ -130,6 +130,9 @@ def get_sector_data(data=data,
                      get_ticker_data(i)[['pffo']].median()[0]]
         
     return df
+  
+  
+sector_data = get_sector_data()
 
 def chart_timeseries_data(ticker, metric_col,
                           data=data,
