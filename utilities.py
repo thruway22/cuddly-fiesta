@@ -143,13 +143,13 @@ def chart_timeseries_data(ticker, metric_col,
     plt.rcParams['text.color'] = "262730"
     plt.rcParams['ytick.color'] = '262730'
     plt.rcParams['xtick.color'] = '262730'
-    plt.rcParams['font.size']: 8
+    plt.rcParams['font.size']: 6
     
     # get asked metric
     ticker_data = get_ticker_data(ticker)[[metric_col]]
     
     # create objects
-    fig, ax = plt.subplots(figsize=(3.2, 1.8))
+    fig, ax = plt.subplots(figsize=(7, 1.2))
     ax.plot(ticker_data, linewidth=1, color='lightgrey')
     
     # format datetime on xaxis
