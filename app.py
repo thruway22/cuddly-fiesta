@@ -17,7 +17,6 @@ style_fullscreen_button_css = """
         background-color: #004170cc;
         right: 0;
         color: white;
-        visibility: hidden;
     }
 
     button[title="View fullscreen"]:hover {
@@ -30,7 +29,7 @@ st.markdown(
     + style_fullscreen_button_css
     + "</styles>",
     unsafe_allow_html=True,
-) 
+)
 
 st.title('SaudiREITsInfo')
 
