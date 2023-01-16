@@ -5,161 +5,142 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 from datetime import datetime  
 from datetime import timedelta
+from pandas.tseries.offsets import DateOffset
+from pandas.tseries.offsets import MonthEnd
 
-def prepare_data(file_path):
-    
-    '''
-    reads the source csv file and compute metrics
-    
-    Args:
-    file_path (str): 
-    
-    Return:
-    df (pd.DataFrame):
-    '''
-    
-    # read data
-    df = pd.read_csv(file_path)
-    
-    # compute metrics
-    df['pffo'] = round((df.price * df.shares) / df.ffo, 2)
-    df['ffos'] = round(df.ffo / df.shares, 2)
-    df['ffo_payout'] = round(100 * -df.dividend / df.ffo, 2) # %
-    df['roic'] = round(100 * df.ebit / (df.equity + df.debt), 2) # %
-    df['op_margin'] = round(100 * df.ebit / df.revenue, 2) # %
-    df['net_debt_ebitda'] = round((df.debt - df.casti) / df.ebitda, 2)
-    df['net_debt_capital'] = round((df.debt - df.casti) / (df.equity + df.debt), 2)
-    df['coverage'] = round(df.ebit / -df.interest, 2)
-    
-    # replace inf by zero
-    # those with zero net_debt will get inf when computing metrics
-    df.replace([np.inf, -np.inf], 0, inplace=True)
-    
-    return df
-  
-  
-def compute_pffo(df, price_col='price', shares_col='shares', ffo_col='ffo'):
-    '''
-    helper function takes any df with required columns and compute pffo
-    
-    Args:
-    df (str):
-    price_col, shares_col, ffo_col (str): column names
-    
-    Return:
-    df (pd.DataFrame):
-    '''
-    
-    df['pffo'] = (df[price_col] * df[shares_col]) / df[ffo_col]
-    df = df[['pffo']]
-    
-    return df
-  
+# global data columns
+ticker_col = 'ticker'
+year_col = 'year'
+name_col='name'
+shares_col='shares'
+ffo_col='ffo'
+dividend_col='dividend'
+revenue_col='revenue'
+interest_col='interest'
+ebitda_col='ebitda'
+ebit_col='ebit'
+asset_col='asset'
+equity_col='equity'
+casti_col='casti'
+debt_col='debt'
 
-def get_sector_pffo(df, ticker_col='ticker', year_col='year', shares_col='shares', ffo_col='ffo'):
+def rock_and_roll(df1, df2, df2_metric_col,
+                  df1_date_col='date',
+                  df2_start_col='period_start',
+                  df2_end_col='period_end'):
+    
+    # yahoo finance does not keep historical data for some tickers
+    # but only returns the most recent 1D data
+    # check if ticker has only 1D data point, if true
+    # return the most recent metric value to allow output metrics to computed 
+    if len(df1) == 1:
+        values = df2.tail(1)[df2_metric_col].values
+    
+    # check date range in df1 and return appropriate metric value from df2
+    else:
+        values = np.piecewise(np.zeros(len(df1)),
+                    [(df1[df1_date_col].values >= start_date) & (df1[df1_date_col].values < end_date) \
+                    for start_date, end_date in zip(df2[df2_start_col].values, df2[df2_end_col].values)],
+                    np.append(df2[df2_metric_col].values, np.nan))
+
+    return values
+
+def get_ticker_data(ticker,
+                    data=data):
     '''
     gets the current/latest market prices of each ticker and compute pffo
     for each ticker as per latest announced ffo 
     
     Args:
-    df (str):
+    data (pd.DataFrame):
     ticker_col, year_col (str): column names
     
     Return:
     df (pd.DataFrame):
     '''
+        
+    # prepare input data
+    data[year_col] = pd.to_datetime(data[year_col], format='%Y-%m-%d')
+    data = data[[ticker_col, year_col, shares_col, ffo_col, dividend_col]].sort_values(by=[year_col])
     
-    # get only last ffo from input df and set index to ticker
-    df = df[df[year_col] == df[year_col].max()].set_index(ticker_col)
+    #### df1 : prices dataframe ####
     
-    # filter out unnecessary columns
-    df = df[[shares_col, ffo_col]]
+    # get historical prices for input ticker
+    df1 = yf.Ticker(str(ticker)+".SR").history(
+        start='2018-01-01', interval='1d', actions=False)[['Close']]
     
-    # get current prices
-    price_list = []
+    # reset index to prepare for merge and rename columns just because OCD
+    df1 = df1.reset_index().rename(columns = {'Close':'price', 'Date':'date'})
     
-    for i in df.index:
-        price = round(yf.Ticker(str(i)+'.SR').history(period='1d', interval='1d')['Close'][0], 2)
-        price_list.append(price)
+    # get only the date from the timestamp and format
+    df1['date'] = df1['date'].dt.date
+    df1['date'] = pd.to_datetime(df1['date'], format='%Y-%m-%d')
     
-    # add to df
-    df['price'] = price_list
+    ### df2 : metrics dataframe ###
     
-    # compute pff
-    df = compute_pffo(df)
+    # rolling agg on metrics for input ticker to obtain Trailing-12-Months (TTM) values
+    df2 = data[data[ticker_col]==ticker].set_index(year_col).rolling(2).agg(
+        {shares_col:'mean', ffo_col:'sum', dividend_col:'sum'}).reset_index()
     
-    return round(df.median()[0], 2)
-  
-  
-def get_ticker_pffo(df, ticker, ticker_col='ticker', year_col='year', shares_col='shares', ffo_col='ffo'):
-    '''
-    gets the current/latest market prices of each ticker and compute pffo
-    for each ticker as per latest announced ffo 
+    df2 = df2.rename(columns = {year_col:'period_end'})
     
-    Args:
-    df (str):
-    ticker_col, year_col (str): column names
+    # DateOffset to subtract 6 months from period_end
+    # MonthEnd to roll forward to the end of the given (0) month
+    df2['period_start'] = df2['period_end'] - DateOffset(months=6) + MonthEnd(0)
     
-    Return:
-    df (pd.DataFrame):
-    '''
+    ### output df ###
     
-    # (1) get histrocal pffo
+    # start with a copy of df1 as the base for output df
+    df = df1.copy()
     
-    # Concat to produce correct ticker format
-    ticker_adj = str(ticker)+".SR"
+    # merge metrcis to prices as per proper date range
+    df[shares_col] = rock_and_roll(df1, df2, shares_col)
+    df[ffo_col] = rock_and_roll(df1, df2, ffo_col)
+    df[dividend_col] = rock_and_roll(df1, df2, dividend_col)
     
-    # get aux dataframe
-    df = df[df[ticker_col]==ticker][[year_col, shares_col, ffo_col]]
-    df[year_col] = pd.to_datetime(df[year_col], format='%Y')
+    # forward fill data
+    df = df.set_index('date').fillna(method='ffill').dropna()
     
-    # get prices
-    df_prices = yf.Ticker(ticker_adj).history(period='5y', interval='1d', actions=False)
+    # compute output metrics
+    df['yield'] = 100 * (abs(df[dividend_col]) / df[shares_col]) / df['price']
+    df['pffo'] = (df['price'] * df[shares_col]) / df[ffo_col]
     
-    # select only close col and rest index
-    df_prices = df_prices[['Close']].reset_index()
+    # take only needed columns
+    df = df[['price', 'yield', 'pffo']]
     
-    # merge
-    df_output = pd.merge(df_prices, df,
-                         left_on = df_prices['Date'].apply(lambda x: (x.year)),
-                         right_on = df[year_col].apply(lambda y: (y.year)),
-                         how = 'left')
+    return df
+
+def get_sector_data(data=data,
+                    tickers_dict=tickers_dict,
+                    price_col='price',
+                    yield_col='yield',
+                    pffo_col='pffo'):
     
-    # change date (needed?)
-    df_output['Date'] = df_output['Date'].dt.date
+    # create empty df with designated columns
+    df = pd.DataFrame({'yield': [], 'pffo': []})
     
-    # take only needed columns, set index, fillna
-    df_output = df_output[['Date', 'Close', shares_col, ffo_col]].set_index('Date').fillna(method='ffill')
-    
-    df_output = compute_pffo(df_output, price_col='Close')
-    
-    ########
-    
-    # (2) get current pffo
-    #current_pffo = round(df_output.tail(1)['pffo'][0], 2)
-    
-    # (3) get median pffo
-    #median_pffo = round(df_output.median()[0], 2)
-    
-    return df_output
-  
-  
-def chart_pffo(ticker, file_path='data.csv'):
-    
-    # prepare data
-    df = prepare_data(file_path)
-    sector_pffo = get_sector_pffo(df)
-    ticker_pffo = get_ticker_pffo(df, ticker)
+    for i in tickers_dict.keys():
+        df.loc[i] = [get_ticker_data(i)[['yield']].median()[0],
+                     get_ticker_data(i)[['pffo']].median()[0]]
+        
+    return df
+
+def chart_timeseries_data(ticker, metric_col,
+                          data=data,
+                          sector_data=sector_data):
     
     # set defult font and colors
     plt.rcParams['font.family'] = "sans-serif"
     plt.rcParams['text.color'] = "262730"
     plt.rcParams['ytick.color'] = '262730'
     plt.rcParams['xtick.color'] = '262730'
-        
+    
+    # get asked metric
+    ticker_data = get_ticker_data(ticker)[[metric_col]]
+    
     # create objects
     fig, ax = plt.subplots()
-    ax.plot(ticker_pffo, linewidth=1, color='lightgrey')
+    ax.plot(ticker_data, linewidth=1, color='lightgrey')
     
     # format datetime on xaxis
     formatter = mdates.DateFormatter("%Y")
@@ -167,41 +148,192 @@ def chart_pffo(ticker, file_path='data.csv'):
     ax.xaxis.set_major_formatter(formatter)
     ax.xaxis.set_major_locator(locator)
     
-    # plt.style.use('default')
-    
     # get coordinates of current/last point (year, value)
-    x = ticker_pffo.tail(1).index[0]
-    y = ticker_pffo['pffo'][-1]
+    x = ticker_data.tail(1).index[0]
+    y = ticker_data[metric_col][-1]
     
     # mark current value on chart, cord:(year, last point)
     ax.plot(x, y, color='#f63366', **{'marker': '.'})
+    
+    unit_dict = {'price': '{value:0.2f} SAR',
+                 'yield': '{value:0.2f}%',
+                 'pffo': '{value:0.2f}x'
+                }
 
     # annotate current value on chart, cord:()
-    plt.annotate('%0.2f' % y, xy=(x, y), xytext=(6, -3), 
+    plt.annotate(unit_dict[metric_col].format(value=y),
+                 xy=(x, y), xytext=(6, -3), 
                  xycoords=('data', 'data'), textcoords='offset points',
                  bbox=dict(boxstyle="round, pad=0.3", fc="#f0f2f6", lw=0))
-
-
-    # draw horizontal line for fund median and annotate value
-    ticker_median = ticker_pffo['pffo'].median()
-    ax.axhline(ticker_median, color='#0068c9', linewidth=0.5, xmin=0.03, xmax=0.97)
-
-    plt.annotate('Fund Median %0.2f' % ticker_median, xy=(0, ticker_median), xytext=(10, -3), 
-                 xycoords=('axes fraction', 'data'), textcoords='offset points',
-                 bbox=dict(boxstyle="round, pad=0.3", fc="#f0f2f6", lw=0))
     
-    # draw horizontal line for sector median and annotate value
-    ax.axhline(sector_pffo, color='#0068c9', linewidth=0.5, xmin=0.03, xmax=0.97)
+    if len(ticker_data) == 1:
+        plt.annotate('No historical data from Yahoo! Finance',
+                     xy=(0, 0), xytext=(0, 5),
+                     xycoords=('axes fraction', 'axes fraction'), textcoords='offset points')
+    
+    if metric_col != 'price':
+        # draw horizontal line for sector median and annotate value
+        sector_median = sector_data[metric_col].median()
+        ax.axhline(sector_median, color='#0068c9', linewidth=0.5, xmin=0.03, xmax=0.97)
 
-    plt.annotate('Sector Median %0.2f' % sector_pffo, xy=(0, sector_pffo), xytext=(10, -3), 
-                 xycoords=('axes fraction', 'data'), textcoords='offset points',
-                 bbox=dict(boxstyle="round, pad=0.3", fc="#f0f2f6", lw=0))
+        plt.annotate('Sector Current Median ' + unit_dict[metric_col].format(value=sector_median),
+                     xy=(0, sector_median), xytext=(10, -3),
+                     xycoords=('axes fraction', 'data'), textcoords='offset points',
+                     bbox=dict(boxstyle="round, pad=0.3", fc="#f0f2f6", lw=0))
+    
+    if metric_col != 'price' and len(ticker_data) != 1:
+        # draw horizontal line for fund median and annotate value
+        ticker_median = ticker_data[metric_col].median()
+        ax.axhline(ticker_median, color='#0068c9', linewidth=0.5, xmin=0.03, xmax=0.97)
+
+        plt.annotate('Fund Historical Median ' + unit_dict[metric_col].format(value=ticker_median),
+                     xy=(0, ticker_median), xytext=(10, -3),
+                     xycoords=('axes fraction', 'data'), textcoords='offset points',
+                     bbox=dict(boxstyle="round, pad=0.3", fc="#f0f2f6", lw=0))
+        
     
     # add a bit of a margin to right a-axis
     ax.set_xlim(right= x + timedelta(days=300))
     
     # add a bit of margin to top y-axis
-    ax.set_ylim(top=ax.get_ylim()[1]+2)
+    ax.set_ylim(top=ax.get_ylim()[1]+1)
+    
+    # hide framebox
+    plt.box(False)
+    
+    #plt.tight_layout()
+    
+    #plt.show()
+    
+    return fig
+
+def get_categorical_data(ticker,
+                        data=data):
+        
+    # prepare
+    data[year_col] = pd.to_datetime(data[year_col], format='%Y-%m-%d')
+    data = data.sort_values(by=year_col)
+    
+    # create yoy and ttm for input ticker
+    yoy = ttm = data[data[ticker_col] == ticker].drop(columns=[ticker_col, name_col])
+        
+    # check if each year has 2 fiscal halfs to produce agg for full fiscal year
+    yoy[year_col] = yoy[year_col].dt.year
+    yoy = yoy[yoy.duplicated(year_col, keep=False) == True]
+    
+    # group by year
+    yoy = yoy.groupby(year_col).agg({
+        shares_col: 'mean',
+        ffo_col: 'sum',
+        dividend_col: 'sum',
+        revenue_col: 'sum',
+        interest_col: 'sum',
+        ebitda_col: 'sum',
+        ebit_col: 'sum',
+        asset_col: 'last',
+        equity_col: 'last',
+        casti_col: 'last',
+        debt_col: 'last',
+    })
+    
+    # roll by last 2 fiscal halfs
+    ttm = ttm.rolling(2).agg({
+        shares_col: 'mean',
+        ffo_col: 'sum',
+        dividend_col: 'sum',
+        revenue_col: 'sum',
+        interest_col: 'sum',
+        ebitda_col: 'sum',
+        ebit_col: 'sum',
+        asset_col: 'mean',
+        equity_col: 'mean',
+        casti_col: 'mean',
+        debt_col: 'mean',
+    }).tail(1)
+    
+    #ttm = ttm.rename(index={0: 'TTM'})
+    ttm['indx'] = 'TTM'
+    ttm = ttm.set_index('indx')
+        
+    # concat to create output df and compute metrics
+    df = pd.concat([yoy, ttm])
+    
+    df['ffos'] = df[ffo_col] / df[shares_col]
+    df['ffo_payout'] = 100 * abs(df[dividend_col]) / df[ffo_col]
+    df['roic'] = 100 * df[ebit_col] / (df[equity_col] + df[debt_col])
+    df['op_margin'] = 100 * df[ebit_col] / df[revenue_col]
+    df['net_debt_ebitda'] = (df[debt_col] - df[casti_col]) / df[ebitda_col]
+    df['net_debt_capital'] = (df[debt_col] - df[casti_col]) / (df[equity_col] + df[debt_col])
+    df['coverage'] = df[ebit_col] / abs(df[interest_col])
+    
+    # replace inf by zero
+    # those with zero net_debt will get inf when computing metrics
+    df.replace([np.inf, -np.inf], 0, inplace=True)
+    
+    
+    return df
+
+def chart_categorical_data(ticker, metric_col):
+    
+    # get df
+    df = get_categorical_data(ticker)
+    
+    # add chnage% by shifting metric_col and then computing
+    df['shift'] = df[metric_col].shift(1)
+    df['chnage'] = 100 * (df[metric_col] - df['shift']) / abs(df['shift'])
+    
+    # set x and y axis data
+    x = df.index
+    y = df[metric_col]
+    
+    # set chnages
+    chnages = df['chnage']
+    
+    # set defult font and colors
+    plt.rcParams['font.family'] = "sans-serif"
+    plt.rcParams['text.color'] = "262730"
+    #plt.rcParams['axes.labelcolor'] = 'ffffff'
+    plt.rcParams['xtick.color'] = '262730'
+    
+    # create object
+    fig, ax = plt.subplots()
+    bars = ax.bar(np.arange(len(x)), y, tick_label=x, color='#0068c9', width=0.96)
+
+    # hide y-axis
+    ax.get_yaxis().set_visible(False)
+
+    # show bar values on top
+    ax.bar_label(bars, padding=16, fmt='%.2f',
+                bbox=dict(boxstyle="round, pad=0.3", fc="#f0f2f6", lw=0))
+    # fmt='%g%%'
+    
+    # annotate chnage% by looping over bars
+    for bar, c in zip(bars.patches, chnages):
+        
+        if bar.get_height() >=0:
+            y_xytext = 6
+        else:
+            y_xytext = -6 
+        
+        # set color and value based on chnage direction
+        if np.isnan(c) or np.isinf(c):
+            c_color = 'grey'
+            c='NM'
+        elif c>=0:
+            c_color = 'green'
+            c='%.0f%%' % c
+        else:
+            c_color = 'red'
+            c='%.0f%%' % c
+        
+        plt.annotate(c,
+                     (bar.get_x() + bar.get_width() / 2, bar.get_height()), #(x,y) cord
+                     ha='center', va='center',
+                     xytext=(0, y_xytext), textcoords='offset points',
+                     size=8, color=c_color)
+
+    # remove side (x) margins and pad (y) 
+    plt.margins(x=0, y=0.15)
     
     # hide framebox
     plt.box(False)
@@ -209,36 +341,4 @@ def chart_pffo(ticker, file_path='data.csv'):
     #plt.show()
     return fig
     
-def chart_metric(df, ticker, metric_col, ticker_col='ticker', year_col='year'):
-
-    # prepare data
-    df = df[df[ticker_col]==ticker][[year_col, metric_col]].sort_values(by=[year_col])
-
-    # set x and y axis data
-    x = df[year_col].apply(str)
-    y = df[metric_col]
-
-    # set defult font and colors
-    plt.rcParams['font.family'] = "sans-serif"
-    plt.rcParams['text.color'] = "262730"
-    #plt.rcParams['axes.labelcolor'] = 'ffffff'
-    plt.rcParams['xtick.color'] = '262730'
-
-    # create object
-    fig, ax = plt.subplots()
-    bars = ax.bar(x, y, color='#0068c9')
-
-    # hide y-axis
-    ax.get_yaxis().set_visible(False)
-
-    # show bar values on top
-    ax.bar_label(bars)
-
-    # remove side margins
-    plt.margins(x=0)
-
-    # hide framebox
-    plt.box(False)
-
-    #plt.show
-    return fig
+  
