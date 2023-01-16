@@ -37,6 +37,7 @@ st.markdown(
 st.markdown("<h2 style='direction: rtl; text-align: center;'>SaudiREITsInfo</h2>", unsafe_allow_html=True)
 
 tickers = {    
+    9999: 'Choose a fund'
     4330: '4330: Riyad REIT الرياض ريت',
     4331: '4331: Aljazira REIT',
     4332: '4332: Jadwa REIT Alharamain',
@@ -58,6 +59,13 @@ tickers = {
 
 ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed',
                       format_func=lambda x:tickers[x])
+
+if ticker == 9999:
+    placeholder = st.empty()
+else:
+    with placeholder.container():
+    st.write("This is one element")
+    st.write("This is another")
 
 st.markdown("""<p style='direction: rtl; text-align: justify;'>أفضل طريقة للتعامل مع النصوص العربية بلغة بيثون هو استخدام الترميز يونيكود، التي يدعمها بيثون دعما أصليا، لا حاجة فيه إلى مكتبات خارجية أو دوال خاصة، وقد يكون هذا أهمّ ما دفعني لاختيار لغة بيثون، إذ يكفي أن تسبق النص بحرف يو u لتدع بيثون يريحك من عناء التفكير وبرمجة النصوص، ويعامل معها بشفافية عالية.</p>""", unsafe_allow_html=True)
 
