@@ -69,7 +69,7 @@ tickers = {
     4348: '4348: Alkhabeer REIT'
 }
 
-ticker = st.selectbox('Choose a REIT fund', tickers.keys(),
+ticker = st.selectbox(components.html("""<div dir="rtl">اختر صندوق</div>"""), tickers.keys(),
                       format_func=lambda x:tickers[x])
 
 st.subheader('Price'+' '+u'السعر')
