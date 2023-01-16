@@ -79,7 +79,8 @@ st.subheader('Dividend Yield'+' '+u'عائد التوزيع النقدي')
 
 st.pyplot(chart_timeseries_data(ticker, 'yield'))
 
-st.subheader('FFO Per Share')
+st.markdown("""<h3 style='direction: rtl; text-align: center;'>النقد من العمليات للوحدة</h3>""", unsafe_allow_html=True)
+#st.subheader('FFO Per Share')
 st.pyplot(chart_categorical_data(ticker, 'ffos'))
 
 st.subheader('FFO Payout Ratio')
