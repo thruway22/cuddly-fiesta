@@ -211,7 +211,7 @@ def chart_timeseries_data(ticker, metric_col,
     # hide framebox
     plt.box(False)
     
-    plt.tight_layout()
+    #plt.tight_layout()
     
     #plt.show()
     
