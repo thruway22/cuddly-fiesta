@@ -10,6 +10,25 @@ from pandas.tseries.offsets import MonthEnd
 import streamlit as st
 from utilities import *
 
+style_fullscreen_button_css = """
+    button[title="View fullscreen"] {
+        background-color: #004170cc;
+        right: 0;
+        color: white;
+    }
+
+    button[title="View fullscreen"]:hover {
+        background-color:  #004170;
+        color: white;
+        }
+    """
+st.markdown(
+    "<style>"
+    + style_fullscreen_button_css
+    + "</styles>",
+    unsafe_allow_html=True,
+)
+
 st.title('SaudiREITsInfo')
 
 
