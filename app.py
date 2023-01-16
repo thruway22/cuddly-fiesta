@@ -60,8 +60,10 @@ tickers = {
 ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed',
                       format_func=lambda x:tickers[x])
 
+placeholder = st.empty()
+
 if ticker == 9999:
-    placeholder = st.empty()
+    pass
 else:
     with placeholder.container():
         st.write("This is one element")
