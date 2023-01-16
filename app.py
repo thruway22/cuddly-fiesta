@@ -11,7 +11,7 @@ from utilities import *
 
 
 
-data = pd.read_csv('data/data_hy.csv')
+data = pd.read_csv('data_hy.csv')
 
 tickers_dict = {data.ticker.unique()[i]: \
                 str(data.ticker.unique()[i]) + ': ' + data.name.unique()[i] \
