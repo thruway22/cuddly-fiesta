@@ -9,7 +9,6 @@ from pandas.tseries.offsets import DateOffset
 from pandas.tseries.offsets import MonthEnd
 import streamlit as st
 import streamlit.components.v1 as components
-from bidi.algorithm import get_display
 from utilities import *
 
 style_fullscreen_button_css = """
