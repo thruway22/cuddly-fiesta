@@ -91,7 +91,7 @@ with col1:
     st.pyplot(chart_categorical_data(ticker, 'roic'))
 with col2:
     st.subheader('op_margin')
-    st.pyplot(chart_categorical_data(ticker, 'op_margin')))
+    st.pyplot(chart_categorical_data(ticker, 'op_margin'))
     
     st.subheader('net_debt_ebitda')
     st.pyplot(chart_categorical_data(ticker, 'net_debt_ebitda'))
