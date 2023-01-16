@@ -37,7 +37,7 @@ st.markdown(
 st.markdown("<h2 style='direction: rtl; text-align: center;'>SaudiREITsInfo</h2>", unsafe_allow_html=True)
 
 tickers = {    
-    4330: '4330: Riyad REIT',
+    4330: '4330: Riyad REIT الرياض ريت',
     4331: '4331: Aljazira REIT',
     4332: '4332: Jadwa REIT Alharamain',
     4333: '4333: Taleem REIT',
