@@ -8,6 +8,7 @@ from datetime import timedelta
 from pandas.tseries.offsets import DateOffset
 from pandas.tseries.offsets import MonthEnd
 import streamlit as st
+import streamlit.components.v1 as components
 from bidi.algorithm import get_display
 from utilities import *
 
@@ -36,6 +37,17 @@ st.title('SaudiREITsInfo '+u'تجربة')
 
 st.write(u'أفضل طريقة للتعامل مع النصوص العربية بلغة بيثون هو استخدام الترميز يونيكود، التي يدعمها بيثون دعما أصليا، لا حاجة فيه إلى مكتبات خارجية أو دوال خاصة، وقد يكون هذا أهمّ ما دفعني لاختيار لغة بيثون، إذ يكفي أن تسبق النص بحرف يو u لتدع بيثون يريحك من عناء التفكير وبرمجة النصوص، ويعامل معها بشفافية عالية.')
 
+components.html("<div dir="rtl">
+
+سلام دنیا
+
+مرحبا العالم
+
+שלום בעולם
+
+ہیلو دنیا
+</div>
+")
 
 tickers = {    
     4330: '4330: Riyad REIT',
