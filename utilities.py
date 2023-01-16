@@ -24,6 +24,12 @@ equity_col='equity'
 casti_col='casti'
 debt_col='debt'
 
+data = pd.read_csv('data_hy.csv')
+
+tickers_dict = {data.ticker.unique()[i]: \
+                str(data.ticker.unique()[i]) + ': ' + data.name.unique()[i] \
+                for i in range(len(data.ticker.unique()))}
+
 def rock_and_roll(df1, df2, df2_metric_col,
                   df1_date_col='date',
                   df2_start_col='period_start',
