@@ -143,6 +143,7 @@ def chart_timeseries_data(ticker, metric_col,
     plt.rcParams['text.color'] = "262730"
     plt.rcParams['ytick.color'] = '262730'
     plt.rcParams['xtick.color'] = '262730'
+    plt.rcParams.update({'font.size': 8})
     
     # get asked metric
     ticker_data = get_ticker_data(ticker)[[metric_col]]
