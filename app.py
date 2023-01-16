@@ -15,11 +15,13 @@ style_fullscreen_button_css = """
         background-color: #004170cc;
         right: 0;
         color: white;
+        visibility: hidden;
     }
 
     button[title="View fullscreen"]:hover {
         background-color:  #004170;
         color: white;
+        visibility: hidden;
         }
     """
 st.markdown(
