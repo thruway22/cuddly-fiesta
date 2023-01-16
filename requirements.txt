@@ -3,4 +3,3 @@ pandas==1.5.2
 matplotlib==3.6.2
 streamlit==1.16.0
 yfinance==0.2.3
-python-bidi==0.4.2
