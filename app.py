@@ -10,7 +10,7 @@ from pandas.tseries.offsets import MonthEnd
 from utilities import *
 
 
-sector_data = get_sector_data()
+
 
 style_fullscreen_button_css = """
     button[title="View fullscreen"] {
