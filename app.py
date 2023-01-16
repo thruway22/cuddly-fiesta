@@ -47,7 +47,7 @@ components.html("""<div dir="rtl">
 
 ہیلو دنیا
 </div>
-"""")
+""")
 
 tickers = {    
     4330: '4330: Riyad REIT',
