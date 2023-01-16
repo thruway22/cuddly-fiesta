@@ -37,7 +37,7 @@ st.markdown(
 st.markdown("<h2 style='direction: rtl; text-align: center;'>SaudiREITsInfo</h2>", unsafe_allow_html=True)
 
 tickers = {    
-    9999: 'Choose a fund';
+    9999: 'Choose a fund',
     4330: '4330: Riyad REIT الرياض ريت',
     4331: '4331: Aljazira REIT',
     4332: '4332: Jadwa REIT Alharamain',
