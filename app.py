@@ -10,13 +10,6 @@ from pandas.tseries.offsets import MonthEnd
 from utilities import *
 
 
-
-data = pd.read_csv('data_hy.csv')
-
-tickers_dict = {data.ticker.unique()[i]: \
-                str(data.ticker.unique()[i]) + ': ' + data.name.unique()[i] \
-                for i in range(len(data.ticker.unique()))}
-
 sector_data = get_sector_data()
 
 style_fullscreen_button_css = """
