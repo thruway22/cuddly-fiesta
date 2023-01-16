@@ -34,7 +34,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-st.title('SaudiREITsInfo '+u'تجربة')
+st.markdown("<h2 style='direction: rtl; text-align: center;'>SaudiREITsInfo</h2>", unsafe_allow_html=True)
 
 
 
