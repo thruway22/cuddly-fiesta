@@ -69,48 +69,48 @@ else:
         st.write("This is one element")
         st.write("This is another")
 
-st.markdown("""<p style='direction: rtl; text-align: justify;'>أفضل طريقة للتعامل مع النصوص العربية بلغة بيثون هو استخدام الترميز يونيكود، التي يدعمها بيثون دعما أصليا، لا حاجة فيه إلى مكتبات خارجية أو دوال خاصة، وقد يكون هذا أهمّ ما دفعني لاختيار لغة بيثون، إذ يكفي أن تسبق النص بحرف يو u لتدع بيثون يريحك من عناء التفكير وبرمجة النصوص، ويعامل معها بشفافية عالية.</p>""", unsafe_allow_html=True)
+        st.markdown("""<p style='direction: rtl; text-align: justify;'>أفضل طريقة للتعامل مع النصوص العربية بلغة بيثون هو استخدام الترميز يونيكود، التي يدعمها بيثون دعما أصليا، لا حاجة فيه إلى مكتبات خارجية أو دوال خاصة، وقد يكون هذا أهمّ ما دفعني لاختيار لغة بيثون، إذ يكفي أن تسبق النص بحرف يو u لتدع بيثون يريحك من عناء التفكير وبرمجة النصوص، ويعامل معها بشفافية عالية.</p>""", unsafe_allow_html=True)
 
-st.subheader('Price'+' '+u'السعر')
-st.pyplot(chart_timeseries_data(ticker, 'price'))
+        st.subheader('Price'+' '+u'السعر')
+        st.pyplot(chart_timeseries_data(ticker, 'price'))
 
-st.subheader('P/FFO'+' '+u'مكرر النقد من العمليات')
-st.pyplot(chart_timeseries_data(ticker, 'pffo'))
+        st.subheader('P/FFO'+' '+u'مكرر النقد من العمليات')
+        st.pyplot(chart_timeseries_data(ticker, 'pffo'))
 
-st.subheader('Dividend Yield'+' '+u'عائد التوزيع النقدي')
+        st.subheader('Dividend Yield'+' '+u'عائد التوزيع النقدي')
 
-st.pyplot(chart_timeseries_data(ticker, 'yield'))
+        st.pyplot(chart_timeseries_data(ticker, 'yield'))
 
-st.markdown('<hr />', unsafe_allow_html=True)
+        st.markdown('<hr />', unsafe_allow_html=True)
 
-st.markdown("""<h4 style='direction: rtl; text-align: center;'>النقد من العمليات للوحدة</h4>""", unsafe_allow_html=True)
-#st.subheader('FFO Per Share')
-st.pyplot(chart_categorical_data(ticker, 'ffos'))
+        st.markdown("""<h4 style='direction: rtl; text-align: center;'>النقد من العمليات للوحدة</h4>""", unsafe_allow_html=True)
+        #st.subheader('FFO Per Share')
+        st.pyplot(chart_categorical_data(ticker, 'ffos'))
 
-st.subheader('FFO Payout Ratio')
-st.pyplot(chart_categorical_data(ticker, 'ffo_payout'))
+        st.subheader('FFO Payout Ratio')
+        st.pyplot(chart_categorical_data(ticker, 'ffo_payout'))
 
-col1, col2 = st.columns(2)
+        col1, col2 = st.columns(2)
 
-with col1:
-    st.subheader('FFO Per Share')
-    st.pyplot(chart_categorical_data(ticker, 'ffos'))
-    
-    st.subheader('FFO Payout Ratio')
-    st.pyplot(chart_categorical_data(ticker, 'ffo_payout'))
-    
-    st.subheader('roic')
-    st.pyplot(chart_categorical_data(ticker, 'roic'))
-with col2:
-    st.subheader('op_margin')
-    st.pyplot(chart_categorical_data(ticker, 'op_margin'))
-    
-    st.subheader('net_debt_ebitda')
-    st.pyplot(chart_categorical_data(ticker, 'net_debt_ebitda'))
-    
-    st.subheader('net_debt_capital')
-    st.pyplot(chart_categorical_data(ticker, 'net_debt_capital'))
-    
-    st.subheader('coverage')
-    st.pyplot(chart_categorical_data(ticker, 'coverage'))
+        with col1:
+            st.subheader('FFO Per Share')
+            st.pyplot(chart_categorical_data(ticker, 'ffos'))
+
+            st.subheader('FFO Payout Ratio')
+            st.pyplot(chart_categorical_data(ticker, 'ffo_payout'))
+
+            st.subheader('roic')
+            st.pyplot(chart_categorical_data(ticker, 'roic'))
+        with col2:
+            st.subheader('op_margin')
+            st.pyplot(chart_categorical_data(ticker, 'op_margin'))
+
+            st.subheader('net_debt_ebitda')
+            st.pyplot(chart_categorical_data(ticker, 'net_debt_ebitda'))
+
+            st.subheader('net_debt_capital')
+            st.pyplot(chart_categorical_data(ticker, 'net_debt_capital'))
+
+            st.subheader('coverage')
+            st.pyplot(chart_categorical_data(ticker, 'coverage'))
     
