@@ -1,23 +1,10 @@
-import yfinance as yf
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
-from datetime import datetime  
-from datetime import timedelta
-from pandas.tseries.offsets import DateOffset
-from pandas.tseries.offsets import MonthEnd
 import streamlit as st
-import streamlit.components.v1 as components
 from utilities import *
 
-# st.set_page_config(layout="wide")
-
+# hide the stupid zoom button on charts
 st.markdown('''<style> button[title="View fullscreen"] {visibility: hidden;}
             button[title="View fullscreen"]:hover {visibility: hidden;}</styles>''',
             unsafe_allow_html=True)
-
-
 
 tickers = {    
     9999: '',
