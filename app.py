@@ -10,6 +10,7 @@ from pandas.tseries.offsets import MonthEnd
 import streamlit as st
 import streamlit.components.v1 as components
 from utilities import *
+from texts import *
 
 # st.set_page_config(layout="wide")
 
@@ -85,12 +86,11 @@ else:
         st.markdown("""<p style='direction: rtl; text-align: justify;'>أفضل طريقة للتعامل مع النصوص العربية بلغة بيثون هو استخدام الترميز يونيكود، التي يدعمها بيثون دعما أصليا، لا حاجة فيه إلى مكتبات خارجية أو دوال خاصة، وقد يكون هذا أهمّ ما دفعني لاختيار لغة بيثون، إذ يكفي أن تسبق النص بحرف يو u لتدع بيثون يريحك من عناء التفكير وبرمجة النصوص، ويعامل معها بشفافية عالية.</p>""", unsafe_allow_html=True)
         
         st.markdown('<hr />', unsafe_allow_html=True)
-
-        st.markdown("""<h4 style='direction: rtl; text-align: center;'>النقد من العمليات للوحدة</h4>""", unsafe_allow_html=True)
-        #st.subheader('FFO Per Share')
+        display_text('pffo')
         st.pyplot(chart_categorical_data(ticker, 'ffos'))
-
-        st.subheader('FFO Payout Ratio')
+        
+        st.markdown('<hr />', unsafe_allow_html=True)
+        display_text('pffo')
         st.pyplot(chart_categorical_data(ticker, 'ffo_payout'))
 
         col1, col2 = st.columns(2)
