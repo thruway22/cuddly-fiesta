@@ -73,6 +73,7 @@ else:
 
         #st.subheader('Price'+' '+u'السعر')
         st.pyplot(chart_timeseries_data(ticker, 'price'))
+        st.markdown('<hr />', unsafe_allow_html=True)
 
         st.subheader('P/FFO'+' '+u'مكرر النقد من العمليات')
         st.pyplot(chart_timeseries_data(ticker, 'pffo'))
