@@ -68,12 +68,10 @@ if ticker == 9999:
     pass
 else:
     with placeholder.container():
-        st.write("This is one element")
-        st.write("This is another")
 
         st.markdown("""<p style='direction: rtl; text-align: justify;'>أفضل طريقة للتعامل مع النصوص العربية بلغة بيثون هو استخدام الترميز يونيكود، التي يدعمها بيثون دعما أصليا، لا حاجة فيه إلى مكتبات خارجية أو دوال خاصة، وقد يكون هذا أهمّ ما دفعني لاختيار لغة بيثون، إذ يكفي أن تسبق النص بحرف يو u لتدع بيثون يريحك من عناء التفكير وبرمجة النصوص، ويعامل معها بشفافية عالية.</p>""", unsafe_allow_html=True)
 
-        st.subheader('Price'+' '+u'السعر')
+        #st.subheader('Price'+' '+u'السعر')
         st.pyplot(chart_timeseries_data(ticker, 'price'))
 
         st.subheader('P/FFO'+' '+u'مكرر النقد من العمليات')
