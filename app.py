@@ -38,7 +38,7 @@ st.markdown(
 
 
 tickers = {    
-    9999: 'Choose a fund',
+    9999: 'Choose fund اختر صندوق',
     4330: '4330: Riyad REIT الرياض ريت',
     4331: '4331: Aljazira REIT',
     4332: '4332: Jadwa REIT Alharamain',
@@ -58,7 +58,7 @@ tickers = {
     4348: '4348: Alkhabeer REIT'
 }
 
-st.markdown(display_text('intro', title_size=22), unsafe_allow_html=True)
+st.markdown(display_text('intro', title_size=24), unsafe_allow_html=True)
 
 ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed',
                       format_func=lambda x:tickers[x])
