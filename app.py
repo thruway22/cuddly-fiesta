@@ -27,15 +27,12 @@ tickers = {
     4348: '4348: Alkhabeer REIT'
 }
 
-st.markdown(display_text(title=texts.loc['main_title'].value, title_size=24), unsafe_allow_html=True)
+st.markdown(display_text(
+            body=texts.loc['main_body'].value، title=texts.loc['main_title'].value, title_size=24),
+            unsafe_allow_html=True)
 
-tab1, tab2 = st.tabs(["عن المشروع", "الرئيسية"])
-
-with tab1:
-   st.markdown(display_text(body=texts.loc['main_body'].value), unsafe_allow_html=True)
-
-   ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed',
-                         format_func=lambda x:tickers[x])
+ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed',
+             format_func=lambda x:tickers[x])
 
 placeholder = st.empty()
 
