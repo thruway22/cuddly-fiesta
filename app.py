@@ -27,6 +27,13 @@ tickers = {
     4348: '4348: Alkhabeer REIT'
 }
 
+tab1, tab2 = st.tabs(["الرئيسية", "عن المشروع")
+
+with tab1:
+   st.header("A cat")
+   st.image("https://static.streamlit.io/examples/cat.jpg", width=200)
+
+
 st.markdown(display_text(
     body=texts.loc['main_body'].value, title=texts.loc['main_title'].value, title_size=24),
             unsafe_allow_html=True)
