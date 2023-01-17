@@ -32,7 +32,6 @@ st.markdown(display_text(title=texts.loc['main_title'].value, title_size=24), un
 tab1, tab2 = st.tabs(["عن المشروع", "الرئيسية"])
 
 with tab1:
-   st.header("A cat")
    st.markdown(display_text(body=texts.loc['main_body'].value), unsafe_allow_html=True)
 
    ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed',
