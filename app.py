@@ -68,15 +68,15 @@ if ticker == 9999:
 else:
     with placeholder.container():
         
-        #st.markdown(display_text('price'), unsafe_allow_html=True)
+        #st.markdown(display_text('empty', texts_dict), unsafe_allow_html=True)
         st.pyplot(chart_timeseries_data(ticker, 'price'))
         
         timeseries_metrics_list = ['pffo', 'yield']
         
         for i in timeseries_metrics_list:
             st.markdown('<hr />', unsafe_allow_html=True)
-            st.markdown(display_text(i), unsafe_allow_html=True)
-            st.pyplot(chart_categorical_data(ticker, i))
+            st.markdown(display_text(i, texts_dict), unsafe_allow_html=True)
+            st.pyplot(chart_timeseries_data(ticker, i))
 
         col1, col2 = st.columns(2)
 
