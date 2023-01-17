@@ -23,8 +23,12 @@ asset_col='asset'
 equity_col='equity'
 casti_col='casti'
 debt_col='debt'
+######
 
-data = pd.read_csv('data_hy.csv')
+
+data = pd.read_csv('data/data_hy.csv')
+data[year_col] = pd.to_datetime(data[year_col], format='%Y-%m-%d')
+data = data.sort_values(by=year_col)
 
 tickers_dict = {data.ticker.unique()[i]: \
                 str(data.ticker.unique()[i]) + ': ' + data.name.unique()[i] \
@@ -50,9 +54,9 @@ def rock_and_roll(df1, df2, df2_metric_col,
                     np.append(df2[df2_metric_col].values, np.nan))
 
     return values
+  
 
-def get_ticker_data(ticker,
-                    data=data):
+def get_ticker_data(ticker):
     '''
     gets the current/latest market prices of each ticker and compute pffo
     for each ticker as per latest announced ffo 
@@ -64,10 +68,6 @@ def get_ticker_data(ticker,
     Return:
     df (pd.DataFrame):
     '''
-        
-    # prepare input data
-    data[year_col] = pd.to_datetime(data[year_col], format='%Y-%m-%d')
-    data = data[[ticker_col, year_col, shares_col, ffo_col, dividend_col]].sort_values(by=[year_col])
     
     #### df1 : prices dataframe ####
     
@@ -84,8 +84,11 @@ def get_ticker_data(ticker,
     
     ### df2 : metrics dataframe ###
     
+    global data
+    df2 = data[[ticker_col, year_col, shares_col, ffo_col, dividend_col]]
+    
     # rolling agg on metrics for input ticker to obtain Trailing-12-Months (TTM) values
-    df2 = data[data[ticker_col]==ticker].set_index(year_col).rolling(2).agg(
+    df2 = df2[df2[ticker_col]==ticker].set_index(year_col).rolling(2).agg(
         {shares_col:'mean', ffo_col:'sum', dividend_col:'sum'}).reset_index()
     
     df2 = df2.rename(columns = {year_col:'period_end'})
@@ -115,12 +118,15 @@ def get_ticker_data(ticker,
     df = df[['price', 'yield', 'pffo']]
     
     return df
+  
 
-def get_sector_data(data=data,
-                    tickers_dict=tickers_dict,
-                    price_col='price',
+@st.cache(ttl=21600)
+def get_sector_data(price_col='price',
                     yield_col='yield',
                     pffo_col='pffo'):
+    
+    global data
+    global tickers_dict
     
     # create empty df with designated columns
     df = pd.DataFrame({'yield': [], 'pffo': []})
@@ -131,25 +137,34 @@ def get_sector_data(data=data,
         
     return df
   
-  
 sector_data = get_sector_data()
 
-def chart_timeseries_data(ticker, metric_col,
-                          data=data,
-                          sector_data=sector_data):
+def chart_timeseries_data(ticker, metric_col):
     
     # set defult font and colors
     plt.rcParams['font.family'] = "sans-serif"
     plt.rcParams['text.color'] = "262730"
     plt.rcParams['ytick.color'] = '262730'
     plt.rcParams['xtick.color'] = '262730'
-    plt.rcParams['font.size']: 6
     
     # get asked metric
     ticker_data = get_ticker_data(ticker)[[metric_col]]
+        
+    metric_dict = {
+        'figsize': {
+            'price': (6.4, 1.4),
+            'yield': (6.4, 1.4),
+            'pffo': (6.4, 1.4),
+        },
+        'unit': {
+            'price': '{value:0.2f} SAR',
+            'yield': '{value:0.2f}%',
+            'pffo': '{value:0.2f}x',
+        },
+    }
     
     # create objects
-    fig, ax = plt.subplots(figsize=(6.4, 1.2))
+    fig, ax = plt.subplots(figsize=metric_dict['figsize'][metric_col])
     ax.plot(ticker_data, linewidth=1, color='lightgrey')
     
     # format datetime on xaxis
@@ -162,51 +177,60 @@ def chart_timeseries_data(ticker, metric_col,
     x = ticker_data.tail(1).index[0]
     y = ticker_data[metric_col][-1]
     
-    # mark current value on chart, cord:(year, last point)
-    ax.plot(x, y, color='#f63366', **{'marker': '.'})
+    # add a bit of a margin to right a-axis
+    ax.set_xlim(right= x + timedelta(days=330))
     
-    unit_dict = {'price': '{value:0.2f} SAR',
-                 'yield': '{value:0.2f}%',
-                 'pffo': '{value:0.2f}x'
-                }
+    if len(ticker_data) == 1:
+        
+        ax.get_xaxis().set_visible(False)
+        
+        plt.annotate(metric_dict['unit'][metric_col].format(value=y),
+                     xy=(0.5, 0.8), xycoords="axes fraction", va="center", ha="center",
+                     bbox=dict(boxstyle="round, pad=0.3", fc="#f0f2f6", lw=0))
+        
+        plt.annotate('Current Value',
+                     xy=(0.5, 0.6), xycoords="axes fraction", va="center", ha="center")
+        
+        plt.annotate('No historical data on Yahoo! Finance for this fund.', size=8,
+                     xy=(0.5, 0.2), xycoords="axes fraction", va="center", ha="center")
+                
+    else:
+        # mark current value on chart, cord:(year, last point)
+        ax.plot(x, y, color='#f63366', **{'marker': '.'})
 
-    # annotate current value on chart, cord:()
-    plt.annotate(unit_dict[metric_col].format(value=y),
-                 xy=(x, y), xytext=(6, -3), 
+        # annotate current value on chart, cord:()
+        plt.annotate(metric_dict['unit'][metric_col].format(value=y),
+                 xy=(x, y), xytext=(7, -3), 
                  xycoords=('data', 'data'), textcoords='offset points',
                  bbox=dict(boxstyle="round, pad=0.3", fc="#f0f2f6", lw=0))
     
-    if len(ticker_data) == 1:
-        plt.annotate('No historical data from Yahoo! Finance',
-                     xy=(0, 0), xytext=(0, 5),
-                     xycoords=('axes fraction', 'axes fraction'), textcoords='offset points')
-    
     if metric_col != 'price':
         # draw horizontal line for sector median and annotate value
+        global sector_data
         sector_median = sector_data[metric_col].median()
-        ax.axhline(sector_median, color='#0068c9', linewidth=0.5, xmin=0.03, xmax=0.97)
+        sector_median = metric_dict['unit'][metric_col].format(value=sector_median)
+        
+        plt.annotate('Sector Current Median',
+                     xy=(0.25, 1.15), xycoords="axes fraction", va="center", ha="center")
 
-        plt.annotate('Sector Current Median ' + unit_dict[metric_col].format(value=sector_median),
-                     xy=(0, sector_median), xytext=(10, -3),
-                     xycoords=('axes fraction', 'data'), textcoords='offset points',
+        plt.annotate(sector_median,
+                     xy=(0.25, 1.35), xycoords="axes fraction", va="center", ha="center",
                      bbox=dict(boxstyle="round, pad=0.3", fc="#f0f2f6", lw=0))
     
-    if metric_col != 'price' and len(ticker_data) != 1:
         # draw horizontal line for fund median and annotate value
         ticker_median = ticker_data[metric_col].median()
-        ax.axhline(ticker_median, color='#0068c9', linewidth=0.5, xmin=0.03, xmax=0.97)
-
-        plt.annotate('Fund Historical Median ' + unit_dict[metric_col].format(value=ticker_median),
-                     xy=(0, ticker_median), xytext=(10, -3),
-                     xycoords=('axes fraction', 'data'), textcoords='offset points',
-                     bbox=dict(boxstyle="round, pad=0.3", fc="#f0f2f6", lw=0))
+        ticker_median = metric_dict['unit'][metric_col].format(value=ticker_median)
+        ticker_median = 'NM' if len(ticker_data) == 1 else ticker_median
         
+        plt.annotate('Fund Historical Median',
+                     xy=(0.75, 1.15), xycoords="axes fraction", va="center", ha="center")
+
+        plt.annotate(ticker_median,
+                     xy=(0.75, 1.35), xycoords="axes fraction", va="center", ha="center",
+                     bbox=dict(boxstyle="round, pad=0.3", fc="#f0f2f6", lw=0))
     
-    # add a bit of a margin to right a-axis
-    ax.set_xlim(right= x + timedelta(days=300))
-    
-    # add a bit of margin to top y-axis
-    ax.set_ylim(top=ax.get_ylim()[1]+1)
+    # hide y-axis
+    ax.get_yaxis().set_visible(False)
     
     # hide framebox
     plt.box(False)
@@ -214,15 +238,12 @@ def chart_timeseries_data(ticker, metric_col,
     #plt.tight_layout()
     
     #plt.show()
-    
     return fig
-
-def get_categorical_data(ticker,
-                        data=data):
-        
-    # prepare
-    data[year_col] = pd.to_datetime(data[year_col], format='%Y-%m-%d')
-    data = data.sort_values(by=year_col)
+  
+  
+def get_categorical_data(ticker):
+    
+    global data
     
     # create yoy and ttm for input ticker
     yoy = ttm = data[data[ticker_col] == ticker].drop(columns=[ticker_col, name_col])
@@ -280,9 +301,9 @@ def get_categorical_data(ticker,
     # those with zero net_debt will get inf when computing metrics
     df.replace([np.inf, -np.inf], 0, inplace=True)
     
-    
     return df
-
+  
+  
 def chart_categorical_data(ticker, metric_col):
     
     # get df
