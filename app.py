@@ -27,7 +27,7 @@ tickers = {
     4348: '4348: Alkhabeer REIT'
 }
 
-tab1, tab2 = st.tabs(["الرئيسية", "عن المشروع")
+tab1, tab2 = st.tabs(["الرئيسية", "عن المشروع"])
 
 with tab1:
    st.header("A cat")
