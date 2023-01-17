@@ -1,7 +1,7 @@
 texts_dict = {
-    'empty': {
-        'title': '',
-        'body': '',
+    'intro': {
+        'title': 'ريتات السعودية',
+        'body': 'هذا الموقع هو مشروع نبع من احتياج شخصي. جمعت فيه ما أظن أنه المقاييس المالية المهمة لتقييم الصناديق العقارية المتداولة في السعودية. اختر صندوق من القائمة لتشاهد المقاييس المالية المتعلقة.',
     },
     'pffo': {
         'title': 'مكرر النقد من العمليات P/FFO',
@@ -20,3 +20,22 @@ texts_dict = {
         'body': 'مقدار التوزيعات النقدية بالنسبة إلى الأموال من العمليات بدلاً من احتسابها بالنسبة إلى صافي الدخل كما هو معمول به في الشركات. بالنسبة للصناديق العقارية فإن الرقم المفضل هو أقل من 90%. زيادة النسبة بشكل مستمر تشير إلى أن التوزيعات تنمو بوتيرة أسرع من نمو الأموال من العمليات للصندوق.',
     },
 }
+
+
+def display_text(x, title_size=16, asis=False):
+    
+    global texts_dict
+    
+    if asis == True:
+        text = texts_dict[x]
+    
+    else:
+        text = '''
+        <p style="direction: rtl; text-align: justify; font-size:{ts}px; font-weight: bold;">{title}</p>
+        <p style="direction: rtl; text-align:justify">{body}</p>
+        '''.format(
+            ts = title_size
+            title = texts_dict[x]['title'],
+            body = texts_dict[x]['body'])
+    
+    return text
