@@ -13,12 +13,12 @@ from utilities import *
 
 # st.set_page_config(layout="wide")
 
-style_fullscreen_button_css = """
+'''style_fullscreen_button_css = """
     button[title="View fullscreen"] {
         background-color: #004170cc;
         right: 0;
         color: white;
-        visibility: hidden;
+        
     }
 
     button[title="View fullscreen"]:hover {
@@ -32,7 +32,11 @@ st.markdown(
     + style_fullscreen_button_css
     + "</styles>",
     unsafe_allow_html=True,
-)
+)'''
+
+st.markdown('''<style> button[title="View fullscreen"] {visibility: hidden;}
+            button[title="View fullscreen"]:hover {visibility: hidden;}</styles>''',
+            unsafe_allow_html=True)
 
 
 
