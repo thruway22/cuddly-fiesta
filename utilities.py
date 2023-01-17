@@ -372,13 +372,3 @@ def chart_categorical_data(ticker, metric_col):
     
     #plt.show()
     return fig
-
-  
-def display_text(metric, texts_dict):
-    
-    text = '''
-    <p style="direction: rtl; text-align: justify; font-size:16px; font-weight: bold;">{title}</p>
-    <p style="direction: rtl; text-align:justify">{body}</p>
-    '''.format(title = texts_dict[metric]['title'], body = texts_dict[metric]['body'])
-    
-    return text
