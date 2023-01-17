@@ -77,7 +77,7 @@ else:
 
         #st.subheader('P/FFO'+' '+u'مكرر النقد من العمليات')
         st.pyplot(chart_timeseries_data(ticker, 'pffo'))
-        st.markdown("""<p>style="direction: rtl; text-align: justify; font-size:16px"<strong>FFO مكرر النقد من العمليات</strong></p><p style="direction: rtl; text-align:justify">أفضل طريقة للتعامل مع النصوص العربية بلغة بيثون هو استخدام الترميز يونيكود، التي يدعمها بيثون دعما أصليا، لا حاجة فيه إلى مكتبات خارجية أو دوال خاصة، وقد يكون هذا أهمّ ما دفعني لاختيار لغة بيثون، إذ يكفي أن تسبق النص بحرف يو u لتدع بيثون يريحك من عناء التفكير وبرمجة النصوص، ويعامل معها بشفافية عالية.</p>
+        st.markdown("""<p style="direction: rtl; text-align: justify; font-size:16px"><strong>FFO مكرر النقد من العمليات</strong></p><p style="direction: rtl; text-align:justify">أفضل طريقة للتعامل مع النصوص العربية بلغة بيثون هو استخدام الترميز يونيكود، التي يدعمها بيثون دعما أصليا، لا حاجة فيه إلى مكتبات خارجية أو دوال خاصة، وقد يكون هذا أهمّ ما دفعني لاختيار لغة بيثون، إذ يكفي أن تسبق النص بحرف يو u لتدع بيثون يريحك من عناء التفكير وبرمجة النصوص، ويعامل معها بشفافية عالية.</p>
 """, unsafe_allow_html=True)
 
         #st.subheader('Dividend Yield'+' '+u'عائد التوزيع النقدي')
