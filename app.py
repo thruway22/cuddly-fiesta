@@ -58,10 +58,16 @@ tickers = {
     4348: '4348: Alkhabeer REIT'
 }
 
-st.markdown(display_text('intro', title_size=24), unsafe_allow_html=True)
+texts = pd.read_csv('texts.csv', encoding='utf8', index_col='id')
+
+st.markdown(oktop(
+    body=texts.loc['main_body'].value, title=texts.loc['main_title'].value, title_size=24),
+            unsafe_allow_html=True)
 
 ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed',
                       format_func=lambda x:tickers[x])
+
+
 
 placeholder = st.empty()
 
