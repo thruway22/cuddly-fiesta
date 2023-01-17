@@ -77,29 +77,20 @@ else:
             st.markdown('<hr />', unsafe_allow_html=True)
             st.markdown(display_text(i, texts_dict), unsafe_allow_html=True)
             st.pyplot(chart_timeseries_data(ticker, i))
+            
+        #st.markdown('<hr />', unsafe_allow_html=True)
 
         col1, col2 = st.columns(2)
 
         with col1:
-            st.subheader('FFO Per Share')
-            st.pyplot(chart_categorical_data(ticker, 'ffos'))
-            st.markdown("""<p style='direction: rtl; text-align: justify;'>أفضل طريقة للتعامل مع النصوص العربية بلغة بيثون هو استخدام الترميز يونيكود، التي يدعمها بيثون دعما أصليا، لا حاجة فيه إلى مكتبات خارجية أو دوال خاصة، وقد يكون هذا أهمّ ما دفعني لاختيار لغة بيثون، إذ يكفي أن تسبق النص بحرف يو u لتدع بيثون يريحك من عناء التفكير وبرمجة النصوص، ويعامل معها بشفافية عالية.</p>""", unsafe_allow_html=True)
-
-            st.subheader('FFO Payout Ratio')
-            st.pyplot(chart_categorical_data(ticker, 'ffo_payout'))
-
-            st.subheader('roic')
-            st.pyplot(chart_categorical_data(ticker, 'roic'))
+            for i in ['ffos', 'roic', 'net_debt_ebitda', 'coverage']:
+                st.markdown('<hr />', unsafe_allow_html=True)
+                #st.markdown(display_text(i, texts_dict), unsafe_allow_html=True)
+                st.pyplot(chart_categorical_data(ticker, i))
+                
         with col2:
-            st.subheader('op_margin')
-            st.pyplot(chart_categorical_data(ticker, 'op_margin'))
-
-            st.subheader('net_debt_ebitda')
-            st.pyplot(chart_categorical_data(ticker, 'net_debt_ebitda'))
-
-            st.subheader('net_debt_capital')
-            st.pyplot(chart_categorical_data(ticker, 'net_debt_capital'))
-
-            st.subheader('coverage')
-            st.pyplot(chart_categorical_data(ticker, 'coverage'))
-    
+            for i in ['ffo_payout', 'op_margin', 'net_debt_capital']:
+                st.markdown('<hr />', unsafe_allow_html=True)
+                #st.markdown(display_text(i, texts_dict), unsafe_allow_html=True)
+                st.pyplot(chart_categorical_data(ticker, i))
+            
