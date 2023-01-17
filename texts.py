@@ -22,21 +22,20 @@ texts_dict = {
 }
 
 
-def display_text(x, title_size=16, asis=False):
+def oktop(body=None, title=None, title_size=16):
     
-    global texts_dict
+    text = ''
     
-    if asis == True:
-        text = texts_dict[x]
+    if title != None:
+        text = text + '<p style="direction: rtl; text-align: justify; font-size:{ts}px; font-weight: bold;">{t}</p>'.format(
+            t = title
+            ts = title_size)
     
-    else:
-        text = '''
-        <p style="direction: rtl; text-align: justify; font-size:{ts}px; font-weight: bold;">{title}</p>
-        <p style="direction: rtl; text-align:justify">{body}</p>
-        '''.format(
+    
+    if body != None:
+        text = text + '<p style="direction: rtl; text-align:justify">{b}</p>'.format(
+            b = body)
             ts = title_size,
-            title = texts_dict[x]['title'],
-            body = texts_dict[x]['body'])
     
     return text
 
