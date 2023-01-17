@@ -10,7 +10,6 @@ from pandas.tseries.offsets import MonthEnd
 import streamlit as st
 import streamlit.components.v1 as components
 from utilities import *
-from texts import *
 
 # st.set_page_config(layout="wide")
 
@@ -58,16 +57,12 @@ tickers = {
     4348: '4348: Alkhabeer REIT'
 }
 
-texts = pd.read_csv('texts.csv', encoding='utf8', index_col='id')
-
-st.markdown(oktop(
+st.markdown(display_text(
     body=texts.loc['main_body'].value, title=texts.loc['main_title'].value, title_size=24),
             unsafe_allow_html=True)
 
 ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed',
                       format_func=lambda x:tickers[x])
-
-
 
 placeholder = st.empty()
 
@@ -76,43 +71,34 @@ if ticker == 9999:
 else:
     with placeholder.container():
         
-        #st.markdown(display_text('empty', texts_dict), unsafe_allow_html=True)
         st.pyplot(chart_timeseries_data(ticker, 'price'))
         
-        timeseries_metrics_list = ['pffo', 'yield']
+        st.markdown('<hr />', unsafe_allow_html=True)
+        st.markdown(display_text(
+            body=texts.loc['yield_body'].value, title=texts.loc['yield_title'].value), 
+                    unsafe_allow_html=True)
+        st.pyplot(chart_timeseries_data(ticker, 'yield'))
         
-        for i in timeseries_metrics_list:
-            st.markdown('<hr />', unsafe_allow_html=True)
-            st.markdown(display_text(i), unsafe_allow_html=True)
-            st.pyplot(chart_timeseries_data(ticker, i))
-            
-        #st.markdown('<hr />', unsafe_allow_html=True)
-
+        st.markdown('<hr />', unsafe_allow_html=True)
+        st.markdown(display_text(
+            body=texts.loc['pffo_body'].value, title=texts.loc['pffo_title'].value), 
+                    unsafe_allow_html=True)
+        st.pyplot(chart_timeseries_data(ticker, 'pffo'))
+      
         col1a, col2a = st.columns(2)
 
         with col1a:
-            metric = 'ffos'
             st.markdown('<hr />', unsafe_allow_html=True)
-            st.markdown(display_text('ffos'), unsafe_allow_html=True)
+            st.markdown(display_text(
+                body=texts.loc['ffos_body'].value, title=texts.loc['ffos_title'].value), 
+                        unsafe_allow_html=True)
             st.pyplot(chart_categorical_data(ticker, 'ffos'))
                 
         with col2a:
-            metric = 'ffo_payout'
             st.markdown('<hr />', unsafe_allow_html=True)
-            st.markdown(display_text('ffo_payout'), unsafe_allow_html=True)
+            st.markdown(display_text(
+                body=texts.loc['ffo_payout_body'].value, title=texts.loc['ffo_payout_title'].value), 
+                        unsafe_allow_html=True)
             st.pyplot(chart_categorical_data(ticker, 'ffo_payout'))
-            
-        col1b, col2b = st.columns(2)
-       
-        with col1b:
-            metric = 'net_debt_ebitda'
-            st.markdown('<hr />', unsafe_allow_html=True)
-            #st.markdown(display_text(metric), unsafe_allow_html=True)
-            st.pyplot(chart_categorical_data(ticker, metric))
-                
-        with col2b:
-            metric = 'coverage'
-            st.markdown('<hr />', unsafe_allow_html=True)
-            #st.markdown(display_text(metric), unsafe_allow_html=True)
-            st.pyplot(chart_categorical_data(ticker, metric))
+           
             
