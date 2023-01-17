@@ -85,13 +85,13 @@ else:
         with col1a:
             metric = 'ffos'
             st.markdown('<hr />', unsafe_allow_html=True)
-            #st.markdown(display_text(metric, texts_dict), unsafe_allow_html=True)
+            st.markdown(display_text(metric, texts_dict), unsafe_allow_html=True)
             st.pyplot(chart_categorical_data(ticker, metric))
                 
         with col2a:
             metric = 'ffo_payout'
             st.markdown('<hr />', unsafe_allow_html=True)
-            #st.markdown(display_text(metric, texts_dict), unsafe_allow_html=True)
+            st.markdown(display_text(metric, texts_dict), unsafe_allow_html=True)
             st.pyplot(chart_categorical_data(ticker, metric))
             
         col1b, col2b = st.columns(2)
