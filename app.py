@@ -38,7 +38,7 @@ st.markdown(
 
 
 tickers = {    
-    9999: 'Choose fund اختر صندوق',
+    9999: '',
     4330: '4330: Riyad REIT الرياض ريت',
     4331: '4331: Aljazira REIT',
     4332: '4332: Jadwa REIT Alharamain',
