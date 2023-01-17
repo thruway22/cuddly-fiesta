@@ -36,8 +36,6 @@ st.markdown(
 )
 
 st.title('SaudiREITsInfo')
-#st.markdown("""<h2 style='direction: rtl; text-align: center; margin: 45px;'>SaudiREITsInfo</h2>""", unsafe_allow_html=True)
-#st.markdown("""<div align="left"><h2 style='direction: rtl;'>SaudiREITsInfo</h2></div>""", unsafe_allow_html=True)
 
 tickers = {    
     9999: 'Choose a fund',
@@ -69,29 +67,16 @@ if ticker == 9999:
     pass
 else:
     with placeholder.container():
-
-        #st.markdown("""<p style='direction: rtl; text-align: justify;'>أفضل طريقة للتعامل مع النصوص العربية بلغة بيثون هو استخدام الترميز يونيكود، التي يدعمها بيثون دعما أصليا، لا حاجة فيه إلى مكتبات خارجية أو دوال خاصة، وقد يكون هذا أهمّ ما دفعني لاختيار لغة بيثون، إذ يكفي أن تسبق النص بحرف يو u لتدع بيثون يريحك من عناء التفكير وبرمجة النصوص، ويعامل معها بشفافية عالية.</p>""", unsafe_allow_html=True)
-
-        #st.subheader('Price'+' '+u'السعر')
+        
+        #st.markdown(display_text('price'), unsafe_allow_html=True)
         st.pyplot(chart_timeseries_data(ticker, 'price'))
-        st.markdown('<hr />', unsafe_allow_html=True)
-
-        #st.subheader('P/FFO'+' '+u'مكرر النقد من العمليات')
-        st.pyplot(chart_timeseries_data(ticker, 'pffo'))
-        st.markdown("""<p style="direction: rtl; text-align: center; font-size:16px"><strong>مكرر النقد من العمليات P/FFO</strong></p><p style="direction: rtl; text-align:justify">أفضل طريقة للتعامل مع النصوص العربية بلغة بيثون هو استخدام الترميز يونيكود، التي يدعمها بيثون دعما أصليا، لا حاجة فيه إلى مكتبات خارجية أو دوال خاصة، وقد يكون هذا أهمّ ما دفعني لاختيار لغة بيثون، إذ يكفي أن تسبق النص بحرف يو u لتدع بيثون يريحك من عناء التفكير وبرمجة النصوص، ويعامل معها بشفافية عالية.</p>
-""", unsafe_allow_html=True)
-
-        #st.subheader('Dividend Yield'+' '+u'عائد التوزيع النقدي')
-        st.pyplot(chart_timeseries_data(ticker, 'yield'))
-        st.markdown("""<p style='direction: rtl; text-align: justify;'>أفضل طريقة للتعامل مع النصوص العربية بلغة بيثون هو استخدام الترميز يونيكود، التي يدعمها بيثون دعما أصليا، لا حاجة فيه إلى مكتبات خارجية أو دوال خاصة، وقد يكون هذا أهمّ ما دفعني لاختيار لغة بيثون، إذ يكفي أن تسبق النص بحرف يو u لتدع بيثون يريحك من عناء التفكير وبرمجة النصوص، ويعامل معها بشفافية عالية.</p>""", unsafe_allow_html=True)
         
-        st.markdown('<hr />', unsafe_allow_html=True)
-        display_text('pffo')
-        st.pyplot(chart_categorical_data(ticker, 'ffos'))
+        timeseries_metrics_list = ['pffo', 'yield']
         
-        st.markdown('<hr />', unsafe_allow_html=True)
-        display_text('pffo')
-        st.pyplot(chart_categorical_data(ticker, 'ffo_payout'))
+        for i in timeseries_metrics_list:
+            st.markdown('<hr />', unsafe_allow_html=True)
+            st.markdown(display_text(i), unsafe_allow_html=True)
+            st.pyplot(chart_categorical_data(ticker, i))
 
         col1, col2 = st.columns(2)
 
