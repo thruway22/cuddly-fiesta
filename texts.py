@@ -34,7 +34,7 @@ def display_text(x, title_size=16, asis=False):
         <p style="direction: rtl; text-align: justify; font-size:{ts}px; font-weight: bold;">{title}</p>
         <p style="direction: rtl; text-align:justify">{body}</p>
         '''.format(
-            ts = title_size
+            ts = title_size,
             title = texts_dict[x]['title'],
             body = texts_dict[x]['body'])
     
