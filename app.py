@@ -35,7 +35,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-st.title('SaudiREITsInfo')
+
 
 tickers = {    
     9999: 'Choose a fund',
@@ -58,6 +58,8 @@ tickers = {
     4348: '4348: Alkhabeer REIT'
 }
 
+st.markdown(display_text('intro', title_size=22), unsafe_allow_html=True)
+
 ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed',
                       format_func=lambda x:tickers[x])
 
@@ -75,7 +77,7 @@ else:
         
         for i in timeseries_metrics_list:
             st.markdown('<hr />', unsafe_allow_html=True)
-            st.markdown(display_text(i, texts_dict), unsafe_allow_html=True)
+            st.markdown(display_text(i), unsafe_allow_html=True)
             st.pyplot(chart_timeseries_data(ticker, i))
             
         #st.markdown('<hr />', unsafe_allow_html=True)
@@ -85,13 +87,13 @@ else:
         with col1a:
             metric = 'ffos'
             st.markdown('<hr />', unsafe_allow_html=True)
-            st.markdown(display_text('ffos', texts_dict), unsafe_allow_html=True)
+            st.markdown(display_text('ffos'), unsafe_allow_html=True)
             st.pyplot(chart_categorical_data(ticker, 'ffos'))
                 
         with col2a:
             metric = 'ffo_payout'
             st.markdown('<hr />', unsafe_allow_html=True)
-            st.markdown(display_text('ffo_payout', texts_dict), unsafe_allow_html=True)
+            st.markdown(display_text('ffo_payout'), unsafe_allow_html=True)
             st.pyplot(chart_categorical_data(ticker, 'ffo_payout'))
             
         col1b, col2b = st.columns(2)
@@ -99,12 +101,12 @@ else:
         with col1b:
             metric = 'net_debt_ebitda'
             st.markdown('<hr />', unsafe_allow_html=True)
-            #st.markdown(display_text(metric, texts_dict), unsafe_allow_html=True)
+            #st.markdown(display_text(metric), unsafe_allow_html=True)
             st.pyplot(chart_categorical_data(ticker, metric))
                 
         with col2b:
             metric = 'coverage'
             st.markdown('<hr />', unsafe_allow_html=True)
-            #st.markdown(display_text(metric, texts_dict), unsafe_allow_html=True)
+            #st.markdown(display_text(metric), unsafe_allow_html=True)
             st.pyplot(chart_categorical_data(ticker, metric))
             
