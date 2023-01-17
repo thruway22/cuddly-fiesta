@@ -69,19 +69,20 @@ if ticker == 9999:
 else:
     with placeholder.container():
 
-        st.markdown("""<p style='direction: rtl; text-align: justify;'>أفضل طريقة للتعامل مع النصوص العربية بلغة بيثون هو استخدام الترميز يونيكود، التي يدعمها بيثون دعما أصليا، لا حاجة فيه إلى مكتبات خارجية أو دوال خاصة، وقد يكون هذا أهمّ ما دفعني لاختيار لغة بيثون، إذ يكفي أن تسبق النص بحرف يو u لتدع بيثون يريحك من عناء التفكير وبرمجة النصوص، ويعامل معها بشفافية عالية.</p>""", unsafe_allow_html=True)
+        #st.markdown("""<p style='direction: rtl; text-align: justify;'>أفضل طريقة للتعامل مع النصوص العربية بلغة بيثون هو استخدام الترميز يونيكود، التي يدعمها بيثون دعما أصليا، لا حاجة فيه إلى مكتبات خارجية أو دوال خاصة، وقد يكون هذا أهمّ ما دفعني لاختيار لغة بيثون، إذ يكفي أن تسبق النص بحرف يو u لتدع بيثون يريحك من عناء التفكير وبرمجة النصوص، ويعامل معها بشفافية عالية.</p>""", unsafe_allow_html=True)
 
         #st.subheader('Price'+' '+u'السعر')
         st.pyplot(chart_timeseries_data(ticker, 'price'))
         st.markdown('<hr />', unsafe_allow_html=True)
 
-        st.subheader('P/FFO'+' '+u'مكرر النقد من العمليات')
+        #st.subheader('P/FFO'+' '+u'مكرر النقد من العمليات')
         st.pyplot(chart_timeseries_data(ticker, 'pffo'))
+        st.markdown("""<p style='direction: rtl; text-align: justify;'>أفضل طريقة للتعامل مع النصوص العربية بلغة بيثون هو استخدام الترميز يونيكود، التي يدعمها بيثون دعما أصليا، لا حاجة فيه إلى مكتبات خارجية أو دوال خاصة، وقد يكون هذا أهمّ ما دفعني لاختيار لغة بيثون، إذ يكفي أن تسبق النص بحرف يو u لتدع بيثون يريحك من عناء التفكير وبرمجة النصوص، ويعامل معها بشفافية عالية.</p>""", unsafe_allow_html=True)
 
-        st.subheader('Dividend Yield'+' '+u'عائد التوزيع النقدي')
-
+        #st.subheader('Dividend Yield'+' '+u'عائد التوزيع النقدي')
         st.pyplot(chart_timeseries_data(ticker, 'yield'))
-
+        st.markdown("""<p style='direction: rtl; text-align: justify;'>أفضل طريقة للتعامل مع النصوص العربية بلغة بيثون هو استخدام الترميز يونيكود، التي يدعمها بيثون دعما أصليا، لا حاجة فيه إلى مكتبات خارجية أو دوال خاصة، وقد يكون هذا أهمّ ما دفعني لاختيار لغة بيثون، إذ يكفي أن تسبق النص بحرف يو u لتدع بيثون يريحك من عناء التفكير وبرمجة النصوص، ويعامل معها بشفافية عالية.</p>""", unsafe_allow_html=True)
+        
         st.markdown('<hr />', unsafe_allow_html=True)
 
         st.markdown("""<h4 style='direction: rtl; text-align: center;'>النقد من العمليات للوحدة</h4>""", unsafe_allow_html=True)
