@@ -35,8 +35,8 @@ st.markdown(
 )
 
 st.title('SaudiREITsInfo')
-st.markdown("""<h2 style='direction: rtl; text-align: center; margin: 45px;'>SaudiREITsInfo</h2>""", unsafe_allow_html=True)
-st.markdown("""<div align="left"><h2 style='direction: rtl;'>SaudiREITsInfo</h2></div>""", unsafe_allow_html=True)
+#st.markdown("""<h2 style='direction: rtl; text-align: center; margin: 45px;'>SaudiREITsInfo</h2>""", unsafe_allow_html=True)
+#st.markdown("""<div align="left"><h2 style='direction: rtl;'>SaudiREITsInfo</h2></div>""", unsafe_allow_html=True)
 
 tickers = {    
     9999: 'Choose a fund',
