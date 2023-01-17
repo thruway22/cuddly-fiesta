@@ -26,7 +26,7 @@ debt_col='debt'
 ######
 
 
-data = pd.read_csv('data/data_hy.csv')
+data = pd.read_csv('data_hy.csv')
 data[year_col] = pd.to_datetime(data[year_col], format='%Y-%m-%d')
 data = data.sort_values(by=year_col)
 
