@@ -80,17 +80,31 @@ else:
             
         #st.markdown('<hr />', unsafe_allow_html=True)
 
-        col1, col2 = st.columns(2)
+        col1a, col2a = st.columns(2)
 
-        with col1:
-            for i in ['ffos', 'roic', 'net_debt_ebitda', 'coverage']:
-                st.markdown('<hr />', unsafe_allow_html=True)
-                #st.markdown(display_text(i, texts_dict), unsafe_allow_html=True)
-                st.pyplot(chart_categorical_data(ticker, i))
+        with col1a:
+            metric = 'ffos'
+            st.markdown('<hr />', unsafe_allow_html=True)
+            #st.markdown(display_text(metric, texts_dict), unsafe_allow_html=True)
+            st.pyplot(chart_categorical_data(ticker, metric))
                 
-        with col2:
-            for i in ['ffo_payout', 'op_margin', 'net_debt_capital']:
-                st.markdown('<hr />', unsafe_allow_html=True)
-                #st.markdown(display_text(i, texts_dict), unsafe_allow_html=True)
-                st.pyplot(chart_categorical_data(ticker, i))
+        with col2a:
+            metric = 'ffo_payout'
+            st.markdown('<hr />', unsafe_allow_html=True)
+            #st.markdown(display_text(metric, texts_dict), unsafe_allow_html=True)
+            st.pyplot(chart_categorical_data(ticker, metric))
+            
+        col1b, col2b = st.columns(2)
+       
+        with col1b:
+            metric = 'net_debt_ebitda'
+            st.markdown('<hr />', unsafe_allow_html=True)
+            #st.markdown(display_text(metric, texts_dict), unsafe_allow_html=True)
+            st.pyplot(chart_categorical_data(ticker, metric))
+                
+        with col2b:
+            metric = 'coverage'
+            st.markdown('<hr />', unsafe_allow_html=True)
+            #st.markdown(display_text(metric, texts_dict), unsafe_allow_html=True)
+            st.pyplot(chart_categorical_data(ticker, metric))
             
