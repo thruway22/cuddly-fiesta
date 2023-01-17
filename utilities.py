@@ -7,7 +7,6 @@ from datetime import datetime
 from datetime import timedelta
 from pandas.tseries.offsets import DateOffset
 from pandas.tseries.offsets import MonthEnd
-import streamlit as st
 
 # global data columns
 ticker_col = 'ticker'
