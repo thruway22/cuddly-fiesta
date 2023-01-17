@@ -39,7 +39,7 @@ def oktop(body=None, title=None, title_size=16):
     
     return text
 
-'''def display_text(x, title_size=16, asis=False):
+def display_text(x, title_size=16, asis=False):
     
     global texts_dict
     
@@ -55,4 +55,4 @@ def oktop(body=None, title=None, title_size=16):
             title = texts_dict[x]['title'],
             body = texts_dict[x]['body'])
     
-    return text'''
+    return text
