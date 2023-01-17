@@ -35,7 +35,7 @@ st.markdown(
 )
 
 st.markdown("""<h2 style='direction: rtl; text-align: center;'>SaudiREITsInfo</h2>""", unsafe_allow_html=True)
-st.markdown("""<div align="center"><h2 style='direction: rtl;'>SaudiREITsInfo</h2></div>""", unsafe_allow_html=True)
+st.markdown("""<div align="right"><h2 style='direction: rtl;'>SaudiREITsInfo</h2></div>""", unsafe_allow_html=True)
 
 tickers = {    
     9999: 'Choose a fund',
