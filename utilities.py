@@ -373,20 +373,20 @@ def chart_categorical_data(ticker, metric_col):
     #plt.show()
     return fig
   
-  texts = pd.read_csv('texts.csv', encoding='utf8', index_col='id')
+texts = pd.read_csv('texts.csv', encoding='utf8', index_col='id')
   
-  def display_text(body=None, title=None, title_size=16):
-    
-    text = ''
-    
-    if title != None:
-        text = text + '<p style="direction: rtl; text-align: justify; font-size:{ts}px; font-weight: bold;">{t}</p>'.format(
-            t = title,
-            ts = title_size)
-    
-    
-    if body != None:
-        text = text + '<p style="direction: rtl; text-align:justify">{b}</p>'.format(
-            b = body)
-    
-    return text
+def display_text(body=None, title=None, title_size=16):
+
+  text = ''
+
+  if title != None:
+      text = text + '<p style="direction: rtl; text-align: justify; font-size:{ts}px; font-weight: bold;">{t}</p>'.format(
+          t = title,
+          ts = title_size)
+
+
+  if body != None:
+      text = text + '<p style="direction: rtl; text-align:justify">{b}</p>'.format(
+          b = body)
+
+  return text
