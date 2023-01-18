@@ -47,14 +47,6 @@ else:
         with col0b:
             st.write('test')
         
-        col_a, col_b, col_c = st.columns(3)
-        with col_a:
-                st.metric('test1', 50)
-        with col_b:
-                st.metric('test1', 45)
-        with col_c:
-                st.metric('test1', 40)
-        
         st.markdown('<hr />', unsafe_allow_html=True)
         st.markdown(display_text(
             body=texts.loc['yield_body'].value, title=texts.loc['yield_title'].value), 
