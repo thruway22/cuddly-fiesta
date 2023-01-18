@@ -46,6 +46,8 @@ else:
             st.pyplot(chart_timeseries_data(ticker, 'price'))
         with col0b:
             st.write('test')
+            st.metric('test1', 50)
+            st.metric('test2', 45)
         
         st.markdown('<hr />', unsafe_allow_html=True)
         st.markdown(display_text(
