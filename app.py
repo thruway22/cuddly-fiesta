@@ -65,6 +65,7 @@ else:
             st.pyplot(chart_categorical_data(ticker, 'ffos'))
                 
         with col2a:
+            st.markdown('<p style="direction: rtl; text-align:center">تجربة</p>', unsafe_allow_html=True)
             #st.markdown('<hr />', unsafe_allow_html=True)
             st.markdown(display_text(
                 body=texts.loc['ffo_payout_body'].value, title=texts.loc['ffo_payout_title'].value), 
