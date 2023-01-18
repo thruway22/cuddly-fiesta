@@ -98,9 +98,17 @@ else:
                 
         with col2b:
             st.markdown('<hr />', unsafe_allow_html=True)
+            st.write('rev')
             st.markdown(display_text(
                 body=texts.loc['ffo_payout_body'].value, title=texts.loc['ffo_payout_title'].value), 
                         unsafe_allow_html=True)
             st.pyplot(chart_categorical_data(ticker, 'revenue'))
+            
+            st.markdown('<hr />', unsafe_allow_html=True)
+            st.write('asset')
+            st.markdown(display_text(
+                body=texts.loc['ffo_payout_body'].value, title=texts.loc['ffo_payout_title'].value), 
+                        unsafe_allow_html=True)
+            st.pyplot(chart_categorical_data(ticker, 'asset'))
            
             
