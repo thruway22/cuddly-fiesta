@@ -46,8 +46,13 @@ else:
             st.pyplot(chart_timeseries_data(ticker, 'price'))
         with col0b:
             st.write('test')
-            st.metric('test1', 50)
-            st.metric('test2', 45)
+            col_a, col_b, col_c = st.columns(3)
+            with col_a:
+                st.metric('test1', 50)
+            with col_b:
+                st.metric('test1', 45)
+            with col_c:
+                st.metric('test1', 40)
         
         st.markdown('<hr />', unsafe_allow_html=True)
         st.markdown(display_text(
