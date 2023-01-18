@@ -73,14 +73,14 @@ else:
             
         col1b, col2b = st.columns(2)
 
-        with col1a:
+        with col1b:
             st.markdown('<hr />', unsafe_allow_html=True)
             st.markdown(display_text(
                 body=texts.loc['ffos_body'].value, title=texts.loc['ffos_title'].value), 
                         unsafe_allow_html=True)
             st.pyplot(chart_categorical_data(ticker, 'dividend'))
                 
-        with col2a:
+        with col2b:
             st.markdown('<hr />', unsafe_allow_html=True)
             st.markdown(display_text(
                 body=texts.loc['ffo_payout_body'].value, title=texts.loc['ffo_payout_title'].value), 
