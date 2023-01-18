@@ -41,7 +41,9 @@ if ticker == 9999:
 else:
     with placeholder.container():
         
-        st.pyplot(chart_timeseries_data(ticker, 'price'))
+        col0a, col0a = st.columns(2)
+        with col0a:
+            st.pyplot(chart_timeseries_data(ticker, 'price'))
         
         st.markdown('<hr />', unsafe_allow_html=True)
         st.markdown(display_text(
