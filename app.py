@@ -58,11 +58,15 @@ else:
         col1a, col2a = st.columns(2)
 
         with col1a:
+            hoh, yoy = st.tabs(["سنوي", "نصف سنوي"])
             #st.markdown('<hr />', unsafe_allow_html=True)
             st.markdown(display_text(
                 body=texts.loc['ffos_body'].value, title=texts.loc['ffos_title'].value), 
                         unsafe_allow_html=True)
-            st.pyplot(chart_categorical_data(ticker, 'ffos'))
+            with hoh:          
+                        st.pyplot(chart_categorical_data(ticker, 'ffos'))
+            with yoy:
+                        st.pyplot(chart_categorical_data(ticker, 'ffo'))
                 
         with col2a:
             st.markdown('<p style="direction: rtl; text-align:center">تجربة</p>', unsafe_allow_html=True)
