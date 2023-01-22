@@ -6,7 +6,12 @@ button[title="View fullscreen"]:hover {
   visibility: hidden;
 }
 
-#metric {
+#metric_block{
+  column-count: 2;
+}
+
+#metric_block {
+  column-span: 1;
   display: inline-block;
   position: relative;
   left: 50%;
@@ -20,6 +25,7 @@ button[title="View fullscreen"]:hover {
 }
 
 #metric_label{
+  column-span: 1;
   direction: rtl;
   text-align:center;
   font-family:sans-serif;
