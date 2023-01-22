@@ -53,7 +53,7 @@ ticker_data = get_ticker_data(fdata, pdata, 4330)
 
 st.dataframe(ticker_data)
 
-sector_data = get_sector_data(pdata, tickers_dict)
+sector_data = get_sector_data(fdata, pdata, tickers_dict)
 
 yoy, hoh = get_categorical_data(fdata, ticker)
 
