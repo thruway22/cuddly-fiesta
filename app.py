@@ -9,22 +9,22 @@ st.markdown('''<style> button[title="View fullscreen"] {visibility: hidden;}
 tickers = {    
     9999: '',
     4330: '4330: Riyad REIT الرياض ريت',
-    4331: '4331: Aljazira REIT',
-    4332: '4332: Jadwa REIT Alharamain',
-    4333: '4333: Taleem REIT',
-    4334: '4334: Almaather REIT',
-    4335: '4335: Musharaka REIT',
-    4336: '4336: Mulkia Gulf REIT',
-    4337: '4337: SICO Saudi REIT',
-    4338: '4338: Alahli REIT',
-    4339: '4339: Derayah REIT',
-    4340: '4340: Alrajhi REIT',
-    4342: '4342: Jadwa REIT',
-    4344: '4344: SEDCO Capital REIT',
-    4345: '4345: Alinma Retail REIT',
-    4346: '4346: MEFIC REIT',
-    4347: '4347: Bonyan REIT',
-    4348: '4348: Alkhabeer REIT'
+    4331: '4331: Aljazira REIT الجزيرة ريت',
+    4332: '4332: Jadwa REIT Alharamain جدوى ريت الحرمين',
+    4333: '4333: Taleem REIT تعليم ريت',
+    4334: '4334: Almaather REIT المعذر ريت',
+    4335: '4335: Musharaka REIT مشاركة ريت',
+    4336: '4336: Mulkia Gulf REIT ملكية الخليج ريت',
+    4337: '4337: SICO Saudi REIT سيكو السعودية ريت',
+    4338: '4338: Alahli REIT الأهلي ريت',
+    4339: '4339: Derayah REIT دراية ريت',
+    4340: '4340: Alrajhi REIT الراجحي ريت',
+    4342: '4342: Jadwa REIT جدوى ريت',
+    4344: '4344: SEDCO Capital REIT سدكو كابيتال ريت',
+    4345: '4345: Alinma Retail REIT الإنماء ريت التجزئة',
+    4346: '4346: MEFIC REIT ميفك ريت',
+    4347: '4347: Bonyan REIT بنيان ريت',
+    4348: '4348: Alkhabeer REIT الخبير ريت'
 }
 
 st.markdown(display_text(
@@ -32,6 +32,11 @@ st.markdown(display_text(
             unsafe_allow_html=True)
 
 ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed', format_func=lambda x:tickers[x])
+
+if ticker == 9999:
+    pass
+else:
+    with placeholder.container():
 
 ##################################
 
