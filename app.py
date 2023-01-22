@@ -52,12 +52,14 @@ def display_chart(kind, metric_col,
     if kind == 'ct':
         return st.pyplot(chart_categorical_data(yoy, hoh, metric_col, ct_method, ct_show_change))
 
-
 st.markdown(display_text(
             body=texts.loc['main_body'].value, title=texts.loc['main_title'].value, title_size=24),
             unsafe_allow_html=True)
 
 ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed', format_func=lambda x:tickers[x])
+
+ticker_data = get_ticker_data(fdata, pdata, ticker)
+yoy, hoh = get_categorical_data(fdata, ticker)
 
 placeholder = st.empty()
 
@@ -65,11 +67,8 @@ if ticker == 9999:
     pass
 else:
     with placeholder.container():
-            ticker_data = get_ticker_data(fdata, pdata, ticker)
-            yoy, hoh = get_categorical_data(fdata, ticker)
-            st.pyplot(chart_timeseries_data(ticker_data, sector_data, 'price', relative_plot=True))
-            st.pyplot(chart_categorical_data(yoy, hoh, 'asset', 'yoy', True))
-            st.pyplot(display_chart('ts', 'price', ts_relative_plot=True))
+            display_chart('ts', 'price', ts_relative_plot=True)
+            display_chart('ct', 'asset')
             
       
      
