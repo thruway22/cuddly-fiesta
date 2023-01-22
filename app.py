@@ -48,14 +48,16 @@ def display_text(header=None, body=None, title=None, **extra_bodies):
     output = ''
     
     if title != None:
-        output = f'<p id="title">{texts.loc[title].value}</p>'
-        return st.markdown(output, unsafe_allow_html=True)
-    
-    else:
+        output = output + f'<p id="title">{texts.loc[title].value}</p>'
+
+    if header != None:
         output = output + f'<p id="header">{texts.loc[header].value}</p>'
+            
+    if body != None:
         output = output + f'<p style="direction: rtl; text-align:justify">{texts.loc[body].value}</p>'               
         for extra_body in extra_bodies.values():
             output = output + f'<p style="direction: rtl; text-align:justify">{texts.loc[extra_body].value}</p>'
+                
         return st.markdown(output, unsafe_allow_html=True)
 
 def display_divider():
@@ -80,7 +82,7 @@ def display_chart(kind, metric_col,
     if kind == 'ct':
         return st.pyplot(chart_categorical_data(yoy, hoh, metric_col, ct_method, ct_show_change))
 
-display_text('intro_title', 'intro_body', 24)
+display_text(None, 'intro_body', 'intro_title')
 
 ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed', format_func=lambda x:tickers[x])
 
