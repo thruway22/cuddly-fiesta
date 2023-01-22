@@ -7,7 +7,8 @@ button[title="View fullscreen"]:hover {
 }
 
 #metric {
-  border-radius: 5px; background-color: tomato;
+  border-radius: 5px;
+  background-color: #0068c9;
   display: inline;
   padding: 5px;
   direction: rtl;
