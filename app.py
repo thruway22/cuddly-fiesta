@@ -54,7 +54,7 @@ def display_text(title=None, body=None, title_size=16, **extra_bodies):
     return st.markdown(output, unsafe_allow_html=True)
 
 def display_chart(kind, metric_col,
-                  ts_relative_plot=False, ct_method='yoy', ct_show_change=True):
+                  ts_relative_plot=True, ct_method='yoy', ct_show_change=True):
     global ticker_data
     global sector_data
     global yoy
@@ -78,8 +78,8 @@ else:
             
     with placeholder.container():
             display_text('price_title', 'price_body')
-            display_chart('ts', 'price', ts_relative_plot=True)
-            display_chart('ct', 'asset')
+            display_chart('ts', 'price')
+            display_chart('ts', 'navpd', ts_relative_plot=False)
             
       
      
