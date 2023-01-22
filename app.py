@@ -40,6 +40,16 @@ tickers_dict = {fdata.ticker.unique()[i]: \
 
 sector_data = get_sector_data(fdata, pdata, tickers_dict)
 
+texts = pd.read_csv('data/texts.csv', encoding='utf8', index_col='id')
+  
+def display_text(title=None, title_size=16, **bodies):
+    global texts
+    output = ''
+    if title != None:
+        output = output + f'<p style="direction: rtl; text-align: justify; font-size:{title_size}px; font-weight: bold;">{texts.loc[title].value}</p>'
+    for body in bodies.values():
+        output = output + f'<p style="direction: rtl; text-align:justify">{texts.loc[body].value}</p>'
+    return st.markdown(output, unsafe_allow_html=True)
 
 def display_chart(kind, metric_col,
                   ts_relative_plot=False, ct_method='yoy', ct_show_change=True):
@@ -52,9 +62,9 @@ def display_chart(kind, metric_col,
     if kind == 'ct':
         return st.pyplot(chart_categorical_data(yoy, hoh, metric_col, ct_method, ct_show_change))
 
-st.markdown(display_text(
-            body=texts.loc['main_body'].value, title=texts.loc['main_title'].value, title_size=24),
-            unsafe_allow_html=True)
+display_text('main_title', 24)
+            #body=texts.loc['main_body'].value, title=texts.loc['main_title'].value, title_size=24),
+            #unsafe_allow_html=True)
 
 ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed', format_func=lambda x:tickers[x])
 
