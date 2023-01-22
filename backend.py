@@ -26,14 +26,6 @@ equity_col='equity'
 casti_col='casti'
 debt_col='debt'
 
-fdata = pd.read_csv('data/fdata.csv')
-fdata[year_col] = pd.to_datetime(fdata[year_col], format='%Y-%m-%d')
-fdata = fdata.sort_values(by=year_col)
-
-tickers_dict = {fdata.ticker.unique()[i]: \
-                str(fdata.ticker.unique()[i]) + ': ' + fdata.name.unique()[i] \
-                for i in range(len(fdata.ticker.unique()))}
-
 # st.cache() ############################### UPDATE
 def get_historical_prices(tickers_dict):
     api_key = st.secrets['api_key']
@@ -49,8 +41,6 @@ def get_historical_prices(tickers_dict):
     df['date'] = pd.to_datetime(df['date'], format='%Y-%m-%d')
         
     return df
-  
-pdata = get_historical_prices(tickers_dict)
 
 def rock_and_roll(df1, df2, df2_metric_col,
                   df1_date_col='date',
