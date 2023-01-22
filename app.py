@@ -42,7 +42,7 @@ sector_data = get_sector_data(fdata, pdata, tickers_dict)
 
 texts = pd.read_csv('data/texts.csv', encoding='utf8', index_col='id')
   
-def display_text(title=None, title_size=16, body=None, **extra_bodies):
+def display_text(title=None, body=None, title_size=16, **extra_bodies):
     global texts
     output = ''
     if title != None:
@@ -64,7 +64,7 @@ def display_chart(kind, metric_col,
     if kind == 'ct':
         return st.pyplot(chart_categorical_data(yoy, hoh, metric_col, ct_method, ct_show_change))
 
-display_text('main_title', 24, 'main_body')
+display_text('main_title', 'main_body', 24)
 
 ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed', format_func=lambda x:tickers[x])
 
