@@ -1,6 +1,12 @@
 import streamlit as st
 from utilities import *
 
+def local_css(file_name):
+    with open(file_name) as f:
+        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
+local_css('style.css')
+
 # hide the stupid zoom button on charts
 st.markdown('''<style> button[title="View fullscreen"] {visibility: hidden;}
             button[title="View fullscreen"]:hover {visibility: hidden;}</styles>''',
