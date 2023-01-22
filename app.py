@@ -102,7 +102,7 @@ else:
             display_metric(ticker_yield, sector_yield, 'p')
             display_chart('ts', 'yield')
             display_divider()
-            display_metric(ticker_pffo, sector_pffo, 'p')
+            display_metric(ticker_pffo, sector_pffo, 'm')
             display_chart('ts', 'pffo')
             display_divider()
             
