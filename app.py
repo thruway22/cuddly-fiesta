@@ -45,16 +45,8 @@ tickers_dict = {fdata.ticker.unique()[i]: \
                 for i in range(len(fdata.ticker.unique()))}
 
 pdata = get_historical_prices(tickers_dict)
-
-st.dataframe(pdata)
-st.dataframe(pdata[['date', 4330]])
-
 ticker_data = get_ticker_data(fdata, pdata, 4330)
-
-st.dataframe(ticker_data)
-
 sector_data = get_sector_data(fdata, pdata, tickers_dict)
-
 yoy, hoh = get_categorical_data(fdata, ticker)
 
 ##################################
@@ -62,8 +54,8 @@ yoy, hoh = get_categorical_data(fdata, ticker)
 
 
 
-#st.pyplot(chart_timeseries_data(ticker_data, sector_data, 'price', relative_plot=True))
-#st.pyplot(chart_categorical_data(yoy, hoh, 'asset', 'yoy', True))
+st.pyplot(chart_timeseries_data(ticker_data, sector_data, 'price', relative_plot=True))
+st.pyplot(chart_categorical_data(yoy, hoh, 'asset', 'yoy', True))
       
      
            
