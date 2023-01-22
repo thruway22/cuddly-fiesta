@@ -34,15 +34,17 @@ st.markdown(display_text(
 ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed',
              format_func=lambda x:tickers[x])
 
-ticker_data = get_ticker_data(ticker)
+
 sector_data = get_sector_data()
-yoy, hoh = get_categorical_data(ticker)
 
 placeholder = st.empty()
 
 if ticker == 9999:
     pass
 else:
+    ticker_data = get_ticker_data(ticker)
+    yoy, hoh = get_categorical_data(ticker)
+            
     with placeholder.container():
         
         st.pyplot(chart_timeseries_data('price', relative_plot=True))
