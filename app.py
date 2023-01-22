@@ -56,6 +56,8 @@ else:
             yoy, hoh = get_categorical_data(fdata, ticker)
             st.pyplot(chart_timeseries_data(ticker_data, sector_data, 'price', relative_plot=True))
             st.pyplot(chart_categorical_data(yoy, hoh, 'asset', 'yoy', True))
+            st.pyploy(display_chart('ts', 'price', ts_relative_plot=True))
+            
       
      
            
