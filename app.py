@@ -31,8 +31,8 @@ st.markdown(display_text(
             body=texts.loc['main_body'].value, title=texts.loc['main_title'].value, title_size=24),
             unsafe_allow_html=True)
 
-ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed',
-             format_func=lambda x:tickers[x])
+ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed') #,
+             #format_func=lambda x:tickers[x])
 
 ##################################
 
