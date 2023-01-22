@@ -27,19 +27,6 @@ tickers = {
     4348: '4348: Alkhabeer REIT الخبير ريت'
 }
 
-st.markdown(display_text(
-            body=texts.loc['main_body'].value, title=texts.loc['main_title'].value, title_size=24),
-            unsafe_allow_html=True)
-
-ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed', format_func=lambda x:tickers[x])
-
-if ticker == 9999:
-    pass
-else:
-    with placeholder.container():
-
-##################################
-
 pdata = pd.read_csv('data/pdata.csv')
 pdata['date'] = pd.to_datetime(pdata['date'], format='%Y-%m-%d')
 
@@ -51,17 +38,22 @@ tickers_dict = {fdata.ticker.unique()[i]: \
                 str(fdata.ticker.unique()[i]) + ': ' + fdata.name.unique()[i] \
                 for i in range(len(fdata.ticker.unique()))}
 
-ticker_data = get_ticker_data(fdata, pdata, ticker)
 sector_data = get_sector_data(fdata, pdata, tickers_dict)
-yoy, hoh = get_categorical_data(fdata, ticker)
 
-##################################
+st.markdown(display_text(
+            body=texts.loc['main_body'].value, title=texts.loc['main_title'].value, title_size=24),
+            unsafe_allow_html=True)
 
+ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed', format_func=lambda x:tickers[x])
 
-
-
-st.pyplot(chart_timeseries_data(ticker_data, sector_data, 'price', relative_plot=True))
-st.pyplot(chart_categorical_data(yoy, hoh, 'asset', 'yoy', True))
+if ticker == 9999:
+    pass
+else:
+    with placeholder.container():
+            ticker_data = get_ticker_data(fdata, pdata, ticker)
+            yoy, hoh = get_categorical_data(fdata, ticker)
+            st.pyplot(chart_timeseries_data(ticker_data, sector_data, 'price', relative_plot=True))
+            st.pyplot(chart_categorical_data(yoy, hoh, 'asset', 'yoy', True))
       
      
            
