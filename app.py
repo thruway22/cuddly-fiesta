@@ -46,6 +46,8 @@ st.markdown(display_text(
 
 ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed', format_func=lambda x:tickers[x])
 
+placeholder = st.empty()
+
 if ticker == 9999:
     pass
 else:
