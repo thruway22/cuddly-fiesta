@@ -48,7 +48,7 @@ def display_text(header=None, body=None, title=None, **extra_bodies):
     output = ''
     
     if title != None:
-        output = output + f'<p id="title">{texts.loc[title].value}</p>'
+        output = output + f'<h1 id="title">{texts.loc[title].value}</h1>'
 
     if header != None:
         output = output + f'<p id="header">{texts.loc[header].value}</p>'
