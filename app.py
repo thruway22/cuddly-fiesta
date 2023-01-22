@@ -135,7 +135,7 @@ else:
         display_divider()
         col41, col42 = st.columns(2)
         with col41:
-            display_chart('ct', 'net_debt_ebtida')
+            display_chart('ct', 'net_debt_ebitda')
         with col42:
             display_chart('ct', 'coverage')
             
