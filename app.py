@@ -54,7 +54,7 @@ def display_text(title=None, body=None, title_size=16, **extra_bodies):
     return st.markdown(output, unsafe_allow_html=True)
 
 def display_metric(value, fmt):
-     fmt_dict = {'p': %, 'm', 'x'}
+     fmt_dict = {'p': '%', 'm', 'x'}
      output = f'<p style="direction: rtl; text-align:center">{value:.2f}{fmt}</p>'
      return st.markdown(output, unsafe_allow_html=True)
 
