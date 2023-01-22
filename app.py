@@ -101,7 +101,7 @@ else:
     sector_pffo = sector_data.tail(1)['pffo'][0]
             
     with placeholder.container():
-        display_text('price_title', 'price_body')
+        display_text('price_header', 'price_body')
         display_chart('ts', 'price')
         display_chart('ts', 'navpd', ts_relative_plot=False)
         display_divider()
@@ -115,8 +115,10 @@ else:
         col11, col12 = st.columns(2)
         with col11:
             display_chart('ct', 'ffos')
+            display_text('ffos_header', 'ffos_body')
         with col12:
             display_chart('ct', 'ffo_payout')
+            display_text('ffo_payout_header', 'ffo_payout_body')
             
         display_divider()
         col21, col22 = st.columns(2)
