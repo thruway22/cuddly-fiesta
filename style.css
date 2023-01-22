@@ -1,1 +1,7 @@
+button[title="View fullscreen"] {
+  visibility: hidden;
+}
 
+button[title="View fullscreen"]:hover {
+  visibility: hidden;
+}
