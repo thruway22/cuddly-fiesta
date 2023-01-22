@@ -7,7 +7,7 @@ st.markdown('''<style> button[title="View fullscreen"] {visibility: hidden;}
             unsafe_allow_html=True)
 
 tickers = {    
-    9999: '',
+    #9999: '',
     4330: '4330: Riyad REIT الرياض ريت',
     4331: '4331: Aljazira REIT',
     4332: '4332: Jadwa REIT Alharamain',
@@ -34,8 +34,22 @@ st.markdown(display_text(
 ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed',
              format_func=lambda x:tickers[x])
 
+##################################
+
+fdata = pd.read_csv('data/fdata.csv')
+fdata[year_col] = pd.to_datetime(fdata[year_col], format='%Y-%m-%d')
+fdata = fdata.sort_values(by=year_col)
+
+tickers_dict = {fdata.ticker.unique()[i]: \
+                str(fdata.ticker.unique()[i]) + ': ' + fdata.name.unique()[i] \
+                for i in range(len(fdata.ticker.unique()))}
+
+pdata = get_historical_prices(tickers_dict)
 
 sector_data = get_sector_data()
+
+
+##################################
 
 placeholder = st.empty()
 
