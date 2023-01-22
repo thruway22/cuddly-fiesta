@@ -43,16 +43,20 @@ sector_data = get_sector_data(fdata, pdata, tickers_dict)
 
 texts = pd.read_csv('data/texts.csv', encoding='utf8', index_col='id')
   
-def display_text(title=None, body=None, title_size=16, **extra_bodies):
+def display_text(header=None, body=None, title=None, **extra_bodies):
     global texts
     output = ''
+    
     if title != None:
-        output = output + f'<p id="title">{texts.loc[title].value}</p>'
-    if body !=None:
+        output = f'<p id="title">{texts.loc[title].value}</p>'
+        return st.markdown(output, unsafe_allow_html=True)
+    
+    else:
+        output = output + f'<p id="header">{texts.loc[header].value}</p>'
         output = output + f'<p style="direction: rtl; text-align:justify">{texts.loc[body].value}</p>'               
-    for extra_body in extra_bodies.values():
-        output = output + f'<p style="direction: rtl; text-align:justify">{texts.loc[extra_body].value}</p>'
-    return st.markdown(output, unsafe_allow_html=True)
+        for extra_body in extra_bodies.values():
+            output = output + f'<p style="direction: rtl; text-align:justify">{texts.loc[extra_body].value}</p>'
+        return st.markdown(output, unsafe_allow_html=True)
 
 def display_divider():
     return st.markdown('<hr />', unsafe_allow_html=True)
