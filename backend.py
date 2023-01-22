@@ -26,7 +26,7 @@ equity_col='equity'
 casti_col='casti'
 debt_col='debt'
 
-fdata = pd.read_csv('fdata.csv')
+fdata = pd.read_csv('data/fdata.csv')
 fdata[year_col] = pd.to_datetime(fdata[year_col], format='%Y-%m-%d')
 fdata = fdata.sort_values(by=year_col)
 
