@@ -18,3 +18,9 @@ button[title="View fullscreen"]:hover {
   text-align:center;
   font-family:sans-serif;
 }
+
+#metric_label{
+  direction: rtl;
+  text-align:center;
+  font-family:sans-serif;
+}
