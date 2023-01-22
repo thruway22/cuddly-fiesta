@@ -46,7 +46,6 @@ tickers_dict = {fdata.ticker.unique()[i]: \
                 str(fdata.ticker.unique()[i]) + ': ' + fdata.name.unique()[i] \
                 for i in range(len(fdata.ticker.unique()))}
 
-pdata = get_historical_prices(tickers_dict)
 ticker_data = get_ticker_data(fdata, pdata, ticker)
 sector_data = get_sector_data(fdata, pdata, tickers_dict)
 yoy, hoh = get_categorical_data(fdata, ticker)
