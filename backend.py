@@ -50,7 +50,7 @@ def get_historical_prices(tickers_dict):
         
     return df
   
-pdata = get_historical_prices(tickers)
+pdata = get_historical_prices(tickers_dict)
 
 def rock_and_roll(df1, df2, df2_metric_col,
                   df1_date_col='date',
