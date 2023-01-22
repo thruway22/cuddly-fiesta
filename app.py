@@ -47,8 +47,9 @@ tickers_dict = {fdata.ticker.unique()[i]: \
 pdata = get_historical_prices(tickers_dict)
 
 st.dataframe(pdata)
+st.dataframe(pdata[['date', str(4330)]].rename(columns = {str(4330):'price'}))
 
-ticker_data = get_ticker_data(fdata, pdata, 4330)
+#ticker_data = get_ticker_data(fdata, pdata, 4330)
 
 #sector_data = get_sector_data(pdata, tickers_dict)
 
