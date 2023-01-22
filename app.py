@@ -53,6 +53,10 @@ def display_text(title=None, body=None, title_size=16, **extra_bodies):
         output = output + f'<p style="direction: rtl; text-align:justify">{texts.loc[extra_body].value}</p>'
     return st.markdown(output, unsafe_allow_html=True)
 
+def display_metric(value) #, label):
+     output = f'<p style="direction: rtl; text-align:center">{value}</p>'
+     return st.markdown(output, unsafe_allow_html=True)
+
 def display_chart(kind, metric_col,
                   ts_relative_plot=True, ct_method='yoy', ct_show_change=True):
     global ticker_data
@@ -76,10 +80,21 @@ else:
     ticker_data = get_ticker_data(fdata, pdata, ticker)
     yoy, hoh = get_categorical_data(fdata, ticker)
             
+    ticker_yield = ticker_data['yield'].median()
+    ticker_pffo = ticker_data['pffo'].median()
+
+    sector_yield = sector_data.tail(1)['yield'][0]
+    sector_pffo = sector_data.tail(1)['pffo'][0]
+            
     with placeholder.container():
             display_text('price_title', 'price_body')
             display_chart('ts', 'price')
             display_chart('ts', 'navpd', ts_relative_plot=False)
+            col1, col2 = st.columns(2)
+            with col1:
+                 display_metric(ticker_yield)
+            with col2:
+                 display_metric(sector_yield)
             display_chart('ts', 'yield')
             display_chart('ts', 'pffo')
             
