@@ -9,7 +9,8 @@ button[title="View fullscreen"]:hover {
 #metric {
   display: inline-block;
   position: relative;
-  left: 40%;
+  left: 50%;
+  transform: translateX(-50%);
   border-radius: 5px;
   background-color: #E7EFF8;
   padding: 5px;
