@@ -8,7 +8,7 @@ button[title="View fullscreen"]:hover {
 
 #metric_block{
   column-count: 2;
-  font-size=5px;
+  font-size=5px!important;
 }
 
 #metric_value {
