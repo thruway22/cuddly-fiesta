@@ -54,7 +54,7 @@ def display_text(header=None, body=None, title=None, **extra_bodies):
         output = output + f'<p id="header">{texts.loc[header].value}</p>'
             
     if body != None:
-        output = output + f'<p style="direction: rtl; text-align:justify">{texts.loc[body].value}</p>'               
+        output = output + f'<p id="body">{texts.loc[body].value}</p>'               
         for extra_body in extra_bodies.values():
             output = output + f'<p style="direction: rtl; text-align:justify">{texts.loc[extra_body].value}</p>'
                 
