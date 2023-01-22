@@ -7,10 +7,10 @@ def local_css(file_name):
 
 local_css('style.css')
 
-# hide the stupid zoom button on charts
+"""# hide the stupid zoom button on charts
 st.markdown('''<style> button[title="View fullscreen"] {visibility: hidden;}
             button[title="View fullscreen"]:hover {visibility: hidden;}</styles>''',
-            unsafe_allow_html=True)
+            unsafe_allow_html=True)"""
 
 tickers = {    
     9999: '',
