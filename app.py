@@ -57,9 +57,10 @@ def display_text(title=None, body=None, title_size=16, **extra_bodies):
 def display_divider():
     return st.markdown('<hr />', unsafe_allow_html=True)
 
-def display_metric(value, fmt):
+def display_metric(value, fmt, label):
      fmt_dict = {'p': '%', 'm': 'x'} #style="direction: rtl; text-align:center"
-     output = f'<p id="metric">{value:.2f}{fmt_dict[fmt]}</p>'
+     label = {'s': texts.loc[sector_label].value, 't': texts.loc[ticker_label].value}
+     output = f'<p id="metric">{value:.2f}{fmt_dict[fmt]}</p>' + f'<p>{label}</p>'
      return st.markdown(output, unsafe_allow_html=True)
 
 def display_chart(kind, metric_col,
@@ -98,9 +99,9 @@ else:
             display_divider()
             col1, col2 = st.columns(2)
             with col1:
-                 display_metric(ticker_yield, 'p')
+                 display_metric(ticker_yield, 'p', 't')
             with col2:
-                 display_metric(sector_yield, 'p')
+                 display_metric(sector_yield, 'p', 's')
             display_chart('ts', 'yield')
             display_divider()
             display_chart('ts', 'pffo')
