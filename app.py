@@ -1,5 +1,5 @@
 import streamlit as st
-from backend import *
+from utilities import *
 
 # hide the stupid zoom button on charts
 st.markdown('''<style> button[title="View fullscreen"] {visibility: hidden;}
