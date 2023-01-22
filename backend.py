@@ -119,14 +119,14 @@ def get_ticker_data(fdata, pdata, ticker):
     return df
   
 # cached ############################
-def get_sector_data(pdata, tickers_dict, yield_col='yield', pffo_col='pffo'):
+def get_sector_data(fdata, pdata, tickers_dict, yield_col='yield', pffo_col='pffo'):
     
     df = pdata[['date']].set_index('date')
     df_yield = df.copy() 
     df_pffo = df.copy() 
     
     for i in tickers_dict.keys():
-        df_aux = get_ticker_data(i)
+        df_aux = get_ticker_data(fdata, pdata, i)
         df_yield[i] = df_aux[yield_col]
         df_pffo[i] = df_aux[pffo_col]
         
