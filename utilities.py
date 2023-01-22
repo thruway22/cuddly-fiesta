@@ -8,6 +8,7 @@ from pandas.tseries.offsets import DateOffset
 from pandas.tseries.offsets import MonthEnd
 from eod import EodHistoricalData
 import streamlit as st
+from app import *
 
 # global data columns
 ticker_col = 'ticker'
@@ -407,3 +408,15 @@ def display_text(title=None, title_size=16, **bodies):
         
     return output
         
+def display_chart(kind, metric_col,
+          ts_relative_plot=False, ct_method='yoy', ct_show_change=True):
+    
+    global ticker_data
+    global sector_data
+    global yoy
+    global hoh
+    
+    if kind == 'ts':
+        return chart_timeseries_data(ticker_data, sector_data, metric_col, ts_relative_plot)
+    if kind == 'ct':
+        return chart_categorical_data(yoy, hoh, metric_col, ct_method, ct_show_change)
