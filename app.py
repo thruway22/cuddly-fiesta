@@ -80,6 +80,8 @@ else:
             display_text('price_title', 'price_body')
             display_chart('ts', 'price')
             display_chart('ts', 'navpd', ts_relative_plot=False)
+            display_chart('ts', 'yield')
+            display_chart('ts', 'pffo')
             
       
      
