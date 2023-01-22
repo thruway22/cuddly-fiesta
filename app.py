@@ -53,9 +53,9 @@ def display_text(title=None, body=None, title_size=16, **extra_bodies):
         output = output + f'<p style="direction: rtl; text-align:justify">{texts.loc[extra_body].value}</p>'
     return st.markdown(output, unsafe_allow_html=True)
 
-def display_metric(value):#, fmt):
-     #fmt_dict = {'p': }
-     output = f'<p style="direction: rtl; text-align:center">{value:.2f%%}</p>'
+def display_metric(value, fmt):
+     fmt_dict = {'p': %, 'm', 'x'}
+     output = f'<p style="direction: rtl; text-align:center">{value:.2f}{fmt}</p>'
      return st.markdown(output, unsafe_allow_html=True)
 
 def display_chart(kind, metric_col,
@@ -93,9 +93,9 @@ else:
             display_chart('ts', 'navpd', ts_relative_plot=False)
             col1, col2 = st.columns(2)
             with col1:
-                 display_metric(ticker_yield)
+                 display_metric(ticker_yield, 'p')
             with col2:
-                 display_metric(sector_yield)
+                 display_metric(sector_yield, 'p')
             display_chart('ts', 'yield')
             display_chart('ts', 'pffo')
             
