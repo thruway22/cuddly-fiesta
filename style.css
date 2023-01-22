@@ -5,3 +5,12 @@ button[title="View fullscreen"] {
 button[title="View fullscreen"]:hover {
   visibility: hidden;
 }
+
+#metric {
+  border-radius: 5px; background-color: tomato;
+  display: inline;
+  padding: 5px;
+  direction: rtl;
+  text-align:center;
+  font-family:sans-serif;
+}
