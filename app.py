@@ -61,7 +61,7 @@ def display_metric(ticker_metric, sector_metric, fmt):
      fmt_dict = {'p': '%', 'm': 'x'} #style="direction: rtl; text-align:center"
     # label_dict = {'s': texts.loc['sector_label'].value, 't': texts.loc['ticker_label'].value}
     
-     output = f'<div id="metric_block"><p id="metric_value">{ticker_metric:.2f}{fmt_dict[fmt]}</p><p id="metric_label">{texts.loc['ticker_label'].value}</p><p id="metric_value">{sector_metric:.2f}{fmt_dict[fmt]}</p><p id="metric_label">{texts.loc['sector_label'].value}</p></div>'
+     output = f'''<div id="metric_block"><p id="metric_value">{ticker_metric:.2f}{fmt_dict[fmt]}</p><p id="metric_label">{texts.loc['ticker_label'].value}</p><p id="metric_value">{sector_metric:.2f}{fmt_dict[fmt]}</p><p id="metric_label">{texts.loc['sector_label'].value}</p></div>'''
         
      return st.markdown(output, unsafe_allow_html=True)
 
