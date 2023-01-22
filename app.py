@@ -34,6 +34,8 @@ st.markdown(display_text(
 ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed',
              format_func=lambda x:tickers[x])
 
+st.write(st.secrets['api_key'])
+
 ##################################
 
 fdata = pd.read_csv('data/fdata.csv')
