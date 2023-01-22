@@ -47,7 +47,7 @@ def display_text(title=None, body=None, title_size=16, **extra_bodies):
     global texts
     output = ''
     if title != None:
-        output = output + f'<p style="direction: rtl; text-align: justify; font-size:{title_size}px; font-weight: bold;">{texts.loc[title].value}</p>'
+        output = output + f'<p id="title">{texts.loc[title].value}</p>'
     if body !=None:
         output = output + f'<p style="direction: rtl; text-align:justify">{texts.loc[body].value}</p>'               
     for extra_body in extra_bodies.values():
