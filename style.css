@@ -8,7 +8,6 @@ button[title="View fullscreen"]:hover {
 
 #metric_block{
   column-count: 2;
-  font-size=5px!important;
 }
 
 #metric_value {
@@ -31,4 +30,5 @@ button[title="View fullscreen"]:hover {
   direction: rtl;
   text-align:center;
   font-family:sans-serif;
+  font-size=5px!important;
 }
