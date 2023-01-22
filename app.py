@@ -111,39 +111,44 @@ else:
         display_metric(ticker_pffo, sector_pffo, 'm')
         display_chart('ts', 'pffo')
         
-        display_divider()
         col11, col12 = st.columns(2)
         with col11:
+            display_divider()
             display_chart('ct', 'ffos')
             display_text('ffos_header', 'ffos_body')
         with col12:
+            display_divider()
             display_chart('ct', 'ffo_payout')
             display_text('ffo_payout_header', 'ffo_payout_body')
             
-        display_divider()
         col21, col22 = st.columns(2)
         with col21:
+            display_divider()
             display_chart('ct', 'asset')
             display_text('asset_header', 'asset_body')
         with col22:
+            display_divider()
             display_chart('ct', 'revenue')
             display_text('revenue_header', 'revenue_body')
             
-        display_divider()
+
         col31, col32 = st.columns(2)
         with col31:
+            display_divider()
             display_chart('ct', 'roic')
             display_text('roic_header', 'roic_body')
         with col32:
+            display_divider()
             display_chart('ct', 'op_margin')
             display_text('op_margin_header', 'op_margin_body')
             
-        display_divider()
         col41, col42 = st.columns(2)
         with col41:
+            display_divider()
             display_chart('ct', 'net_debt_ebitda')
             display_text('net_debt_ebitda_header', 'net_debt_ebitda_body')
         with col42:
+            display_divider()
             display_chart('ct', 'coverage')
             display_text('coverage_header', 'coverage_body')
             
