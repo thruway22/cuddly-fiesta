@@ -62,7 +62,7 @@ def display_chart(kind, metric_col,
     if kind == 'ct':
         return st.pyplot(chart_categorical_data(yoy, hoh, metric_col, ct_method, ct_show_change))
 
-display_text('main_title', 24, 'main_body')
+display_text('main_title', 24, body='main_body')
             #body=texts.loc['main_body'].value, title=texts.loc['main_title'].value, title_size=24),
             #unsafe_allow_html=True)
 
