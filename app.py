@@ -53,7 +53,7 @@ def display_text(title=None, body=None, title_size=16, **extra_bodies):
         output = output + f'<p style="direction: rtl; text-align:justify">{texts.loc[extra_body].value}</p>'
     return st.markdown(output, unsafe_allow_html=True)
 
-def display_metric(value) #, label):
+def display_metric(value):
      output = f'<p style="direction: rtl; text-align:center">{value}</p>'
      return st.markdown(output, unsafe_allow_html=True)
 
