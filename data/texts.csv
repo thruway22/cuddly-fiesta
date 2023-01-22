@@ -24,7 +24,7 @@ roic_header,العائد على الاستثمار
 roic_body,العائد على الاستثمار
 op_margin_header,المارجن
 op_margin_body,المارجن
-net_debt_ebitda_header,الدين إلى الايرادات
+net_debt_ebitda_header,الدين إلى الأرباح قبل الفائدة والضرائب والإهلاك واستهلاك الدين
 net_debt_ebitda_body,الدين إلى الايرادات
 coverage_header,التغطية الائتمانية
 coverage_body,التغطية الائتمانية
