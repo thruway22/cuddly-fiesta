@@ -40,6 +40,19 @@ tickers_dict = {fdata.ticker.unique()[i]: \
 
 sector_data = get_sector_data(fdata, pdata, tickers_dict)
 
+
+def display_chart(kind, metric_col,
+                  ts_relative_plot=False, ct_method='yoy', ct_show_change=True):
+    global ticker_data
+    global sector_data
+    global yoy
+    global hoh
+    if kind == 'ts':
+        return st.pyplot(chart_timeseries_data(ticker_data, sector_data, metric_col, ts_relative_plot))
+    if kind == 'ct':
+        return st.pyplot(chart_categorical_data(yoy, hoh, metric_col, ct_method, ct_show_change))
+
+
 st.markdown(display_text(
             body=texts.loc['main_body'].value, title=texts.loc['main_title'].value, title_size=24),
             unsafe_allow_html=True)
