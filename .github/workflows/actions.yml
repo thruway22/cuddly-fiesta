@@ -1,8 +1,9 @@
 name: run eod_client.py
 
 on:
-  schedule:
-    - cron: '*/10 * * * *' # At 00:00 on Monday
+  push
+  #schedule:
+  #  - cron: '*/10 * * * *' # At 00:00 on Monday
     
 jobs:
   build:
