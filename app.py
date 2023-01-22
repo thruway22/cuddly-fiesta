@@ -1,5 +1,5 @@
 import streamlit as st
-from utilities import *
+from backend import *
 
 # hide the stupid zoom button on charts
 st.markdown('''<style> button[title="View fullscreen"] {visibility: hidden;}
@@ -34,6 +34,10 @@ st.markdown(display_text(
 ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed',
              format_func=lambda x:tickers[x])
 
+ticker_data = get_ticker_data(ticker)
+sector_data = get_sector_data()
+yoy, hoh = get_categorical_data(ticker)
+
 placeholder = st.empty()
 
 if ticker == 9999:
@@ -41,78 +45,8 @@ if ticker == 9999:
 else:
     with placeholder.container():
         
-        st.pyplot(chart_timeseries_data(ticker, 'price'))
-        
-        st.markdown('<hr />', unsafe_allow_html=True)
-        st.markdown(display_text(
-            body=texts.loc['yield_body'].value, title=texts.loc['yield_title'].value), 
-                    unsafe_allow_html=True)
-        st.pyplot(chart_timeseries_data(ticker, 'yield'))
-        
-        st.markdown('<hr />', unsafe_allow_html=True)
-        st.markdown(display_text(
-            body=texts.loc['pffo_body'].value, title=texts.loc['pffo_title'].value), 
-                    unsafe_allow_html=True)
-        st.pyplot(chart_timeseries_data(ticker, 'pffo'))
+        st.pyplot(chart_timeseries_data('price', relative_plot=True))
       
-        col1a, col2a = st.columns(2)
-
-        with col1a:
-            #st.markdown('<hr />', unsafe_allow_html=True)
-            st.markdown(display_text(
-                body=texts.loc['ffos_body'].value, title=texts.loc['ffos_title'].value), 
-                        unsafe_allow_html=True)
-            hoh, yoy = st.tabs(["سنوي", "نصف سنوي"])
-            with hoh:          
-                        st.pyplot(chart_categorical_data(ticker, 'ffos'))
-            with yoy:
-                        st.pyplot(chart_categorical_data(ticker, 'ffo'))
-                
-        with col2a:
-            st.markdown('<p style="direction: rtl; text-align:center">تجربة</p>', unsafe_allow_html=True)
-            #st.markdown('<hr />', unsafe_allow_html=True)
-            st.markdown(display_text(
-                body=texts.loc['ffo_payout_body'].value, title=texts.loc['ffo_payout_title'].value), 
-                        unsafe_allow_html=True)
-            st.pyplot(chart_categorical_data(ticker, 'ffo_payout'))
-            
-        col1b, col2b = st.columns(2)
-
-        with col1b:
-            st.markdown('<hr />', unsafe_allow_html=True)
-            st.write('net_debt_ebitda')
-            st.markdown(display_text(
-                body=texts.loc['ffos_body'].value, title=texts.loc['ffos_title'].value), 
-                        unsafe_allow_html=True)
-            st.pyplot(chart_categorical_data(ticker, 'net_debt_ebitda'))
-                
-            st.markdown('<hr />', unsafe_allow_html=True)
-            st.write('coverage')
-            st.markdown(display_text(
-                body=texts.loc['ffo_payout_body'].value, title=texts.loc['ffo_payout_title'].value), 
-                        unsafe_allow_html=True)
-            st.pyplot(chart_categorical_data(ticker, 'coverage'))
-            
-        with col1b:
-            st.markdown('<hr />', unsafe_allow_html=True)
-            st.markdown(display_text(
-                body=texts.loc['ffos_body'].value, title=texts.loc['ffos_title'].value), 
-                        unsafe_allow_html=True)
-            st.pyplot(chart_categorical_data(ticker, 'dividend'))
-                
-        with col2b:
-            st.markdown('<hr />', unsafe_allow_html=True)
-            st.write('rev')
-            st.markdown(display_text(
-                body=texts.loc['ffo_payout_body'].value, title=texts.loc['ffo_payout_title'].value), 
-                        unsafe_allow_html=True)
-            st.pyplot(chart_categorical_data(ticker, 'revenue'))
-            
-            st.markdown('<hr />', unsafe_allow_html=True)
-            st.write('asset')
-            st.markdown(display_text(
-                body=texts.loc['ffo_payout_body'].value, title=texts.loc['ffo_payout_title'].value), 
-                        unsafe_allow_html=True)
-            st.pyplot(chart_categorical_data(ticker, 'asset'))
+     
            
             
