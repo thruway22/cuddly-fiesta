@@ -54,8 +54,8 @@ def display_text(title=None, body=None, title_size=16, **extra_bodies):
     return st.markdown(output, unsafe_allow_html=True)
 
 def display_metric(value, fmt):
-     fmt_dict = {'p': '%', 'm': 'x'}
-     output = f'<p style="direction: rtl; text-align:center">{value:.2f}{fmt_dict[fmt]}</p>'
+     fmt_dict = {'p': '%', 'm': 'x'} #style="direction: rtl; text-align:center"
+     output = f'<p id="metric">{value:.2f}{fmt_dict[fmt]}</p>'
      return st.markdown(output, unsafe_allow_html=True)
 
 def display_chart(kind, metric_col,
