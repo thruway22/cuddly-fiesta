@@ -34,8 +34,6 @@ st.markdown(display_text(
 ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed',
              format_func=lambda x:tickers[x])
 
-st.write(st.secrets['api_key'])
-
 ##################################
 
 fdata = pd.read_csv('data/fdata.csv')
@@ -48,16 +46,21 @@ tickers_dict = {fdata.ticker.unique()[i]: \
 
 pdata = get_historical_prices(tickers_dict)
 
-ticker_data = get_ticker_data(fdata, pdata, ticker)
+st.dataframe(pdata)
 
-sector_data = get_sector_data(pdata, tickers_dict)
+#ticker_data = get_ticker_data(fdata, pdata, ticker)
 
-yoy, hoh = get_categorical_data(fdata, ticker)
+#sector_data = get_sector_data(pdata, tickers_dict)
+
+#yoy, hoh = get_categorical_data(fdata, ticker)
 
 ##################################
 
-st.pyplot(chart_timeseries_data(ticker_data, sector_data, 'price', relative_plot=True))
-st.pyplot(chart_categorical_data(yoy, hoh, 'asset', 'yoy', True))
+
+
+
+#st.pyplot(chart_timeseries_data(ticker_data, sector_data, 'price', relative_plot=True))
+#st.pyplot(chart_categorical_data(yoy, hoh, 'asset', 'yoy', True))
       
      
            
