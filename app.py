@@ -48,7 +48,7 @@ pdata = get_historical_prices(tickers_dict)
 
 st.dataframe(pdata)
 
-#ticker_data = get_ticker_data(fdata, pdata, ticker)
+ticker_data = get_ticker_data(fdata, pdata, ticker)
 
 #sector_data = get_sector_data(pdata, tickers_dict)
 
