@@ -7,14 +7,14 @@ button[title="View fullscreen"]:hover {
 }
 
 #metric {
+  display: inline-block;
+  position: relative;
+  
   border-radius: 5px;
   background-color: #E7EFF8;
-  display: inline-block;
+  transform: translateX(-50%);
   padding: 5px;
   direction: rtl;
   text-align:center;
   font-family:sans-serif;
-  display: inline-block;
-  position: relative;
-  left: 50%; 
 }
