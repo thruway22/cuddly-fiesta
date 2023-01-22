@@ -14,5 +14,4 @@ for i in tickers:
     resp = client.get_prices_eod(str(i)+'.SR', period='d', order='a', from_='2018-01-01')
     df = df.merge(pd.DataFrame(resp)[['date', 'adjusted_close']].rename(columns={"adjusted_close": i}), on='date', how='left')
     
-df['date'] = pd.to_datetime(df['date'], format='%Y-%m-%d') 
 df.to_csv('data/pdata.csv', index=False)
