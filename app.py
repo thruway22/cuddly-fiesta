@@ -64,7 +64,7 @@ def display_chart(kind, metric_col,
     if kind == 'ct':
         return st.pyplot(chart_categorical_data(yoy, hoh, metric_col, ct_method, ct_show_change))
 
-display_text('main_title', 'main_body', 24)
+display_text('intro_title', 'intro_body', 24)
 
 ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed', format_func=lambda x:tickers[x])
 
@@ -77,6 +77,7 @@ else:
     yoy, hoh = get_categorical_data(fdata, ticker)
             
     with placeholder.container():
+            display_text('price_title', 'price_body')
             display_chart('ts', 'price', ts_relative_plot=True)
             display_chart('ct', 'asset')
             
