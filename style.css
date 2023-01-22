@@ -10,7 +10,7 @@ button[title="View fullscreen"]:hover {
   column-count: 2;
 }
 
-#metric_block {
+#metric_value {
   column-span: 1;
   display: inline-block;
   position: relative;
