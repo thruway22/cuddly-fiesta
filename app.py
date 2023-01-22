@@ -8,7 +8,7 @@ def local_css(file_name):
 local_css('style.css')
 
 tickers = {    
-    9999: '',
+    #9999: '',
     4330: '4330: Riyad REIT الرياض ريت',
     4331: '4331: Aljazira REIT الجزيرة ريت',
     4332: '4332: Jadwa REIT Alharamain جدوى ريت الحرمين',
