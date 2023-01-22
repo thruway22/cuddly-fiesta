@@ -8,7 +8,6 @@ from pandas.tseries.offsets import DateOffset
 from pandas.tseries.offsets import MonthEnd
 from eod import EodHistoricalData
 import streamlit as st
-from app import *
 
 # global data columns
 ticker_col = 'ticker'
