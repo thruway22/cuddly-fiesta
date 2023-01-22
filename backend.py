@@ -78,7 +78,7 @@ def get_ticker_data(fdata, pdata, ticker):
     '''pdata -> df1 and fdata -> df2'''
     
     # get historical prices for input ticker
-    df1 = pdata[['date',str(ticker)]]
+    df1 = pdata[['date', ticker]].rename(columns = {ticker:'price'})
     
     # get historical financials for input ticker
     df2 = fdata[[ticker_col, year_col, shares_col, ffo_col, dividend_col, nav_col]]
