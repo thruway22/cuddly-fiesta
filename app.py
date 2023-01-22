@@ -46,22 +46,16 @@ tickers_dict = {fdata.ticker.unique()[i]: \
 
 pdata = get_historical_prices(tickers_dict)
 
-sector_data = get_sector_data()
+ticker_data = get_ticker_data(fdata, pdata, ticker)
 
+sector_data = get_sector_data(pdata, tickers_dict)
+
+yoy, hoh = get_categorical_data(fdata, ticker)
 
 ##################################
 
-placeholder = st.empty()
-
-if ticker == 9999:
-    pass
-else:
-    ticker_data = get_ticker_data(ticker)
-    yoy, hoh = get_categorical_data(ticker)
-            
-    with placeholder.container():
-        
-        st.pyplot(chart_timeseries_data('price', relative_plot=True))
+st.pyplot(chart_timeseries_data(ticker_data, sector_data, 'price', relative_plot=True))
+st.pyplot(chart_categorical_data(yoy, hoh, 'asset', 'yoy', True))
       
      
            
