@@ -58,14 +58,16 @@ st.markdown(display_text(
 
 ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed', format_func=lambda x:tickers[x])
 
-ticker_data = get_ticker_data(fdata, pdata, ticker)
-yoy, hoh = get_categorical_data(fdata, ticker)
+
 
 placeholder = st.empty()
 
 if ticker == 9999:
     pass
 else:
+    ticker_data = get_ticker_data(fdata, pdata, ticker)
+    yoy, hoh = get_categorical_data(fdata, ticker)
+            
     with placeholder.container():
             display_chart('ts', 'price', ts_relative_plot=True)
             display_chart('ct', 'asset')
