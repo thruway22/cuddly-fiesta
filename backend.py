@@ -73,10 +73,7 @@ def rock_and_roll(df1, df2, df2_metric_col,
 
     return values
   
-def get_ticker_data(ticker):
-    
-    global pdata
-    global fdata
+def get_ticker_data(fdata, pdata, ticker):
     
     '''pdata -> df1 and fdata -> df2'''
     
@@ -122,10 +119,7 @@ def get_ticker_data(ticker):
     return df
   
 # cached ############################
-def get_sector_data(yield_col='yield', pffo_col='pffo'):
-    
-    global pdata
-    global tickers_dict
+def get_sector_data(pdata, tickers_dict, yield_col='yield', pffo_col='pffo'):
     
     df = pdata[['date']].set_index('date')
     df_yield = df.copy() 
@@ -141,10 +135,7 @@ def get_sector_data(yield_col='yield', pffo_col='pffo'):
         
     return df
   
-def chart_timeseries_data(metric_col, relative_plot=False):
-    
-    global ticker_data
-    global sector_data
+def chart_timeseries_data(ticker_data, sector_data, metric_col, relative_plot=False):
     
     # set defult font and colors
     plt.rcParams['font.size'] = 8
@@ -260,9 +251,7 @@ def compute_metrics(df):
     
     return df
   
-def get_categorical_data(ticker):
-    
-    global fdata
+def get_categorical_data(fdata, ticker):
     
     # create yoy and ttm for input ticker
     hoh = fdata[fdata[ticker_col] == ticker].drop(columns=[ticker_col, name_col])    
@@ -323,10 +312,8 @@ def get_categorical_data(ticker):
     
     return yoy, hoh
   
-def chart_categorical_data(metric_col, method='yoy', show_change=False):
-    
-    global yoy
-    global hoh
+def chart_categorical_data(yoy, hoh, metric_col, method='yoy', show_change=False):
+   
     
     var_dict = {
         'unit': {
