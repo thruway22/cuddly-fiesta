@@ -9,7 +9,7 @@ button[title="View fullscreen"]:hover {
 #metric {
   border-radius: 5px;
   background-color: #E7EFF8;
-  display: inline;
+  /* display: inline; */
   padding: 5px;
   direction: rtl;
   text-align:center;
