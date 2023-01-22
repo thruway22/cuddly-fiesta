@@ -59,7 +59,7 @@ def display_divider():
 
 def display_metric(value, fmt, label):
      fmt_dict = {'p': '%', 'm': 'x'} #style="direction: rtl; text-align:center"
-     label = {'s': texts.loc[sector_label].value, 't': texts.loc[ticker_label].value}
+     label = {'s': texts.loc['sector_label'].value, 't': texts.loc['ticker_label'].value}
      output = f'<p id="metric">{value:.2f}{fmt_dict[fmt]}</p>' + f'<p>{label}</p>'
      return st.markdown(output, unsafe_allow_html=True)
 
