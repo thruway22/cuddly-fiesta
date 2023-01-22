@@ -58,11 +58,11 @@ def display_divider():
     return st.markdown('<hr />', unsafe_allow_html=True)
 
 def display_metric(ticker_metric, sector_metric, fmt):
-     fmt_dict = {'p': '%', 'm': 'x'} #style="direction: rtl; text-align:center"
-    # label_dict = {'s': texts.loc['sector_label'].value, 't': texts.loc['ticker_label'].value}
-    
-     output = f'''<div id="metric_block"><p id="metric_value">{ticker_metric:.2f}{fmt_dict[fmt]}</p><p id="metric_label">{texts.loc['ticker_label'].value}</p><p id="metric_value">{sector_metric:.2f}{fmt_dict[fmt]}</p><p id="metric_label">{texts.loc['sector_label'].value}</p></div>'''
-        
+     fmt_dict = {'p': '%', 'm': 'x'} #style="direction: rtl; text-align:center"    
+     output = f'''<div id="metric_block"><p id="metric_value">{ticker_metric:.2f}{fmt_dict[fmt]}</p>
+                  <p id="metric_label">{texts.loc['ticker_label'].value}</p>
+                  <p id="metric_value">{sector_metric:.2f}{fmt_dict[fmt]}</p>
+                  <p id="metric_label">{texts.loc['sector_label'].value}</p></div>'''
      return st.markdown(output, unsafe_allow_html=True)
 
 def display_chart(kind, metric_col,
@@ -102,7 +102,9 @@ else:
             display_metric(ticker_yield, sector_yield, 'p')
             display_chart('ts', 'yield')
             display_divider()
+            display_metric(ticker_pffo, sector_pffo, 'p')
             display_chart('ts', 'pffo')
+            display_divider()
             
       
      
