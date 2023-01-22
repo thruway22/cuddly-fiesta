@@ -49,7 +49,7 @@ def display_chart(kind, metric_col,
     global hoh
     
     if kind == 'ts':
-        return chart_timeseries_data(ticker_data, sector_data, metric_col, relative_plot)
+        return chart_timeseries_data(ticker_data, sector_data, metric_col, ts_relative_plot)
     if kind == 'ct':
         return chart_categorical_data(yoy, hoh, metric_col, ct_method, ct_show_change)
 
