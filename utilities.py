@@ -389,21 +389,4 @@ def chart_categorical_data(yoy, hoh, metric_col, method='yoy', show_change=False
     
     #plt.show()
     return fig
-  
-##################################################
-##################################################
-
-texts = pd.read_csv('data/texts.csv', encoding='utf8', index_col='id')
-  
-def display_text(title=None, title_size=16, **bodies):
-    
-    output = ''
-    
-    if title != None:
-        output = output + f'<p style="direction: rtl; text-align: justify; font-size:{title_size}px; font-weight: bold;">{title}</p>'
-        
-    for body in bodies.values():
-        output = output + f'<p style="direction: rtl; text-align:justify">{body}</p>'
-        
-    return output
     
