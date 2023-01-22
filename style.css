@@ -6,7 +6,7 @@ button[title="View fullscreen"]:hover {
   visibility: hidden;
 }
 
-#title {
+h1 {
   direction: rtl;
   text-align: justify;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
