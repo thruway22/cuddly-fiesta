@@ -48,7 +48,7 @@ def display_text(title=None, title_size=16, body=None, **extra_bodies):
     if title != None:
         output = output + f'<p style="direction: rtl; text-align: justify; font-size:{title_size}px; font-weight: bold;">{texts.loc[title].value}</p>'
     if body !=None:
-        output + f'<p style="direction: rtl; text-align:justify">{texts.loc[body].value}</p>'               
+        output = output + f'<p style="direction: rtl; text-align:justify">{texts.loc[body].value}</p>'               
     for extra_body in extra_bodies.values():
         output = output + f'<p style="direction: rtl; text-align:justify">{texts.loc[extra_body].value}</p>'
     return st.markdown(output, unsafe_allow_html=True)
