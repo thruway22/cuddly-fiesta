@@ -17,7 +17,7 @@ button[title="View fullscreen"]:hover {
 #header {
   direction: rtl;
   text-align: justify;
-  font-family: sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 16px;
   font-weight: bold;
 }
@@ -37,7 +37,7 @@ button[title="View fullscreen"]:hover {
   padding: 5px;
   direction: rtl;
   text-align:center;
-  font-family:sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   margin-bottom: 3px;
   font-weight: bold;
 }
@@ -46,7 +46,7 @@ button[title="View fullscreen"]:hover {
   column-span: 1;
   direction: rtl;
   text-align:center;
-  font-family:sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   font-size:10px;
   
 }
