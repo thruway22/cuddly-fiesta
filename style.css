@@ -31,5 +31,5 @@ button[title="View fullscreen"]:hover {
   direction: rtl;
   text-align:center;
   font-family:sans-serif;
-  font-size=30px;
+  font-size=small;
 }
