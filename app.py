@@ -101,16 +101,24 @@ else:
     sector_pffo = sector_data.tail(1)['pffo'][0]
             
     with placeholder.container():
-            display_text('price_title', 'price_body')
-            display_chart('ts', 'price')
-            display_chart('ts', 'navpd', ts_relative_plot=False)
-            display_divider()
-            display_metric(ticker_yield, sector_yield, 'p')
-            display_chart('ts', 'yield')
-            display_divider()
-            display_metric(ticker_pffo, sector_pffo, 'm')
-            display_chart('ts', 'pffo')
-            display_divider()
+        display_text('price_title', 'price_body')
+        display_chart('ts', 'price')
+        display_chart('ts', 'navpd', ts_relative_plot=False)
+        display_divider()
+        display_metric(ticker_yield, sector_yield, 'p')
+        display_chart('ts', 'yield')
+        display_divider()
+        display_metric(ticker_pffo, sector_pffo, 'm')
+        display_chart('ts', 'pffo')
+        display_divider()
+        
+        col11, col12 = st.columns(2)
+        with col11:
+            display_chart('ct', 'ffos')
+        with col12:
+            display_chart('ct', 'ffo_payout')
+            
+            
             
       
      
