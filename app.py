@@ -110,13 +110,34 @@ else:
         display_divider()
         display_metric(ticker_pffo, sector_pffo, 'm')
         display_chart('ts', 'pffo')
-        display_divider()
         
+        display_divider()
         col11, col12 = st.columns(2)
         with col11:
             display_chart('ct', 'ffos')
         with col12:
             display_chart('ct', 'ffo_payout')
+            
+        display_divider()
+        col21, col22 = st.columns(2)
+        with col21:
+            display_chart('ct', 'asset')
+        with col22:
+            display_chart('ct', 'revenue')
+            
+        display_divider()
+        col31, col32 = st.columns(2)
+        with col31:
+            display_chart('ct', 'roic')
+        with col32:
+            display_chart('ct', 'op_margin')
+            
+        display_divider()
+        col41, col42 = st.columns(2)
+        with col41:
+            display_chart('ct', 'net_debt_ebtida')
+        with col42:
+            display_chart('ct', 'coverage')
             
             
             
