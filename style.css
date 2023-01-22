@@ -22,6 +22,7 @@ button[title="View fullscreen"]:hover {
   direction: rtl;
   text-align:center;
   font-family:sans-serif;
+  margin-bottom: 10px;
 }
 
 #metric_label{
