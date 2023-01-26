@@ -83,7 +83,6 @@ def display_chart(kind, metric_col,
         return st.pyplot(chart_categorical_data(yoy, hoh, metric_col, ct_method, ct_show_change))
 
 display_text(None, 'intro_body', 'intro_title')
-*أخر تحديث للأسعار:*
 st.markdown(<p id="body">أخر تحديث أسعار: {last_update}</p>, unsafe_allow_html=False)
 
 ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed', format_func=lambda x:tickers[x])
