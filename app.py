@@ -8,7 +8,7 @@ def local_css(file_name):
 local_css('style.css')
 
 tickers = {    
-    #9999: '',
+    9999: '',
     4330: '4330: Riyad REIT الرياض ريت',
     4331: '4331: Aljazira REIT الجزيرة ريت',
     4332: '4332: Jadwa REIT Alharamain جدوى ريت الحرمين',
@@ -31,6 +31,8 @@ tickers = {
 pdata = pd.read_csv('data/pdata.csv')
 pdata['date'] = pd.to_datetime(pdata['date'], format='%Y-%m-%d')
 
+last_update = pdata['date'][-1]
+
 fdata = pd.read_csv('data/fdata.csv')
 fdata[year_col] = pd.to_datetime(fdata[year_col], format='%Y-%m-%d')
 fdata = fdata.sort_values(by=year_col)
@@ -43,7 +45,7 @@ sector_data = get_sector_data(fdata, pdata, tickers_dict)
 
 texts = pd.read_csv('data/texts.csv', encoding='utf8', index_col='id')
   
-def display_text(header=None, body=None, title=None, **extra_bodies):
+def display_text(header=None, body=None, title=None):
     global texts
     output = ''
     
@@ -55,10 +57,8 @@ def display_text(header=None, body=None, title=None, **extra_bodies):
             
     if body != None:
         output = output + f'<p id="body">{texts.loc[body].value}</p>'               
-        for extra_body in extra_bodies.values():
-            output = output + f'<p style="direction: rtl; text-align:justify">{texts.loc[extra_body].value}</p>'
                 
-        return st.markdown(output, unsafe_allow_html=True)
+    return st.markdown(output, unsafe_allow_html=True)
 
 def display_divider():
     return st.markdown('<hr />', unsafe_allow_html=True)
@@ -83,6 +83,8 @@ def display_chart(kind, metric_col,
         return st.pyplot(chart_categorical_data(yoy, hoh, metric_col, ct_method, ct_show_change))
 
 display_text(None, 'intro_body', 'intro_title')
+*أخر تحديث للأسعار:*
+st.markdown(<p id="body">أخر تحديث أسعار: {last_update}</p>, unsafe_allow_html=False)
 
 ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed', format_func=lambda x:tickers[x])
 
