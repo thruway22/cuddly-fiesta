@@ -29,9 +29,10 @@ tickers = {
 }
 
 pdata = pd.read_csv('data/pdata.csv')
+last_update = pdata['date'][-1]
 pdata['date'] = pd.to_datetime(pdata['date'], format='%Y-%m-%d')
 
-last_update = pdata['date'][-1]
+
 
 fdata = pd.read_csv('data/fdata.csv')
 fdata[year_col] = pd.to_datetime(fdata[year_col], format='%Y-%m-%d')
