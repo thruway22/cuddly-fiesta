@@ -29,7 +29,7 @@ tickers = {
 }
 
 pdata = pd.read_csv('data/pdata.csv')
-st.dataframe(pdata.tail(1)['date'])
+st.dataframe(pdata.tail(1))
 #st.write(str(pdata.tail(1)['date'][0]))
 pdata['date'] = pd.to_datetime(pdata['date'], format='%Y-%m-%d')
 
