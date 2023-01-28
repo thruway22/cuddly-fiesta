@@ -71,11 +71,11 @@ def display_metric(metric1, metric1_fmt, metric1_label,
      }   
      output = f'''<div id="metric_block">
                   <p id="metric_value">{metric1:.2f}{fmt_dict[metric1_fmt]}</p>
-                  <p id="metric_label">{texts.loc['metric1_label'].value}</p>
+                  <p id="metric_label">{texts.loc[metric1_label].value}</p>
                   <p id="metric_value">{metric2:.2f}{fmt_dict[metric2_fmt]}</p>
-                  <p id="metric_label">{texts.loc['metric2_label'].value}</p>
+                  <p id="metric_label">{texts.loc[metric2_label].value}</p>
                   <p id="metric_value">{metric3:.2f}{fmt_dict[metric3_fmt]}</p>
-                  <p id="metric_label">{texts.loc['metric3_label'].value}</p>
+                  <p id="metric_label">{texts.loc[metric3_label].value}</p>
                   </div>'''
      return st.markdown(output, unsafe_allow_html=True)
 
