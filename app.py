@@ -90,6 +90,8 @@ if ticker == 9999:
 else:
     ticker_data = get_ticker_data(fdata, pdata, ticker)
     yoy, hoh = get_categorical_data(fdata, ticker)
+    
+    
             
     ticker_yield = ticker_data['yield'].median()
     ticker_pffo = ticker_data['pffo'].median()
@@ -99,7 +101,11 @@ else:
             
     with placeholder.container():
         display_text(header='price_header', body='price_body')
+        ticker_current_price = ticker_data['price'][-1]
+        display_metric(ticker_current_price, sector_yield, 'p')
         display_chart('ts', 'price')
+        
+        
         display_chart('ts', 'navpd', ts_relative_plot=False)
         display_divider()
         display_metric(ticker_yield, sector_yield, 'p')
