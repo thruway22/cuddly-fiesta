@@ -29,8 +29,7 @@ tickers = {
 }
 
 pdata = pd.read_csv('data/pdata.csv')
-#last_update = pdata.tail(1)['date'].astype(str)
-st.write(pdata.tail(1)['date'].values[0])
+last_update = pdata.tail(1)['date'].values[0]
 pdata['date'] = pd.to_datetime(pdata['date'], format='%Y-%m-%d')
 
 fdata = pd.read_csv('data/fdata.csv')
@@ -83,8 +82,9 @@ def display_chart(kind, metric_col,
         return st.pyplot(chart_categorical_data(yoy, hoh, metric_col, ct_method, ct_show_change))
 
 display_text(None, 'intro_body', 'intro_title')
-
+display_text(None, 'last_update')
 ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed', format_func=lambda x:tickers[x])
+
 
 placeholder = st.empty()
 
