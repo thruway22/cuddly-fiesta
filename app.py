@@ -83,7 +83,7 @@ def display_chart(kind, metric_col,
 
 display_text(None, 'intro_body', 'intro_title')
 #st.write(display_text(None, 'last_update'))
-st.markdown(f'<p>{texts.loc['last_update'].value}:{last_update}</p>', unsafe_allow_html=True)
+st.markdown(f'<p>{texts.loc["last_update"].value}:{last_update}</p>', unsafe_allow_html=True)
 ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed', format_func=lambda x:tickers[x])
 
 
