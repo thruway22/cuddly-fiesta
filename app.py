@@ -65,7 +65,7 @@ def display_metric(metric1, metric1_fmt, metric1_label,
                    metric2, metric2_fmt, metric2_label,
                    metric3, metric3_fmt, metric3_label):
      fmt_dict = {
-         'currency': 'SAR',
+         'currency': ' SAR',
          'percent': '%',
          'multiple': 'x'
      }   
