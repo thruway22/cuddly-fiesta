@@ -45,6 +45,10 @@ sector_data = get_sector_data(fdata, pdata, tickers_dict)
 texts = pd.read_csv('data/texts.csv', encoding='utf8', index_col='id')
   
 def display_text(**kwargs):
+    
+    '''
+    takes title, header, body, footnote
+    '''
      
     global texts
     output = ''
