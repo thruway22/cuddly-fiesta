@@ -61,12 +61,22 @@ def display_text(**kwargs):
 def display_divider():
     return st.markdown('<hr />', unsafe_allow_html=True)
 
-def display_metric(ticker_metric, sector_metric, fmt):
-     fmt_dict = {'p': '%', 'm': 'x'} #style="direction: rtl; text-align:center"    
-     output = f'''<div id="metric_block"><p id="metric_value">{ticker_metric:.2f}{fmt_dict[fmt]}</p>
-                  <p id="metric_label">{texts.loc['ticker_label'].value}</p>
-                  <p id="metric_value">{sector_metric:.2f}{fmt_dict[fmt]}</p>
-                  <p id="metric_label">{texts.loc['sector_label'].value}</p></div>'''
+def display_metric(metric1, metric1_fmt, metric1_label,
+                   metric2, metric2_fmt, metric2_label,
+                   metric3, metric3_fmt, metric3_label):
+     fmt_dict = {
+         'currency': 'SAR',
+         'percent': '%',
+         'multiple': 'x'
+     }   
+     output = f'''<div id="metric_block">
+                  <p id="metric_value">{metric1:.2f}{fmt_dict[metric1_fmt]}</p>
+                  <p id="metric_label">{texts.loc['metric1_label'].value}</p>
+                  <p id="metric_value">{metric2:.2f}{fmt_dict[metric2_fmt]}</p>
+                  <p id="metric_label">{texts.loc['metric2_label'].value}</p>
+                  <p id="metric_value">{metric3:.2f}{fmt_dict[metric3_fmt]}</p>
+                  <p id="metric_label">{texts.loc['metric3_label'].value}</p>
+                  </div>'''
      return st.markdown(output, unsafe_allow_html=True)
 
 def display_chart(kind, metric_col,
@@ -90,8 +100,6 @@ if ticker == 9999:
 else:
     ticker_data = get_ticker_data(fdata, pdata, ticker)
     yoy, hoh = get_categorical_data(fdata, ticker)
-    
-    
             
     ticker_yield = ticker_data['yield'].median()
     ticker_pffo = ticker_data['pffo'].median()
@@ -101,18 +109,21 @@ else:
             
     with placeholder.container():
         display_text(header='price_header', body='price_body')
-        ticker_current_price = ticker_data['price'][-1]
-        ticker_current_nav = ticker_data['nav'][-1]
-        display_metric(ticker_current_price, ticker_current_nav, 'p')
+        #ticker_current_price = ticker_data['price'][-1]
+        #ticker_current_nav = ticker_data['nav'][-1]
+        #ticker_current_nav = ticker_data['navpd'][-1]
+        display_metric(ticker_data['navpd'][-1], 'percent', 'navpd_label',
+                       ticker_data['nav'][-1], 'currency', 'nav_label',
+                       ticker_data['price'][-1], 'currency', 'price_label')
         display_chart('ts', 'price')
         
         
         display_chart('ts', 'navpd', ts_relative_plot=False)
         display_divider()
-        display_metric(ticker_yield, sector_yield, 'p')
+        #display_metric(ticker_yield, sector_yield, 'p')
         display_chart('ts', 'yield')
         display_divider()
-        display_metric(ticker_pffo, sector_pffo, 'm')
+        #display_metric(ticker_pffo, sector_pffo, 'm')
         display_chart('ts', 'pffo')
         
         col11, col12 = st.columns(2)
