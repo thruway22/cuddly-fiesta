@@ -47,6 +47,7 @@ button[title="View fullscreen"]:hover {
   transform: translateX(-50%);
   border-radius: 5px;
   border-bottom-color: red;
+  border-bottom-width: 10px;
   background-color: #E7EFF8;
   padding: 5px;
   direction: rtl;
