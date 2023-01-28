@@ -36,7 +36,7 @@ button[title="View fullscreen"]:hover {
 }
 
 #metric_block{
-  column-count: 2;
+  column-count: 3;
 }
 
 #metric_value {
