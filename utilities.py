@@ -180,7 +180,7 @@ def chart_timeseries_data(ticker_data, sector_data, metric_col, relative_plot=Fa
     x = ticker_data[metric_col].tail(1).index[0]
     y = ticker_data[metric_col][-1]
     
-    '''# add a bit of a margin to right a-axis
+    # add a bit of a margin to right a-axis
     ax.set_xlim(right= x + timedelta(days=330))
     
     # mark current value on chart, cord:(year, last point)
@@ -190,7 +190,7 @@ def chart_timeseries_data(ticker_data, sector_data, metric_col, relative_plot=Fa
     plt.annotate(var_dict['unit'][metric_col].format(value=y),
              xy=(x, y), xytext=(7, -3), size=10,
              xycoords=('data', 'data'), textcoords='offset points',
-             bbox=dict(boxstyle="round, pad=0.3", fc="#0068c9", lw=0, alpha=0.10))'''
+             bbox=dict(boxstyle="round, pad=0.3", fc="#0068c9", lw=0, alpha=0.10))
     
     if relative_plot == True:
         ax.plot(var_dict['relative_plot'][metric_col],
