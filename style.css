@@ -28,6 +28,13 @@ button[title="View fullscreen"]:hover {
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+#body {
+  direction: rtl;
+  text-align:justify;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 9px;
+}
+
 #metric_block{
   column-count: 2;
 }
