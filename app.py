@@ -51,12 +51,12 @@ def display_text(**kwargs):
     '''
      
     global texts
-    output = ''
     
+    output = ''
     for i in kwargs.keys():
         output += f'<p id="{i}">{texts.loc[kwargs[i]].value}</p>'
                 
-    return output
+    return st.markdown(output, unsafe_allow_html=True)
 
 def display_divider():
     return st.markdown('<hr />', unsafe_allow_html=True)
