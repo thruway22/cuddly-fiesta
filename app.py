@@ -82,7 +82,7 @@ def display_chart(kind, metric_col,
         return st.pyplot(chart_categorical_data(yoy, hoh, metric_col, ct_method, ct_show_change))
 
 display_text(None, 'intro_body', 'intro_title')
-display_text(None, 'last_update')
+st.write(display_text(None, 'last_update'))
 ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed', format_func=lambda x:tickers[x])
 
 
