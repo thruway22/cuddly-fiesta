@@ -150,7 +150,7 @@ else:
             display_text(header='coverage_header', body='coverage_body')
             
         display_divider()
-        display_text(footnote='last_update')
+        display_text(footnote='footnote')
             
             
             
