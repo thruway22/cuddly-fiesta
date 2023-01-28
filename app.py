@@ -44,20 +44,15 @@ sector_data = get_sector_data(fdata, pdata, tickers_dict)
 
 texts = pd.read_csv('data/texts.csv', encoding='utf8', index_col='id')
   
-def display_text(header=None, body=None, title=None):
+def display_text(**kwargs):
+     
     global texts
     output = ''
     
-    if title != None:
-        output = output + f'<p id="title">{texts.loc[title].value}</p>'
-
-    if header != None:
-        output = output + f'<p id="header">{texts.loc[header].value}</p>'
-            
-    if body != None:
-        output = output + f'<p id="body">{texts.loc[body].value}</p>' 
+    for i in kwargs.keys():
+        output += f'<p id="{i}">{texts.loc[kwargs[i]].value}</p>'
                 
-    return st.markdown(output, unsafe_allow_html=True)
+    return output
 
 def display_divider():
     return st.markdown('<hr />', unsafe_allow_html=True)
@@ -81,7 +76,7 @@ def display_chart(kind, metric_col,
     if kind == 'ct':
         return st.pyplot(chart_categorical_data(yoy, hoh, metric_col, ct_method, ct_show_change))
 
-display_text(body='intro_body', title='intro_title')
+display_text(title='intro_title', body='intro_body')
 ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed', format_func=lambda x:tickers[x])
 
 placeholder = st.empty()
@@ -99,7 +94,7 @@ else:
     sector_pffo = sector_data.tail(1)['pffo'][0]
             
     with placeholder.container():
-        display_text('price_header', 'price_body')
+        display_text(header='price_header', body='price_body')
         display_chart('ts', 'price')
         display_chart('ts', 'navpd', ts_relative_plot=False)
         display_divider()
@@ -113,42 +108,42 @@ else:
         with col11:
             display_divider()
             display_chart('ct', 'ffos')
-            display_text('ffos_header', 'ffos_body')
+            display_text(header='ffos_header', body='ffos_body')
         with col12:
             display_divider()
             display_chart('ct', 'ffo_payout')
-            display_text('ffo_payout_header', 'ffo_payout_body')
+            display_text(header='ffo_payout_header', body='ffo_payout_body')
             
         col21, col22 = st.columns(2)
         with col21:
             display_divider()
             display_chart('ct', 'asset')
-            display_text('asset_header', 'asset_body')
+            display_text(header='asset_header', body='asset_body')
         with col22:
             display_divider()
             display_chart('ct', 'revenue')
-            display_text('revenue_header', 'revenue_body')
+            display_text(header='revenue_header', body='revenue_body')
             
 
         col31, col32 = st.columns(2)
         with col31:
             display_divider()
             display_chart('ct', 'roic')
-            display_text('roic_header', 'roic_body')
+            display_text(header='roic_header', body='roic_body')
         with col32:
             display_divider()
             display_chart('ct', 'op_margin')
-            display_text('op_margin_header', 'op_margin_body')
+            display_text(header='op_margin_header', body='op_margin_body')
             
         col41, col42 = st.columns(2)
         with col41:
             display_divider()
             display_chart('ct', 'net_debt_ebitda')
-            display_text('net_debt_ebitda_header', 'net_debt_ebitda_body')
+            display_text(header='net_debt_ebitda_header', body='net_debt_ebitda_body')
         with col42:
             display_divider()
             display_chart('ct', 'coverage')
-            display_text('coverage_header', 'coverage_body')
+            display_text(header='coverage_header', body='coverage_body')
             
         display_divider()
         display_text(body='last_update')
