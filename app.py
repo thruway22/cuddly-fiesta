@@ -83,9 +83,6 @@ def display_chart(kind, metric_col,
 
 display_text(body='intro_body', title='intro_title')
 ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed', format_func=lambda x:tickers[x])
-display_divider()
-display_text(body='last_update')
-
 
 placeholder = st.empty()
 
@@ -152,6 +149,9 @@ else:
             display_divider()
             display_chart('ct', 'coverage')
             display_text('coverage_header', 'coverage_body')
+            
+        display_divider()
+        display_text(body='last_update')
             
             
             
