@@ -55,7 +55,7 @@ def display_text(header=None, body=None, title=None):
         output = output + f'<p id="header">{texts.loc[header].value}</p>'
             
     if body != None:
-        output = output + f'<p id="body">{texts.loc[body].value}</p>'               
+        output = output + f'<p id="body">{texts.loc[body].value}</p>' 
                 
     return st.markdown(output, unsafe_allow_html=True)
 
@@ -82,7 +82,8 @@ def display_chart(kind, metric_col,
         return st.pyplot(chart_categorical_data(yoy, hoh, metric_col, ct_method, ct_show_change))
 
 display_text(None, 'intro_body', 'intro_title')
-st.write(display_text(None, 'last_update'))
+#st.write(display_text(None, 'last_update'))
+st.markdown(f'<p>{texts.loc['last_update'].value}:{last_update}</p>', unsafe_allow_html=True)
 ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed', format_func=lambda x:tickers[x])
 
 
