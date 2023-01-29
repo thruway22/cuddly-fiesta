@@ -166,6 +166,7 @@ def chart_timeseries_data(ticker_data, sector_data, metric_col, relative_plot=Fa
                         where=(y_curve < 0), color='#09ab3b', alpha=0.15)
         
         ax2.set_frame_on(False)
+        ax1.get_xaxis().set_visible(False)
         
         
     else:
