@@ -6,7 +6,7 @@ button[title="View fullscreen"]:hover {
   visibility: hidden;
 }
 
-hr {
+.hr {
   content: "";
 	position: absolute;
 	z-index: 1;
