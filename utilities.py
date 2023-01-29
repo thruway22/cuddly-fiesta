@@ -154,7 +154,7 @@ def chart_timeseries_data(ticker_data, sector_data, metric_col, relative_plot=Fa
         ax1.plot(ticker_data['price'], linewidth=1, color='lightgrey', alpha=1)
         ax1.plot(ticker_data['nav'], linewidth=1, color='#0068c9', alpha=1)
         
-        xy = ticker_data[metric_col]
+        xy = ticker_data['navpd']
         x_curve = xy.index
         y_curve = xy.values
         
