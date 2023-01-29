@@ -146,13 +146,15 @@ def chart_timeseries_data(ticker_data, sector_data, metric_col, relative_plot=Fa
         }
     }
         
-    fig, ax = plt.subplots(figsize=(6.4, 1.4))
+    
     
     if metric_col == 'price':
-        ax.plot(ticker_data['price'], linewidth=1, color='lightgrey', alpha=1)
-        ax.plot(ticker_data['nav'], linewidth=1, color='#0068c9', alpha=1)
+        fig, (ax1 ,ax2) = plt.subplots(2, 1, figsize=(6.4, 2.8), sharex=True)
+        ax1.plot(ticker_data['price'], linewidth=1, color='lightgrey', alpha=1)
+        ax2.plot(ticker_data['nav'], linewidth=1, color='#0068c9', alpha=1)
         
     else:
+        fig, ax = plt.subplots(figsize=(6.4, 1.4))
         if metric_col == 'navpd':
             xy = ticker_data[metric_col]
             
