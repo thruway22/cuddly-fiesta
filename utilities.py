@@ -128,7 +128,7 @@ def get_sector_data(fdata, pdata, tickers_dict, yield_col='yield', pffo_col='pff
 def chart_timeseries_data(ticker_data, sector_data, metric_col, relative_plot=False):
     
     # set defult font and colors
-    plt.rcParams['font.size'] = 8
+    plt.rcParams['font.size'] = 7
     plt.rcParams['font.family'] = "sans-serif"
     plt.rcParams['text.color'] = "262730"
     plt.rcParams['xtick.color'] = '262730'
@@ -166,6 +166,7 @@ def chart_timeseries_data(ticker_data, sector_data, metric_col, relative_plot=Fa
                         where=(y_curve < 0), color='#09ab3b', alpha=0.15)
         
         ax2.set_frame_on(False)
+        ax2.get_yaxis().set_visible(False)
         ax1.get_xaxis().set_visible(False)
         
         
