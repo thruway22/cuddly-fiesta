@@ -120,8 +120,8 @@ else:
             
         with tab02:
             display_text(header='yield_header', body='yield_body')
-            display_metric(((ticker_data.tail(1)['yield'][0] / ticker_data.['yield'].median()) - 1) * 100 , 'percent', 'pd_label',
-                           ticker_data.['yield'].median(), 'percent', 'sector_yield_label',
+            display_metric(((ticker_data.tail(1)['yield'][0] / ticker_data['yield'].median()) - 1) * 100 , 'percent', 'pd_label',
+                           ticker_data['yield'].median(), 'percent', 'sector_yield_label',
                            ticker_data.tail(1)['yield'][0], 'percent', 'ticker_yield_label')
             display_chart('ts', 'yield')
         
