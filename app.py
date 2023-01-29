@@ -110,20 +110,17 @@ else:
         display_chart('ts', 'price')
         
         
-        tab01, tab02 = st.tabs(["مقارنة بوسيط القطاع الحالي", "مقارنة بوسيط الصندوق التاريخي"])
-        with tab01:
-            display_text(header='yield_header', body='yield_body')
-            display_metric(((ticker_data.tail(1)['yield'][0] / sector_data.tail(1)['yield'][0]) - 1) * 100 , 'percent', 'pd_label',
-                           sector_data.tail(1)['yield'][0], 'percent', 'sector_yield_label',
-                           ticker_data.tail(1)['yield'][0], 'percent', 'ticker_yield_label')
-            display_chart('ts', 'yield', ts_relative_plot='sector')
+      
+        display_text(header='yield_header', body='yield_body')
+        display_metric(((ticker_data.tail(1)['yield'][0] / sector_data.tail(1)['yield'][0]) - 1) * 100 , 'percent', 'pd_label',
+                       sector_data.tail(1)['yield'][0], 'percent', 'sector_yield_label',
+                       ticker_data.tail(1)['yield'][0], 'percent', 'ticker_yield_label')
+        display_chart('ts', 'yield', ts_relative_plot='sector')
             
-        with tab02:
-            display_text(header='yield_header', body='yield_body')
-            display_metric(((ticker_data.tail(1)['yield'][0] / ticker_data['yield'].median()) - 1) * 100 , 'percent', 'pd_label',
-                           ticker_data['yield'].median(), 'percent', 'sector_yield_label',
-                           ticker_data.tail(1)['yield'][0], 'percent', 'ticker_yield_label')
-            display_chart('ts', 'yield', ts_relative_plot='ticker')
+        display_metric(((ticker_data.tail(1)['yield'][0] / ticker_data['yield'].median()) - 1) * 100 , 'percent', 'pd_label',
+                       ticker_data['yield'].median(), 'percent', 'sector_yield_label',
+                       ticker_data.tail(1)['yield'][0], 'percent', 'ticker_yield_label')
+        display_chart('ts', 'yield', ts_relative_plot='ticker')
         
         #display_divider()
         
