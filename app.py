@@ -110,7 +110,7 @@ else:
         display_chart('ts', 'price')
         
         
-        tab01, tab02 = st.tabs(["مقارنة بالقطاع", "مقارنة بالصندوق"])
+        tab01, tab02 = st.tabs(["مقارنة بوسيط القطاع الحالي", "مقارنة بوسيط الصندوق التاريخي"])
         with tab01:
             display_text(header='yield_header', body='yield_body')
             display_metric(((ticker_data.tail(1)['yield'][0] / sector_data.tail(1)['yield'][0]) - 1) * 100 , 'percent', 'pd_label',
