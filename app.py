@@ -109,14 +109,17 @@ else:
                        ticker_data['price'][-1], 'currency', 'price_label')
         display_chart('ts', 'price')
         
-        
-        
-        display_divider()
         display_text(header='yield_header', body='yield_body')
-        display_metric(((ticker_data.tail(1)['yield'][0] / sector_data.tail(1)['yield'][0]) - 1) * 100 , 'percent', 'pd_label',
-                       sector_data.tail(1)['yield'][0], 'percent', 'sector_yield_label',
-                       ticker_data.tail(1)['yield'][0], 'percent', 'ticker_yield_label')
-        display_chart('ts', 'yield')
+        tab01, tab02 = st.tabs(["مقارنة بالقطاع", "مقارنة بالصندوق"])
+        with tab01:
+            display_metric(((ticker_data.tail(1)['yield'][0] / sector_data.tail(1)['yield'][0]) - 1) * 100 , 'percent', 'pd_label',
+                           sector_data.tail(1)['yield'][0], 'percent', 'sector_yield_label',
+                           ticker_data.tail(1)['yield'][0], 'percent', 'ticker_yield_label')
+            display_chart('ts', 'yield')
+        
+        #display_divider()
+        
+        
         
         
         display_divider()
