@@ -101,7 +101,7 @@ def get_ticker_data(fdata, pdata, ticker):
     # compute output metrics
     df['yield'] = 100 * (abs(df[dividend_col]) / df[shares_col]) / df['price']
     df['pffo'] = (df['price'] * df[shares_col]) / df[ffo_col]
-    df['navpd'] = ((df['price'] / df[nav_col]) - 1) * 100    
+    df['navpd'] = ((df['price'] / df[nav_col]) - 1) * 100
     
     # take only needed columns
     df = df[['price', nav_col, 'navpd', 'yield', 'pffo']] 
@@ -207,9 +207,10 @@ def chart_timeseries_data(ticker_data, sector_data, metric_col, relative_plot=Fa
                  bbox=dict(boxstyle="round, pad=0.3", fc="#f0f2f6", lw=0))'''
         
         
-    if metric_col == 'navpd':
-        x_curve = ticker_data[metric_col].index
-        y_curve = ticker_data[metric_col].values
+    if metric_col == 'pffo' :
+        xy = ((ticker_data[metric_col] / sector_data[metric_col]) - 1) * 100
+        x_curve = xy.index
+        y_curve = xy.values
         ax.fill_between(x_curve, y_curve,
                         where=(y_curve > 0), color='#ff2b2b', alpha=0.15)
         ax.fill_between(x_curve, y_curve,
