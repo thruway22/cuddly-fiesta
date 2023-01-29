@@ -167,7 +167,7 @@ def chart_timeseries_data(ticker_data, sector_data, metric_col, relative_plot=Fa
     fig, ax = plt.subplots(
         figsize=var_dict['figsize'][metric_col])
     
-    if metric_col == 'pffo':
+    if metric_col == 'pffo' or metric_col == 'yield':
         xy = ((ticker_data[metric_col] / sector_data[metric_col]) - 1) * 100
         ax.plot(xy, color='#0068c9', alpha=0.2,
                 linewidth=var_dict['linewidth'][metric_col])
