@@ -80,7 +80,7 @@ def display_metric(metric1, metric1_fmt, metric1_label,
      return st.markdown(output, unsafe_allow_html=True)
 
 def display_chart(kind, metric_col,
-                  ts_relative_plot=True, ct_method='yoy', ct_show_change=True):
+                  ts_relative_plot=None, ct_method='yoy', ct_show_change=True):
     global ticker_data
     global sector_data
     global yoy
@@ -116,14 +116,14 @@ else:
             display_metric(((ticker_data.tail(1)['yield'][0] / sector_data.tail(1)['yield'][0]) - 1) * 100 , 'percent', 'pd_label',
                            sector_data.tail(1)['yield'][0], 'percent', 'sector_yield_label',
                            ticker_data.tail(1)['yield'][0], 'percent', 'ticker_yield_label')
-            display_chart('ts', 'yield')
+            display_chart('ts', 'yield', ts_relative_plot='sector')
             
         with tab02:
             display_text(header='yield_header', body='yield_body')
             display_metric(((ticker_data.tail(1)['yield'][0] / ticker_data['yield'].median()) - 1) * 100 , 'percent', 'pd_label',
                            ticker_data['yield'].median(), 'percent', 'sector_yield_label',
                            ticker_data.tail(1)['yield'][0], 'percent', 'ticker_yield_label')
-            display_chart('ts', 'yield')
+            display_chart('ts', 'yield', ts_relative_plot='ticker')
         
         #display_divider()
         
