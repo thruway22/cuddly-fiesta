@@ -134,12 +134,12 @@ def chart_timeseries_data(ticker_data, sector_data, metric_col, relative_plot=Fa
     plt.rcParams['xtick.color'] = '262730'
     
     color_dict = {
-        'more_than_zero' = {
+        'more_than_zero': {
             'navpd': '#ff2b2b',
             'pffo': '#ff2b2b',
             'yield': '#09ab3b'
         },
-        'less_than_zero' = {
+        'less_than_zero': {
             'navpd': '#09ab3b',
             'pffo': '#09ab3b',
             'yield': '#ff2b2b'
