@@ -112,19 +112,21 @@ else:
         
         
         display_divider()
-        display_text(header='yield_header', body='yield_body')
+        display_text(header='yield_header')
         display_metric(((ticker_data.tail(1)['yield'][0] / sector_data.tail(1)['yield'][0]) - 1) * 100 , 'percent', 'pd_label',
                        sector_data.tail(1)['yield'][0], 'percent', 'sector_yield_label',
                        ticker_data.tail(1)['yield'][0], 'percent', 'ticker_yield_label')
         display_chart('ts', 'yield')
+        display_text(body='yield_body')
         
         
         display_divider()
-        display_text(header='pffo_header', body='pffo_body')
+        display_text(header='pffo_header')
         display_metric(((ticker_data.tail(1)['pffo'][0] / sector_data.tail(1)['pffo'][0]) - 1) * 100 , 'percent', 'pd_label',
                        sector_data.tail(1)['pffo'][0], 'multiple', 'sector_pffo_label',
                        ticker_data.tail(1)['pffo'][0], 'multiple', 'ticker_pffo_label')
         display_chart('ts', 'pffo')
+        display_text(body='pffo_body')
         
         
         col11, col12 = st.columns(2)
