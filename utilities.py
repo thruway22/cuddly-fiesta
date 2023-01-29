@@ -150,8 +150,21 @@ def chart_timeseries_data(ticker_data, sector_data, metric_col, relative_plot=Fa
     
     if metric_col == 'price':
         fig, (ax1 ,ax2) = plt.subplots(2, 1, figsize=(6.4, 2.8), sharex=True)
+        
         ax1.plot(ticker_data['price'], linewidth=1, color='lightgrey', alpha=1)
-        ax2.plot(ticker_data['nav'], linewidth=1, color='#0068c9', alpha=1)
+        ax1.plot(ticker_data['nav'], linewidth=1, color='#0068c9', alpha=1)
+        
+        xy = ticker_data[metric_col]
+        x_curve = xy.index
+        y_curve = xy.values
+        
+        ax2.plot(xy, color='#0068c9', linewidth=0)
+    
+        ax2.fill_between(x_curve, y_curve,
+                        where=(y_curve > 0), color=color_dict['more_than_zero'][metric_col], alpha=0.15)
+        ax2.fill_between(x_curve, y_curve,
+                        where=(y_curve < 0), color=color_dict['less_than_zero'][metric_col], alpha=0.15)
+        
         
     else:
         fig, ax1 = plt.subplots(figsize=(6.4, 1.4))
