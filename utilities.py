@@ -162,13 +162,32 @@ def chart_timeseries_data(ticker_data, sector_data, metric_col, relative_plot=Fa
         },
     }
     
-    linewidth = 0 if metric_col == 'navpd' else 1
-    
     fig, ax = plt.subplots(
         figsize=var_dict['figsize'][metric_col])
     
-    ax.plot(ticker_data[metric_col], color='#0068c9', alpha=1,
-            linewidth=var_dict['linewidth'][metric_col])
+    if metric_col == 'price':
+        ax.plot(ticker_data[metric_col], color='#0068c9', alpha=1,
+            linewidth=1)
+        
+        ax.plot(var_dict['relative_plot'][metric_col],
+                linewidth=1, color='#0068c9', alpha=0.2)
+        
+    else:
+        if metric_col == 'navpd':
+            xy = ticker_data[metric_col]
+            
+        if metric_col == 'yield' or metric_col == 'pffo':
+            xy = ((ticker_data[metric_col] / sector_data[metric_col]) - 1) * 100
+            
+        x_curve = xy.index
+        y_curve = xy.values
+        
+        ax.plot(ticker_data[metric_col], color='#0068c9', linewidth=0)
+    
+        ax.fill_between(x_curve, y_curve,
+                        where=(y_curve > 0), color='#ff2b2b', alpha=0.15)
+        ax.fill_between(x_curve, y_curve,
+                        where=(y_curve < 0), color='#09ab3b', alpha=0.15)
         
     # format datetime on xaxis
     formatter = mdates.DateFormatter("%Y")
@@ -176,46 +195,8 @@ def chart_timeseries_data(ticker_data, sector_data, metric_col, relative_plot=Fa
     ax.xaxis.set_major_formatter(formatter)
     ax.xaxis.set_major_locator(locator)
     
-    # get coordinates of current/last point (year, value)
-    x = ticker_data[metric_col].tail(1).index[0]
-    y = ticker_data[metric_col][-1]
-    
     # add a bit of a margin to right a-axis
     ax.set_xlim(right= x + timedelta(days=330))
-    
-    # mark current value on chart, cord:(year, last point)
-    ax.plot(x, y, color='#f63366', **{'marker': '.'})
-
-    # annotate current value on chart, cord:()
-    plt.annotate(var_dict['unit'][metric_col].format(value=y),
-             xy=(x, y), xytext=(7, -3), size=10,
-             xycoords=('data', 'data'), textcoords='offset points',
-             bbox=dict(boxstyle="round, pad=0.3", fc="#0068c9", lw=0, alpha=0.10))
-    
-    if relative_plot == True:
-        ax.plot(var_dict['relative_plot'][metric_col],
-                linewidth=1, color='#0068c9', alpha=0.2)
-        
-        # get coordinates of current/last point (year, value)
-        '''x2 = var_dict['relative_plot'][metric_col].tail(1).index[0]
-        y2 = var_dict['relative_plot'][metric_col][-1]
-        ax.plot(x2, y2, color='#09ab3b', **{'marker': '.'})
-        # annotate current value on chart, cord:()
-        plt.annotate(var_dict['unit'][metric_col].format(value=y2),
-                 xy=(x2, y2), xytext=(7, -3), 
-                 xycoords=('data', 'data'), textcoords='offset points',
-                 bbox=dict(boxstyle="round, pad=0.3", fc="#f0f2f6", lw=0))'''
-        
-        
-    if metric_col == 'navpd':
-        x_curve = ticker_data[metric_col].index
-        y_curve = ticker_data[metric_col].values
-        ax.fill_between(x_curve, y_curve,
-                        where=(y_curve > 0), color='#ff2b2b', alpha=0.15)
-        ax.fill_between(x_curve, y_curve,
-                        where=(y_curve < 0), color='#09ab3b', alpha=0.15)
-        
-        #ax.get_yaxis().set_visible(True)
     
     # hide y-axis
     ax.get_yaxis().set_visible(False)
