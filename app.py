@@ -141,16 +141,26 @@ else:
                            ticker_data.tail(1)['pffo'][0], 'multiple', 'ticker_pffo_label')
             display_chart('ts', 'pffo', ts_relative_plot='ticker')
         
-        
+        # ct_method='yoy'
         col11, col12 = st.columns(2)
         with col11:
             display_divider()
-            display_chart('ct', 'ffos')
-            display_text(header='ffos_header', body='ffos_body')
+            tab05, tab06 = st.tabs(['سنوي', 'نصفي'])
+            with tab05:            
+                display_chart('ct', 'ffos')
+                display_text(header='ffos_header', body='ffos_body')
+            with tab06:            
+                display_chart('ct', 'ffos')
+                display_text(header='ffos_header', body='ffos_body', ct_method='yoy')
         with col12:
             display_divider()
-            display_chart('ct', 'ffo_payout')
-            display_text(header='ffo_payout_header', body='ffo_payout_body')
+            tab07, tab08 = st.tabs(['سنوي', 'نصفي'])
+            with tab07:
+                display_chart('ct', 'ffo_payout')
+                display_text(header='ffo_payout_header', body='ffo_payout_body')
+            with tab08:
+                display_chart('ct', 'ffo_payout')
+                display_text(header='ffo_payout_header', body='ffo_payout_body', ct_method='yoy')
             
         col21, col22 = st.columns(2)
         with col21:
