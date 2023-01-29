@@ -154,7 +154,7 @@ def chart_timeseries_data(ticker_data, sector_data, metric_col, relative_plot=Fa
         ax2.plot(ticker_data['nav'], linewidth=1, color='#0068c9', alpha=1)
         
     else:
-        fig, ax = plt.subplots(figsize=(6.4, 1.4))
+        fig, ax1 = plt.subplots(figsize=(6.4, 1.4))
         if metric_col == 'navpd':
             xy = ticker_data[metric_col]
             
@@ -164,11 +164,11 @@ def chart_timeseries_data(ticker_data, sector_data, metric_col, relative_plot=Fa
         x_curve = xy.index
         y_curve = xy.values
         
-        ax.plot(ticker_data[metric_col], color='#0068c9', linewidth=0)
+        ax1.plot(ticker_data[metric_col], color='#0068c9', linewidth=0)
     
-        ax.fill_between(x_curve, y_curve,
+        ax1.fill_between(x_curve, y_curve,
                         where=(y_curve > 0), color=color_dict['more_than_zero'][metric_col], alpha=0.15)
-        ax.fill_between(x_curve, y_curve,
+        ax1.fill_between(x_curve, y_curve,
                         where=(y_curve < 0), color=color_dict['less_than_zero'][metric_col], alpha=0.15)
         
     # format datetime on xaxis
@@ -181,7 +181,7 @@ def chart_timeseries_data(ticker_data, sector_data, metric_col, relative_plot=Fa
     #ax.set_xlim(right= x + timedelta(days=330))
     
     # hide y-axis
-    ax.get_yaxis().set_visible(False)
+    ax1.get_yaxis().set_visible(False)
     
     # hide framebox
     plt.box(False)
