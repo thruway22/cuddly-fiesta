@@ -102,11 +102,12 @@ else:
     yoy, hoh = get_categorical_data(fdata, ticker)
              
     with placeholder.container():
-        display_text(header='price_header', body='price_body')
+        display_divider()
         display_metric(ticker_data['navpd'][-1], 'percent', 'navpd_label',
                        ticker_data['nav'][-1], 'currency', 'nav_label',
                        ticker_data['price'][-1], 'currency', 'price_label')
         display_chart('ts', 'price')
+        display_text(header='price_header', body='price_body')
         
         
         display_divider()
