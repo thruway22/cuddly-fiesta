@@ -169,7 +169,7 @@ def chart_timeseries_data(ticker_data, sector_data, metric_col, relative_plot=Fa
     
     if metric_col == 'pffo':
         xy = ((ticker_data[metric_col] / sector_data[metric_col]) - 1) * 100
-        ax.plot(xy, color='#0068c9', alpha=1,
+        ax.plot(xy, color='#0068c9', alpha=0.2,
                 linewidth=var_dict['linewidth'][metric_col])
         x_curve = xy.index
         y_curve = xy.values
