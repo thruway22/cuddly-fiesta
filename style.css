@@ -6,6 +6,19 @@ button[title="View fullscreen"]:hover {
   visibility: hidden;
 }
 
+hr {
+  content: "";
+	position: absolute;
+	z-index: 1;
+	top: -6px;
+	left: calc(50% - 7px);
+	width: 14px;
+	height: 12px;
+	background-color: white;
+	border-left: 1px solid rgb(48,49,51);
+	border-right: 1px solid rgb(48,49,51);
+}
+
 #title {
   direction: rtl;
   text-align: justify;
