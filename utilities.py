@@ -167,8 +167,20 @@ def chart_timeseries_data(ticker_data, sector_data, metric_col, relative_plot=Fa
     fig, ax = plt.subplots(
         figsize=var_dict['figsize'][metric_col])
     
-    ax.plot(ticker_data[metric_col], color='#0068c9', alpha=1,
-            linewidth=var_dict['linewidth'][metric_col])
+    if metric_col == 'pffo':
+        xy = ((ticker_data[metric_col] / sector_data[metric_col]) - 1) * 100
+        ax.plot(xy, color='#0068c9', alpha=1,
+                linewidth=var_dict['linewidth'][metric_col])
+        x_curve = xy.index
+        y_curve = xy.values
+        ax.fill_between(x_curve, y_curve,
+                        where=(y_curve > 0), color='#ff2b2b', alpha=0.15)
+        ax.fill_between(x_curve, y_curve,
+                        where=(y_curve < 0), color='#09ab3b', alpha=0.15)
+        
+    else:
+        ax.plot(ticker_data[metric_col], color='#0068c9', alpha=1,
+                linewidth=var_dict['linewidth'][metric_col])
         
     # format datetime on xaxis
     formatter = mdates.DateFormatter("%Y")
@@ -192,9 +204,9 @@ def chart_timeseries_data(ticker_data, sector_data, metric_col, relative_plot=Fa
              xycoords=('data', 'data'), textcoords='offset points',
              bbox=dict(boxstyle="round, pad=0.3", fc="#0068c9", lw=0, alpha=0.10))'''
     
-    if relative_plot == True:
-        ax.plot(var_dict['relative_plot'][metric_col],
-                linewidth=1, color='#f63366', alpha=1)
+    #if relative_plot == True:
+    #    ax.plot(var_dict['relative_plot'][metric_col],
+    #            linewidth=1, color='#f63366', alpha=1)
         
         # get coordinates of current/last point (year, value)
         '''x2 = var_dict['relative_plot'][metric_col].tail(1).index[0]
@@ -207,14 +219,7 @@ def chart_timeseries_data(ticker_data, sector_data, metric_col, relative_plot=Fa
                  bbox=dict(boxstyle="round, pad=0.3", fc="#f0f2f6", lw=0))'''
         
         
-    if metric_col == 'yield':
-        xy = ((ticker_data[metric_col] / sector_data[metric_col]) - 1) * 100
-        x_curve = xy.index
-        y_curve = xy.values
-        ax.fill_between(x_curve, y_curve,
-                        where=(y_curve > 0), color='#ff2b2b', alpha=0.15)
-        ax.fill_between(x_curve, y_curve,
-                        where=(y_curve < 0), color='#09ab3b', alpha=0.15)
+    
         
         #ax.get_yaxis().set_visible(True)
     
