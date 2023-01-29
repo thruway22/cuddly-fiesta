@@ -130,12 +130,21 @@ else:
         
         
         
-        display_divider()
-        display_text(header='pffo_header', body='pffo_body')
-        display_metric(((ticker_data.tail(1)['pffo'][0] / sector_data.tail(1)['pffo'][0]) - 1) * 100 , 'percent', 'pd_label',
-                       sector_data.tail(1)['pffo'][0], 'multiple', 'sector_pffo_label',
-                       ticker_data.tail(1)['pffo'][0], 'multiple', 'ticker_pffo_label')
-        display_chart('ts', 'pffo')
+        #display_divider()
+        tap03, tap04 = st.taps('مقارنة بوسيط القطاع الحالي', 'مقارنة بوسيط الصندوق التاريخي')
+        with tap03:
+            display_text(header='pffo_header', body='pffo_body')
+            display_metric(((ticker_data.tail(1)['pffo'][0] / sector_data.tail(1)['pffo'][0]) - 1) * 100 , 'percent', 'pd_label',
+                           sector_data.tail(1)['pffo'][0], 'multiple', 'sector_pffo_label',
+                           ticker_data.tail(1)['pffo'][0], 'multiple', 'ticker_pffo_label')
+            display_chart('ts', 'pffo', ts_relative_plot='sector')
+            
+        with tap04:
+            display_text(header='pffo_header', body='pffo_body')
+            display_metric(((ticker_data.tail(1)['pffo'][0] / ticker_data['pffo'].median()) - 1) * 100 , 'percent', 'pd_label',
+                           ticker_data['pffo'].median(), 'multiple', 'sector_pffo_label',
+                           ticker_data.tail(1)['pffo'][0], 'multiple', 'ticker_pffo_label')
+            display_chart('ts', 'pffo', ts_relative_plot='ticker')
         
         
         col11, col12 = st.columns(2)
