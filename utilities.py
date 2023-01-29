@@ -196,7 +196,7 @@ def chart_timeseries_data(ticker_data, sector_data, metric_col, relative_plot=Fa
     ax.xaxis.set_major_locator(locator)
     
     # add a bit of a margin to right a-axis
-    ax.set_xlim(right= x + timedelta(days=330))
+    #ax.set_xlim(right= x + timedelta(days=330))
     
     # hide y-axis
     ax.get_yaxis().set_visible(False)
