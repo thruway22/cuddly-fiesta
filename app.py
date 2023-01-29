@@ -100,38 +100,28 @@ if ticker == 9999:
 else:
     ticker_data = get_ticker_data(fdata, pdata, ticker)
     yoy, hoh = get_categorical_data(fdata, ticker)
-            
-    ticker_yield = ticker_data.tail(1)['yield'][0]
-    sector_yield = sector_data.tail(1)['yield'][0]
-    yieldpd = ((ticker_yield / sector_yield) - 1) * 100 
-    
-    ticker_pffo = ticker_data.tail(1)['pffo'][0]
-    sector_pffo = sector_data.tail(1)['pffo'][0]
-    pffopd = ((ticker_pffo / sector_pffo) - 1) * 100 
              
     with placeholder.container():
         display_text(header='price_header', body='price_body')
-        #ticker_current_price = ticker_data['price'][-1]
-        #ticker_current_nav = ticker_data['nav'][-1]
-        #ticker_current_nav = ticker_data['navpd'][-1]
         display_metric(ticker_data['navpd'][-1], 'percent', 'navpd_label',
                        ticker_data['nav'][-1], 'currency', 'nav_label',
                        ticker_data['price'][-1], 'currency', 'price_label')
         display_chart('ts', 'price')
         
         
-        #display_chart('ts', 'navpd', ts_relative_plot=False)
         display_divider()
         display_metric(((ticker_data.tail(1)['yield'][0] / sector_data.tail(1)['yield'][0]) - 1) * 100 , 'percent', 'pd_label',
                        sector_data.tail(1)['yield'][0], 'percent', 'sector_label',
                        ticker_data.tail(1)['yield'][0], 'percent', 'ticker_label')
         display_chart('ts', 'yield')
+        display_text(header='yield_header', body='yield_body')
         
         display_divider()
         display_metric(((ticker_data.tail(1)['pffo'][0] / sector_data.tail(1)['pffo'][0]) - 1) * 100 , 'percent', 'pd_label',
                        sector_data.tail(1)['pffo'][0], 'multiple', 'sector_label',
                        ticker_data.tail(1)['pffo'][0], 'multiple', 'ticker_label')
         display_chart('ts', 'pffo')
+        display_text(header='pffo_header', body='pffo_body')
         
         col11, col12 = st.columns(2)
         with col11:
