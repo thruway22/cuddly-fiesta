@@ -125,7 +125,7 @@ def get_sector_data(fdata, pdata, tickers_dict, yield_col='yield', pffo_col='pff
         
     return df
   
-def chart_timeseries_data(ticker_data, sector_data, metric_col, relative_plot=False):
+def chart_timeseries_data(ticker_data, sector_data, metric_col, relative_plot=None):
     
     # set defult font and colors
     plt.rcParams['font.size'] = 6
@@ -172,11 +172,12 @@ def chart_timeseries_data(ticker_data, sector_data, metric_col, relative_plot=Fa
         
     else:
         fig, ax1 = plt.subplots(figsize=(6.4, 1.4))
-        if metric_col == 'navpd':
-            xy = ticker_data[metric_col]
             
-        if metric_col == 'yield' or metric_col == 'pffo':
+        if relative_plot == 'sector':
             xy = ((ticker_data[metric_col] / sector_data[metric_col]) - 1) * 100
+            
+        if relative_plot == 'ticker':
+            xy = ((ticker_data[metric_col] / ticker_data[metric_col].median()) - 1) * 100
             
         x_curve = xy.index
         y_curve = xy.values
