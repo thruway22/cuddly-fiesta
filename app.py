@@ -80,7 +80,7 @@ def display_metric(metric1, metric1_fmt, metric1_label,
      return st.markdown(output, unsafe_allow_html=True)
 
 def display_chart(kind, metric_col,
-                  ts_relative_plot=None, ct_method='yoy', ct_show_change=True):
+                  ts_relative_plot='sector', ct_method='yoy', ct_show_change=True):
     global ticker_data
     global sector_data
     global yoy
@@ -111,54 +111,28 @@ else:
         
         display_divider()
         display_text(header='yield_header', body='yield_body')
-        tab01, tab02 = st.tabs(['مقارنة بوسيط القطاع الحالي', 'مقارنة بوسيط الصندوق التاريخي'])
-        with tab01:
-            display_metric(((ticker_data.tail(1)['yield'][0] / sector_data.tail(1)['yield'][0]) - 1) * 100 , 'percent', 'pd_label',
-                           sector_data.tail(1)['yield'][0], 'percent', 'sector_yield_label',
-                           ticker_data.tail(1)['yield'][0], 'percent', 'ticker_yield_label')
-            display_chart('ts', 'yield', ts_relative_plot='sector')
-        
-        with tab02:
-            display_metric(((ticker_data.tail(1)['yield'][0] / ticker_data['yield'].median()) - 1) * 100 , 'percent', 'pd_label',
-                           ticker_data['yield'].median(), 'percent', 'sector_yield_label',
-                           ticker_data.tail(1)['yield'][0], 'percent', 'ticker_yield_label')
-            display_chart('ts', 'yield', ts_relative_plot='ticker')
+        display_metric(((ticker_data.tail(1)['yield'][0] / sector_data.tail(1)['yield'][0]) - 1) * 100 , 'percent', 'pd_label',
+                       sector_data.tail(1)['yield'][0], 'percent', 'sector_yield_label',
+                       ticker_data.tail(1)['yield'][0], 'percent', 'ticker_yield_label')
+        display_chart('ts', 'yield')
         
         display_divider()
         display_text(header='pffo_header', body='pffo_body')
-        tab03, tab04 = st.tabs(['مقارنة بوسيط القطاع الحالي', 'مقارنة بوسيط الصندوق التاريخي'])
-        with tab03:
-            display_metric(((ticker_data.tail(1)['pffo'][0] / sector_data.tail(1)['pffo'][0]) - 1) * 100 , 'percent', 'pd_label',
-                           sector_data.tail(1)['pffo'][0], 'multiple', 'sector_pffo_label',
-                           ticker_data.tail(1)['pffo'][0], 'multiple', 'ticker_pffo_label')
-            display_chart('ts', 'pffo', ts_relative_plot='sector')
-            
-        with tab04:
-            display_metric(((ticker_data.tail(1)['pffo'][0] / ticker_data['pffo'].median()) - 1) * 100 , 'percent', 'pd_label',
-                           ticker_data['pffo'].median(), 'multiple', 'sector_pffo_label',
-                           ticker_data.tail(1)['pffo'][0], 'multiple', 'ticker_pffo_label')
-            display_chart('ts', 'pffo', ts_relative_plot='ticker')
+        display_metric(((ticker_data.tail(1)['pffo'][0] / sector_data.tail(1)['pffo'][0]) - 1) * 100 , 'percent', 'pd_label',
+                       sector_data.tail(1)['pffo'][0], 'multiple', 'sector_pffo_label',
+                       ticker_data.tail(1)['pffo'][0], 'multiple', 'ticker_pffo_label')
+        display_chart('ts', 'pffo')
         
-        # ct_method='yoy'
         col11, col12 = st.columns(2)
         with col11:
             display_divider()
             display_text(header='ffos_header', body='ffos_body')
-            tab05, tab06 = st.tabs(['سنوي', 'نصفي'])
-            with tab05:            
-                display_chart('ct', 'ffos')
-            with tab06:            
-                display_chart('ct', 'ffos', ct_method='hoh')
+            display_chart('ct', 'ffos')
 
         with col12:
             display_divider()
             display_text(header='ffo_payout_header', body='ffo_payout_body')
-            tab07, tab08 = st.tabs(['سنوي', 'نصفي'])
-            with tab07:
-                display_chart('ct', 'ffo_payout')
-                
-            with tab08:
-                display_chart('ct', 'ffo_payout', ct_method='hoh')
+            display_chart('ct', 'ffo_payout')
             
         col21, col22 = st.columns(2)
         with col21:
