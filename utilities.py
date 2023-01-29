@@ -133,44 +133,24 @@ def chart_timeseries_data(ticker_data, sector_data, metric_col, relative_plot=Fa
     plt.rcParams['text.color'] = "262730"
     plt.rcParams['xtick.color'] = '262730'
     
-    var_dict = {
-        'figsize': {
-            'price': (6.4, 1.4),
-            'nav': (6.4, 1.4),
-            'navpd': (6.4, 1.4),
-            'yield': (6.4, 1.4),
-            'pffo': (6.4, 1.4),
+    color_dict = {
+        'more_than_zero' = {
+            'navpd': '#ff2b2b',
+            'pffo': '#ff2b2b',
+            'yield': '#09ab3b'
         },
-        'linewidth': {
-            'price': 1,
-            'nav': 1,
-            'navpd': 0,
-            'yield': 1,
-            'pffo': 1,  
-        },
-        'unit': {
-            'price': '{value:0.2f} SAR',
-            'nav': '{value:0.2f} SAR',
-            'navpd': '{value:0.2f}%',
-            'yield': '{value:0.2f}%',
-            'pffo': '{value:0.2f}x',
-        },
-        'relative_plot': {
-            'price': ticker_data['nav'],
-            'yield': sector_data['yield'],
-            'pffo': sector_data['pffo']
-        },
+        'less_than_zero' = {
+            'navpd': '#09ab3b',
+            'pffo': '#09ab3b',
+            'yield': '#ff2b2b'
+        }
     }
-    
-    fig, ax = plt.subplots(
-        figsize=var_dict['figsize'][metric_col])
+        
+    fig, ax = plt.subplots(figsize=(6.4, 1.4))
     
     if metric_col == 'price':
-        ax.plot(ticker_data[metric_col], color='#0068c9', alpha=1,
-            linewidth=1)
-        
-        ax.plot(var_dict['relative_plot'][metric_col],
-                linewidth=1, color='#0068c9', alpha=0.2)
+        ax.plot(ticker_data['price'], linewidth=1, color='lightgrey', alpha=1)
+        ax.plot(ticker_data['nav'], linewidth=1, color='#0068c9', alpha=1)
         
     else:
         if metric_col == 'navpd':
@@ -185,9 +165,9 @@ def chart_timeseries_data(ticker_data, sector_data, metric_col, relative_plot=Fa
         ax.plot(ticker_data[metric_col], color='#0068c9', linewidth=0)
     
         ax.fill_between(x_curve, y_curve,
-                        where=(y_curve > 0), color='#ff2b2b', alpha=0.15)
+                        where=(y_curve > 0), color=color_dict['more_than_zero'][metric_col], alpha=0.15)
         ax.fill_between(x_curve, y_curve,
-                        where=(y_curve < 0), color='#09ab3b', alpha=0.15)
+                        where=(y_curve < 0), color=color_dict['less_than_zero'][metric_col], alpha=0.15)
         
     # format datetime on xaxis
     formatter = mdates.DateFormatter("%Y")
