@@ -194,7 +194,7 @@ def chart_timeseries_data(ticker_data, sector_data, metric_col, relative_plot=Fa
     
     if relative_plot == True:
         ax.plot(var_dict['relative_plot'][metric_col],
-                linewidth=1, color='#0068c9', alpha=0.2)
+                linewidth=1, color='#F75C03', alpha=1)
         
         # get coordinates of current/last point (year, value)
         '''x2 = var_dict['relative_plot'][metric_col].tail(1).index[0]
