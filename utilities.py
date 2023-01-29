@@ -208,20 +208,6 @@ def chart_timeseries_data(ticker_data, sector_data, metric_col, relative_plot=Fa
     #    ax.plot(var_dict['relative_plot'][metric_col],
     #            linewidth=1, color='#f63366', alpha=1)
         
-        # get coordinates of current/last point (year, value)
-        '''x2 = var_dict['relative_plot'][metric_col].tail(1).index[0]
-        y2 = var_dict['relative_plot'][metric_col][-1]
-        ax.plot(x2, y2, color='#09ab3b', **{'marker': '.'})
-        # annotate current value on chart, cord:()
-        plt.annotate(var_dict['unit'][metric_col].format(value=y2),
-                 xy=(x2, y2), xytext=(7, -3), 
-                 xycoords=('data', 'data'), textcoords='offset points',
-                 bbox=dict(boxstyle="round, pad=0.3", fc="#f0f2f6", lw=0))'''
-        
-        
-    
-        
-        #ax.get_yaxis().set_visible(True)
     
     # hide y-axis
     ax.get_yaxis().set_visible(False)
