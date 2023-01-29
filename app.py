@@ -150,7 +150,7 @@ else:
                 display_chart('ct', 'ffos')
                 display_text(header='ffos_header', body='ffos_body')
             with tab06:            
-                display_chart('ct', 'ffos', ct_method='yoy')
+                display_chart('ct', 'ffos', ct_method='hoh')
                 display_text(header='ffos_header', body='ffos_body')
         with col12:
             display_divider()
@@ -159,7 +159,7 @@ else:
                 display_chart('ct', 'ffo_payout')
                 display_text(header='ffo_payout_header', body='ffo_payout_body')
             with tab08:
-                display_chart('ct', 'ffo_payout', ct_method='yoy')
+                display_chart('ct', 'ffo_payout', ct_method='hoh')
                 display_text(header='ffo_payout_header', body='ffo_payout_body')
             
         col21, col22 = st.columns(2)
