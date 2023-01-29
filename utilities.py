@@ -161,9 +161,11 @@ def chart_timeseries_data(ticker_data, sector_data, metric_col, relative_plot=Fa
         ax2.plot(xy, color='#0068c9', linewidth=0)
     
         ax2.fill_between(x_curve, y_curve,
-                        where=(y_curve > 0), color=color_dict['more_than_zero'][metric_col], alpha=0.15)
+                        where=(y_curve > 0), color='#ff2b2b', alpha=0.15)
         ax2.fill_between(x_curve, y_curve,
-                        where=(y_curve < 0), color=color_dict['less_than_zero'][metric_col], alpha=0.15)
+                        where=(y_curve < 0), color=c'#09ab3b', alpha=0.15)
+        
+        ax2.set_frame_on(False)
         
         
     else:
@@ -197,7 +199,7 @@ def chart_timeseries_data(ticker_data, sector_data, metric_col, relative_plot=Fa
     ax1.get_yaxis().set_visible(False)
     
     # hide framebox
-    plt.box(False)
+    ax1.set_frame_on(False)
         
     #plt.show()
     return fig
