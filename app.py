@@ -104,7 +104,7 @@ else:
     with placeholder.container():
         display_divider()
         display_text(header='price_header', body='price_body')
-        display_metric(ticker_data['navpd'][-1], 'percent', 'navpd_label',
+        display_metric(ticker_data['navpd'][-1], 'percent', 'pd_label',
                        ticker_data['nav'][-1], 'currency', 'nav_label',
                        ticker_data['price'][-1], 'currency', 'price_label')
         display_chart('ts', 'price')
@@ -114,16 +114,16 @@ else:
         display_divider()
         display_text(header='yield_header', body='yield_body')
         display_metric(((ticker_data.tail(1)['yield'][0] / sector_data.tail(1)['yield'][0]) - 1) * 100 , 'percent', 'pd_label',
-                       sector_data.tail(1)['yield'][0], 'percent', 'sector_label',
-                       ticker_data.tail(1)['yield'][0], 'percent', 'ticker_label')
+                       sector_data.tail(1)['yield'][0], 'percent', 'sector_yield_label',
+                       ticker_data.tail(1)['yield'][0], 'percent', 'ticker_yield_label')
         display_chart('ts', 'yield')
         
         
         display_divider()
         display_text(header='pffo_header', body='pffo_body')
         display_metric(((ticker_data.tail(1)['pffo'][0] / sector_data.tail(1)['pffo'][0]) - 1) * 100 , 'percent', 'pd_label',
-                       sector_data.tail(1)['pffo'][0], 'multiple', 'sector_label',
-                       ticker_data.tail(1)['pffo'][0], 'multiple', 'ticker_label')
+                       sector_data.tail(1)['pffo'][0], 'multiple', 'sector_pffo_label',
+                       ticker_data.tail(1)['pffo'][0], 'multiple', 'ticker_pffo_label')
         display_chart('ts', 'pffo')
         
         
