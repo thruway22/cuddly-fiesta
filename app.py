@@ -118,7 +118,7 @@ else:
         display_chart('ts', 'price')
         
         
-        display_chart('ts', 'navpd', ts_relative_plot=False)
+        #display_chart('ts', 'navpd', ts_relative_plot=False)
         display_divider()
         #display_metric(ticker_yield, sector_yield, 'p')
         display_chart('ts', 'yield')
