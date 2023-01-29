@@ -207,7 +207,7 @@ def chart_timeseries_data(ticker_data, sector_data, metric_col, relative_plot=Fa
                  bbox=dict(boxstyle="round, pad=0.3", fc="#f0f2f6", lw=0))'''
         
         
-    if metric_col == 'pffo' :
+    if metric_col == 'yield':
         xy = ((ticker_data[metric_col] / sector_data[metric_col]) - 1) * 100
         x_curve = xy.index
         y_curve = xy.values
