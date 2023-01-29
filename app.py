@@ -59,7 +59,7 @@ def display_text(**kwargs):
     return st.markdown(output, unsafe_allow_html=True)
 
 def display_divider():
-    return st.markdown('<hr />', unsafe_allow_html=True)
+    return st.markdown('<hr/>', unsafe_allow_html=True)
 
 def display_metric(metric1, metric1_fmt, metric1_label,
                    metric2, metric2_fmt, metric2_label,
