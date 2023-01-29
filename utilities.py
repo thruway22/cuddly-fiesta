@@ -174,8 +174,8 @@ def chart_timeseries_data(ticker_data, sector_data, metric_col, relative_plot=Fa
     # format datetime on xaxis
     formatter = mdates.DateFormatter("%Y")
     locator = mdates.YearLocator()
-    ax.xaxis.set_major_formatter(formatter)
-    ax.xaxis.set_major_locator(locator)
+    ax1.xaxis.set_major_formatter(formatter)
+    ax1.xaxis.set_major_locator(locator)
     
     # add a bit of a margin to right a-axis
     #ax.set_xlim(right= x + timedelta(days=330))
