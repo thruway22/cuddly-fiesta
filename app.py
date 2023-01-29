@@ -110,7 +110,7 @@ else:
         display_chart('ts', 'price')
         
         
-        tab01, tab02 = st.tabs('مقارنة بوسيط القطاع الحالي', 'مقارنة بوسيط الصندوق التاريخي')
+        tab01, tab02 = st.tabs(['مقارنة بوسيط القطاع الحالي', 'مقارنة بوسيط الصندوق التاريخي'])
         with tab01:
             display_text(header='yield_header', body='yield_body')
             display_metric(((ticker_data.tail(1)['yield'][0] / sector_data.tail(1)['yield'][0]) - 1) * 100 , 'percent', 'pd_label',
@@ -131,7 +131,7 @@ else:
         
         
         #display_divider()
-        tab03, tab04 = st.tabs('مقارنة بوسيط القطاع الحالي', 'مقارنة بوسيط الصندوق التاريخي')
+        tab03, tab04 = st.tabs(['مقارنة بوسيط القطاع الحالي', 'مقارنة بوسيط الصندوق التاريخي'])
         with tab03:
             display_text(header='pffo_header', body='pffo_body')
             display_metric(((ticker_data.tail(1)['pffo'][0] / sector_data.tail(1)['pffo'][0]) - 1) * 100 , 'percent', 'pd_label',
