@@ -8,7 +8,7 @@ def local_css(file_name):
 local_css('style.css')
 
 tickers = {    
-    #9999: '',
+    9999: '',
     4330: '4330: Riyad REIT الرياض ريت',
     4331: '4331: Aljazira REIT الجزيرة ريت',
     4332: '4332: Jadwa REIT Alharamain جدوى ريت الحرمين',
@@ -92,6 +92,7 @@ def display_chart(kind, metric_col,
 
 display_text(title='intro_title', body='intro_body')
 ticker = st.selectbox('Choose fund', tickers.keys(), label_visibility='collapsed', format_func=lambda x:tickers[x])
+display_divider()
 
 placeholder = st.empty()
 
@@ -102,14 +103,13 @@ else:
     yoy, hoh = get_categorical_data(fdata, ticker)
              
     with placeholder.container():
-        display_divider()
         display_text(header='price_header', body='price_body')
         display_metric(ticker_data['navpd'][-1], 'percent', 'pd_label',
                        ticker_data['nav'][-1], 'currency', 'nav_label',
                        ticker_data['price'][-1], 'currency', 'price_label')
         display_chart('ts', 'price')
         
-        
+        display_divider()
         tab01, tab02 = st.tabs(['مقارنة بوسيط القطاع الحالي', 'مقارنة بوسيط الصندوق التاريخي'])
         with tab01:
             display_text(header='yield_header', body='yield_body')
@@ -125,12 +125,7 @@ else:
                            ticker_data.tail(1)['yield'][0], 'percent', 'ticker_yield_label')
             display_chart('ts', 'yield', ts_relative_plot='ticker')
         
-        #display_divider()
-        
-        
-        
-        
-        #display_divider()
+        display_divider()
         tab03, tab04 = st.tabs(['مقارنة بوسيط القطاع الحالي', 'مقارنة بوسيط الصندوق التاريخي'])
         with tab03:
             display_text(header='pffo_header', body='pffo_body')
