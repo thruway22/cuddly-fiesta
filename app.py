@@ -101,12 +101,14 @@ else:
     ticker_data = get_ticker_data(fdata, pdata, ticker)
     yoy, hoh = get_categorical_data(fdata, ticker)
             
-    ticker_yield = ticker_data['yield'].median()
-    ticker_pffo = ticker_data['pffo'].median()
-
+    ticker_yield = ticker_data.tail(1)['yield'][0]
     sector_yield = sector_data.tail(1)['yield'][0]
+    yieldpd = ((ticker_yield / sector_yield) - 1) * 100 
+    
+    ticker_pffo = ticker_data.tail(1)['pffo'][0]
     sector_pffo = sector_data.tail(1)['pffo'][0]
-            
+    pffopd = ((ticker_pffo / sector_pffo) - 1) * 100 
+             
     with placeholder.container():
         display_text(header='price_header', body='price_body')
         #ticker_current_price = ticker_data['price'][-1]
@@ -120,10 +122,15 @@ else:
         
         #display_chart('ts', 'navpd', ts_relative_plot=False)
         display_divider()
-        #display_metric(ticker_yield, sector_yield, 'p')
+        display_metric(((ticker_data.tail(1)['yield'][0] / sector_data.tail(1)['yield'][0]) - 1) * 100 , 'percent', 'pd_label',
+                       sector_data.tail(1)['yield'][0], 'percent', 'sector_label',
+                       ticker_data.tail(1)['yield'][0], 'percent', 'ticker_label')
         display_chart('ts', 'yield')
+        
         display_divider()
-        #display_metric(ticker_pffo, sector_pffo, 'm')
+        display_metric(((ticker_data.tail(1)['pffo'][0] / sector_data.tail(1)['pffo'][0]) - 1) * 100 , 'percent', 'pd_label',
+                       sector_data.tail(1)['pffo'][0], 'multiple', 'sector_label',
+                       ticker_data.tail(1)['pffo'][0], 'multiple', 'ticker_label')
         display_chart('ts', 'pffo')
         
         col11, col12 = st.columns(2)
