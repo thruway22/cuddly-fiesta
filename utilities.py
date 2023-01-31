@@ -305,10 +305,17 @@ def chart_categorical_data(yoy, hoh, metric_col, method='yoy', show_change=False
         
     # set x and y axis data
     x = df.index
-    y = df[metric_col]
     
-    if metric_col == 'revenue' or metric_col == 'asset':
-        y = df[metric_col] / 1000000
+    if metric_col == 'asset' or metric_col == 'revenue':
+        # add chnage% by shifting metric_col and then computing
+        df['shift'] = df[metric_col].shift(1)
+        df['change'] = 100 * (df[metric_col] - df['shift']) / abs(df['shift'])
+        y = df['change'].fillna(0)
+    else:
+        y = df[metric_col]
+    
+    #if metric_col == 'revenue' or metric_col == 'asset':
+        #y = df[metric_col] / 1000000
     
     # set defult font and colors
     plt.rcParams['font.size'] = 8
