@@ -80,7 +80,7 @@ def display_metric(metric1, metric1_fmt, metric1_label,
      return st.markdown(output, unsafe_allow_html=True)
 
 def display_chart(kind, metric_col,
-                  ts_relative_plot='sector', ct_method='yoy', ct_show_change=True):
+                  ts_relative_plot='sector', ct_method='yoy', ct_show_change=False):
     global ticker_data
     global sector_data
     global yoy
